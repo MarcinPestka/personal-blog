@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+$primary1: #d01317;
+$primary2: #9d1915;
+$primary3: #6a1415;
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #ffffff;
+  background-image: radial-gradient(#FFAAAA 1px, #ffffff 1px);
+  background-size: 20px 20px;
+}
+
+.title {
+  font-size: 65px;
+  margin: 0px;
+}
+
+.subTitle {
+  font-size: 30px;
+  color: $primary1;
+  margin: 0px;
+}
+
+#footer {
+  position: fixed;
+  width: 100%;
+  bottom: 30px;
+  font-size: 10px;
+}
+
+#header {
+  font-size: 50px;
+  margin: 0px;
+}
+
+#subHeader {
+  font-size: 20px;
+  margin: 0px;
+}
+
+p {
+  font-size:17px;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.activeNavItem {
+  border-bottom: 2px solid #FFAAAA;
+}
+
+.CTAbutton {
+  margin-top: 20px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 100;
+  font-size: 14px;
+  color: #fff;
+  background-color: $primary1;
+  padding: 13px 36px;
+  border: solid $primary1 2px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  border-radius: 7px;
+  transition: 835ms;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.CTAbutton:hover {
+  transition: 835ms;
+  padding: 13px 44px;
+  background-color: #fff;
+  color: $primary1;
+  border: solid 2px $primary1;
+}
+
+.logoSvg {
+  //transform: rotate(-17deg);
+}

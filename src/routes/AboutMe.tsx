@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { GetAllSections } from "../services/SectionService";
 import { BaseComponent } from "../components/BaseComponent";
 
-function PostPage() {
+export function AboutMe() {
   var sections = GetAllSections();
   return (
     <>
@@ -14,16 +14,10 @@ function PostPage() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item marginLeft="100px" marginRight="100px">
-          {sections.map((section) => {
-            return (
-              <BaseComponent {...section}/>
-            );
-          })}
+        <Grid item>
+            <p>Page all about me :-)</p>
         </Grid>
       </Grid>
     </>
   );
 }
-
-export default PostPage;

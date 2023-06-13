@@ -1,17 +1,21 @@
-import { Section } from "../services/SectionService";
-import { TextComponent } from "./TextComponent";
-import { TitleComponent } from "./TitleComponent";
+import { Section, SectionTypeEnum } from "../services/SectionService";
+import { TitleNoImageComponent } from "./Sections/TitleNoImageComponent";
+import { TextComponent } from "./Sections/TextComponent";
+import { TitleComponent } from "./Sections/TitleComponent";
 
 export function BaseComponent(props: Section) {
   var Component = <TitleComponent {...props}></TitleComponent>;
 
   (() => {
     switch (props.type) {
-      case 1:
+      case SectionTypeEnum.Title:
         Component = <TitleComponent {...props}></TitleComponent>;
         break;
-      case 2:
+      case SectionTypeEnum.Text:
         Component = <TextComponent {...props}></TextComponent>;
+        break;
+      case SectionTypeEnum.TitleNoImage:
+        Component = <TitleNoImageComponent {...props}></TitleNoImageComponent>;
         break;
     }
   })();
