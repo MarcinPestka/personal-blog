@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/Web_Api/.vs
+/Web_Api/Web_Api/bin/Debug/net7.0
+/Web_Api/Web_Api/obj
