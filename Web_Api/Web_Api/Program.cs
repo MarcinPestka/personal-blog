@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.Contracts;
 using Web_Api.Data;
-using Web_Api.Service;
+using Web_Api.Service.Blog;
+using Web_Api.Service.CourseService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BlogContext>();
 

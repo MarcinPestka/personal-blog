@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Api.Data;
 
@@ -10,9 +11,11 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20230628115246_AddTopic")]
+    partial class AddTopic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +48,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Course");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
@@ -76,7 +79,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lecture");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
@@ -105,7 +108,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
@@ -138,7 +141,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Sections", (string)null);
+                    b.ToTable("Section");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
@@ -158,7 +161,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Topics", (string)null);
+                    b.ToTable("Topic");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>

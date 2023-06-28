@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Api.Data;
 
@@ -10,43 +11,16 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20230628113506_AddedLecture")]
+    partial class AddedLecture
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("Web_Api.Model.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("PublishDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses", (string)null);
-                });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
                 {
@@ -58,9 +32,6 @@ namespace Web_Api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -74,9 +45,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lecture");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
@@ -105,13 +74,16 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LectureId")
                         .HasColumnType("int");
 
                     b.Property<int>("PostId")
@@ -129,83 +101,36 @@ namespace Web_Api.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("TopicId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("TopicId");
-
-                    b.ToTable("Sections", (string)null);
-                });
-
-            modelBuilder.Entity("Web_Api.Model.Topic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LectureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Topics", (string)null);
-                });
+                    b.HasIndex("PostId");
 
-            modelBuilder.Entity("Web_Api.Model.Lecture", b =>
-                {
-                    b.HasOne("Web_Api.Model.Course", null)
-                        .WithMany("Lectures")
-                        .HasForeignKey("CourseId");
+                    b.ToTable("Section");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
                 {
+                    b.HasOne("Web_Api.Model.Lecture", null)
+                        .WithMany("Lectures")
+                        .HasForeignKey("LectureId");
+
                     b.HasOne("Web_Api.Model.Post", "Post")
                         .WithMany("Sections")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web_Api.Model.Topic", null)
-                        .WithMany("Sections")
-                        .HasForeignKey("TopicId");
-
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("Web_Api.Model.Topic", b =>
-                {
-                    b.HasOne("Web_Api.Model.Lecture", null)
-                        .WithMany("Topics")
-                        .HasForeignKey("LectureId");
-                });
-
-            modelBuilder.Entity("Web_Api.Model.Course", b =>
-                {
-                    b.Navigation("Lectures");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
                 {
-                    b.Navigation("Topics");
+                    b.Navigation("Lectures");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
-                {
-                    b.Navigation("Sections");
-                });
-
-            modelBuilder.Entity("Web_Api.Model.Topic", b =>
                 {
                     b.Navigation("Sections");
                 });

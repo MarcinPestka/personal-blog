@@ -7,7 +7,10 @@ namespace Web_Api.Data
     public class BlogContext : DbContext
     {
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Section> Section { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Lecture> Lectures { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Topic> Topics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

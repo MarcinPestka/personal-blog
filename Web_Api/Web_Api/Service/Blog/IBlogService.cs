@@ -1,6 +1,6 @@
 ﻿using Web_Api.Model;
 
-namespace Web_Api.Service
+namespace Web_Api.Service.Blog
 {
     public interface IBlogService
     {

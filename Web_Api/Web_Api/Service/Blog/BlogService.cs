@@ -2,7 +2,7 @@
 using Web_Api.Data;
 using Web_Api.Model;
 
-namespace Web_Api.Service
+namespace Web_Api.Service.Blog
 {
     public class BlogService : IBlogService
     {
@@ -11,23 +11,22 @@ namespace Web_Api.Service
         {
             this.context = context;
         }
-        
+
         public async Task<Post> GetPostById(int Id)
         {
-            //db.Users.Include("Interests").Where(u => u.Interests.Any(i => i.TenantId == tenantId));
-            return await this.context.Posts.Where(p => p.Id == Id).Include(p => p.Sections).FirstOrDefaultAsync();
+            return await context.Posts.Where(p => p.Id == Id).Include(p => p.Sections).FirstOrDefaultAsync();
         }
         public async Task<IEnumerable<Post>> GetAllPosts()
         {
-            return await this.context.Posts.ToArrayAsync();
+            return await context.Posts.ToArrayAsync();
         }
 
         public async Task<Post> AddPost(Post post)
         {
-            this.context.Posts.Add(post);
-            await this.context.SaveChangesAsync();
+            context.Posts.Add(post);
+            await context.SaveChangesAsync();
 
-            return await this.context.Posts.FirstOrDefaultAsync();
+            return await context.Posts.FirstOrDefaultAsync();
         }
     }
 }

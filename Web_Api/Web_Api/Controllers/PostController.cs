@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Web_Api.Model;
-using Web_Api.Service;
+using Web_Api.Service.Blog;
 
 namespace Web_Api.Controllers
 {
