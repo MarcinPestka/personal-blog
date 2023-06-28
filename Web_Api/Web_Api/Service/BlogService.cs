@@ -17,6 +17,10 @@ namespace Web_Api.Service
             //db.Users.Include("Interests").Where(u => u.Interests.Any(i => i.TenantId == tenantId));
             return await this.context.Posts.Where(p => p.Id == Id).Include(p => p.Sections).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<Post>> GetAllPosts()
+        {
+            return await this.context.Posts.ToArrayAsync();
+        }
 
         public async Task<Post> AddPost(Post post)
         {

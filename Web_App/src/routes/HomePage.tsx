@@ -1,12 +1,21 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { TitleComponent } from "../components/Sections/TitleComponent";
-import { SectionsRepository } from "../services/SectionService";
+import { sectionStore } from "../store/sectionStore";
+import { BaseComponent } from "../components/BaseComponent";
+import { ISection } from "../models/section.model";
 
 export function HomePage() {
-  const test = useParams();
+  const [sections, setSections] = useState<ISection[]>([]);
+  const store = sectionStore;
+  
+  useEffect(() => {
+    (async () => {
+      await store.getAllSectionsAsync('0');
+      setSections(store.sections);
+    })();
+  }, []);
+
   return (
     <>
       <Grid
@@ -17,7 +26,13 @@ export function HomePage() {
         alignItems="center"
       >
         <Grid item>
-          <TitleComponent {...SectionsRepository[0]}></TitleComponent>
+        {sections.map((section) => {
+            return (
+              <div key={section.id}>
+                <BaseComponent {...section} />
+              </div>
+            );
+          })}
         </Grid>
       </Grid>
     </>

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.Contracts;
 using Web_Api.Data;
 using Web_Api.Service;
@@ -12,6 +14,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BlogContext>();
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:3000");
+                      });
+});
 
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
@@ -28,6 +40,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

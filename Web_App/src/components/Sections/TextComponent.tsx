@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material";
-import { Section } from "../../services/SectionService";
+import { ISection } from "../../models/section.model";
 
-export function TextComponent(props: Section) {
+export function TextComponent(props: ISection) {
   return (
     <>
       <Grid container>
         <Grid item xs={10}>
-          <p>{props.Text}</p>
+        <p className="title">{props.title}</p>
+          <p className="subTitle">{props.subTitle}</p>
         </Grid>
       </Grid>
     </>

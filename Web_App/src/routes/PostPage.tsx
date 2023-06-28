@@ -1,10 +1,23 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { GetAllSections } from "../services/SectionService";
 import { BaseComponent } from "../components/BaseComponent";
+import { useEffect, useState } from "react";
+import { ISection } from "../models/section.model";
+import { sectionStore, SectionsStore } from "../store/sectionStore";
+import { useParams } from "react-router-dom";
 
 function PostPage() {
-  var sections = GetAllSections();
+  const [sections, setSections] = useState<ISection[]>([]);
+  const store = sectionStore;
+  var params = useParams();
+  useEffect(() => {
+    (async () => {
+      await store.getAllSectionsAsync(params.id);
+      setSections(store.sections);
+    })();
+    
+  }, [params]);
+
   return (
     <>
       <Grid
@@ -17,7 +30,9 @@ function PostPage() {
         <Grid item marginLeft="100px" marginRight="100px">
           {sections.map((section) => {
             return (
-              <BaseComponent {...section}/>
+              <div key={section.id}>
+                <BaseComponent {...section} />
+              </div>
             );
           })}
         </Grid>

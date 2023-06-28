@@ -20,6 +20,12 @@ namespace Web_Api.Controllers
             return this.blogService.GetPostById(Id);
         }
 
+        [HttpGet("GetAllPosts")]
+        public Task<IEnumerable<Post>> GetAllPosts()
+        {
+            return this.blogService.GetAllPosts();
+        }
+
         [HttpPost]
         public Task<Post> AddPost(Post post)
         {

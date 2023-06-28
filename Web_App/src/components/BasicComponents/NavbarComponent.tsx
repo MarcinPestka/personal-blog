@@ -1,10 +1,17 @@
+import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import tellCodeLogo from "../../image/TellCodeLogo.svg";
+import { useParams } from "react-router-dom";
 
 export function NavBarComponent() {
-  const path = window.location.pathname;
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    setHash(window.location.pathname);
+  }, [window.location.pathname]);
+
   return (
-    <Grid container marginBottom={13} alignItems="center" p="25px">
+    <Grid container marginBottom={3} alignItems="center" p="25px">
       <Grid item xs>
         <a href="/">
           <Grid container alignItems="center">
@@ -22,19 +29,19 @@ export function NavBarComponent() {
       <Grid item xs={8} pl={5}>
         <Grid container alignItems="center">
           <Grid item pr="90px">
-            <a href="/" className={path === '/' ? 'activeNavItem' : ''}>Home</a>
+            <a href="/" onClick={() => (setHash(hash))} className={hash === '/' ? 'activeNavItem' : ''}>Home</a>
           </Grid>
           <Grid item pr="90px">
-            <a href="/posts" className={path === '/posts' ? 'activeNavItem' : ''}>Posts</a>
+            <a href="/posts" onClick={() => (setHash(hash))} className={hash === '/posts' ? 'activeNavItem' : ''}>Posts</a>
           </Grid>
           <Grid item pr="20px">
-            <a href="/about" className={path === '/about' ? 'activeNavItem' : ''}>About me</a>
+            <a href="/course" onClick={() => (setHash(hash))} className={hash === '/course' ? 'activeNavItem' : ''}>Courses</a>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs>
         <Box display="flex" justifyContent="flex-end">
-          <p>Zaloguj</p>
+            <a href="/login" onClick={() => (setHash(hash))} className={hash === '/login' ? 'activeNavItem' : ''}>Zaloguj</a>
         </Box>
       </Grid>
     </Grid>
