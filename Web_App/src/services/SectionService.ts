@@ -4,7 +4,7 @@ import tellCodeLogo from "../image/TellCodeLogo.svg";
 import { ISection } from "../models/section.model";
 import { getPostById } from "./ApiService";
 import { sectionStore } from "../store/sectionStore";
-import { ICourse } from "../models/course.model";
+import { ILecture } from "../models/course.model";
 
 export function GetAllSections() {
   const store = sectionStore;
@@ -25,51 +25,3 @@ export enum SectionTypeEnum {
   text,
   TitleNoImage,
 }
-
-export var SectionsRepository: ICourse[] = [
-  {
-    id: 1,
-    idk: 4,
-    title: "1. Środowisko",
-    sections: [
-      {
-        id: 1,
-        title: "Elo",
-      },
-      {
-        id: 2,
-        title: "Żelo",
-      },
-    ],
-  },
-  {
-    id: 2,
-    idk: 3,
-    title: "2. Zmienne",
-    sections: [
-      {
-        id: 1,
-        title: "Test",
-      },
-      {
-        id: 2,
-        title: "Mest",
-      },
-    ],
-  },
-  {
-    id: 5,
-    idk: 6,
-    title: "3. Test",
-    sections: [
-      {
-        id: 1,
-        title: "Best",
-      },
-      {
-        id: 2,
-        title: "Srest",
-      },
-    ],
-  },
-];

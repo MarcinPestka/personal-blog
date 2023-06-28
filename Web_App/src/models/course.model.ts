@@ -1,11 +1,22 @@
+import { ISection } from "./section.model";
+
 export interface ICourse {
     id: number;
-    idk: number;
     title: string;
-    sections: ISectionCourse[];
+    description?: string;
+    authorId?: number;
+    lectures: ILecture[];
 }
 
-export interface ISectionCourse {
+export interface ILecture {
     id: number;
     title: string;
+    description?: string;
+    topics: ITopic[];
 } 
+
+export interface ITopic {
+    id: number;
+    title: string;
+    sections: ISection[]
+}

@@ -8,39 +8,32 @@ import { useParams } from "react-router-dom";
 import { sectionStore } from "../store/sectionStore";
 import NestedList from "../components/CourseComponents/SideBar/SideBar";
 import { ISection } from "../models/section.model";
-import { useObserver } from "mobx-react-lite";
+import { Observer, useObserver } from "mobx-react-lite";
+import { courseStore } from "../store/courseStore";
 
 export function Course() {
-    const store = sectionStore;
+  const store = courseStore;
 
-    useEffect(() => {
-        (async () => {
-          await store.getAllSectionsAsync('1');
-        })();
-      }, []);
-    
+  useEffect(() => {
+    (async () => {
+      await store.getCourseById("3");
+  })();
+  }, []);
 
-  return useObserver(() => (
+  return <Observer>{() => (
     <>
-      <Grid
-        container
-        spacing={0}
-      >
+      <Grid container spacing={0}>
         <Grid item>
-        <NestedList></NestedList>
+          <NestedList></NestedList>
         </Grid>
         <Grid item>
-        {store.sections.map((post) => {
-            return (
-              <div key={post.id}>
-                <p> {post.title}</p>
-              </div>
-            );
-          })}
-            <p>Page all about me :-) Page all about me :-)Page all about me :-)Page all about me :-)</p>
+          {store.activeSections &&
+            store.activeSections.map((section) => {
+              return <p key={section.id}>{section.title}</p>;
+              //return <BaseComponent key={section.id} {...section}></BaseComponent>;
+            })}
         </Grid>
       </Grid>
     </>
-  ));
+  )}</Observer>
 }
-

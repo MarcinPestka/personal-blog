@@ -1,13 +1,8 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { GetAllSections } from "../services/SectionService";
-import { BaseComponent } from "../components/BaseComponent";
-import { useEffect, useState } from "react";
-import { IPost } from "../models/post.model";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { sectionStore } from "../store/sectionStore";
-import NestedList from "../components/CourseComponents/SideBar/SideBar";
-import { useObserver } from "mobx-react-lite";
+import { Observer } from "mobx-react-lite";
 
 export function Posts() {
     const store = sectionStore;
@@ -18,7 +13,7 @@ export function Posts() {
       })();
     }, []);
 
-  return useObserver(() => (
+  return <Observer>{() => (
     <>
       <Grid
         container
@@ -38,5 +33,5 @@ export function Posts() {
         </Grid>
       </Grid>
     </>
-  ));
+  )}</Observer>
 }
