@@ -19,17 +19,7 @@ import React from "react";
 import { Login } from "./routes/Login";
 import { Posts } from "./routes/Posts";
 import { Course } from "./routes/Course";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutMe />} />
-      <Route path="post/:id" element={<PostPage />} />
-      <Route path="*" element={<NotFound />} />
-    </>
-  )
-);
+import { Courses } from "./routes/Courses";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
@@ -37,7 +27,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <NavBarComponent />
       <Routes>
         <Route path="/" element={<><HomePage /></>} />
-        <Route path="course" element={<><Course /></>} />
+        <Route path="course/:id" element={<><Course /></>} />
+        <Route path="courses" element={<><Courses /></>} />
         <Route path="about" element={<><AboutMe /></>} />
         <Route path="posts" element={<><Posts /></>} />
         <Route path="post/:id" element={<><PostPage /></>} />

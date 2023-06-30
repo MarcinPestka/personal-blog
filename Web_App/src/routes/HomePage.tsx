@@ -3,38 +3,46 @@ import "../App.scss";
 import { Grid } from "@mui/material";
 import { sectionStore } from "../store/sectionStore";
 import { BaseComponent } from "../components/BaseComponent";
-import { ISection } from "../models/section.model";
+import { IPost } from "../models/post.model";
+import { Observer } from "mobx-react-lite";
+
+// async function getPosts():IPost[] {
+//   store
+//   return
+// }
 
 export function HomePage() {
-  const [sections, setSections] = useState<ISection[]>([]);
   const store = sectionStore;
-  
+
   useEffect(() => {
     (async () => {
-      await store.getAllSectionsAsync('0');
-      setSections(store.sections);
+      await store.getAllSectionsAsync("0");
     })();
   }, []);
 
   return (
-    <>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item>
-        {sections.map((section) => {
-            return (
-              <div key={section.id}>
-                <BaseComponent {...section} />
-              </div>
-            );
-          })}
-        </Grid>
-      </Grid>
-    </>
+    <Observer>
+      {() => (
+        <>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item>
+              {store.sections.map((section) => {
+                return (
+                  <div key={section.id}>
+                    <BaseComponent {...section} />
+                  </div>
+                );
+              })}
+            </Grid>
+          </Grid>
+        </>
+      )}
+    </Observer>
   );
 }

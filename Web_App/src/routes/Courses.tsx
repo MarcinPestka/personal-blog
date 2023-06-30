@@ -4,13 +4,15 @@ import { useEffect } from "react";
 import { sectionStore } from "../store/sectionStore";
 import { Observer } from "mobx-react-lite";
 import { PostTile } from "../components/TileComponents/PostTileComponent";
+import { courseStore } from "../store/courseStore";
+import { CourseTile } from "../components/TileComponents/CourseTileComponet";
 
-export function Posts() {
-  const store = sectionStore;
+export function Courses() {
+  const store = courseStore;
 
   useEffect(() => {
     (async () => {
-      await store.getAllPosts();
+      await store.getAllCourses();
     })();
   }, []);
 
@@ -25,10 +27,10 @@ export function Posts() {
             justifyContent="center"
             alignItems="center"
           >
-            {store.posts.map((post) => {
+            {store.courses.map((post) => {
               return (
                 <Grid item>
-                  <PostTile {...post}></PostTile>
+                  <CourseTile {...post} />
                 </Grid>
               );
             })}

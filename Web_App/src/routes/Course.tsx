@@ -10,13 +10,15 @@ import NestedList from "../components/CourseComponents/SideBar/SideBar";
 import { ISection } from "../models/section.model";
 import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
+import { ICourse } from "../models/course.model";
 
 export function Course() {
   const store = courseStore;
+  var params = useParams();
 
   useEffect(() => {
     (async () => {
-      await store.getCourseById("3");
+      await store.getCourseById(params.id);
   })();
   }, []);
 
@@ -26,11 +28,10 @@ export function Course() {
         <Grid item>
           <NestedList></NestedList>
         </Grid>
-        <Grid item>
+        <Grid item xs ml={10}>
           {store.activeSections &&
             store.activeSections.map((section) => {
-              return <p key={section.id}>{section.title}</p>;
-              //return <BaseComponent key={section.id} {...section}></BaseComponent>;
+              return <BaseComponent key={section.id} {...section}></BaseComponent>;
             })}
         </Grid>
       </Grid>

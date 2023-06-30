@@ -36,7 +36,7 @@ export class CourseStore {
   getAllCourses = async () => {
     await axios({
       method: "get",
-      url: "https://localhost:7143/Lecture/GetAllCourses",
+      url: "https://localhost:7143/Lecture/GetAllLectures",
     }).then((resp) => {
       let courses: ICourse[] = resp.data;
       this.courses = courses;

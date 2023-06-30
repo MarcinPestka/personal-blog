@@ -35,7 +35,7 @@ export function NavBarComponent() {
             <a href="/posts" onClick={() => (setHash(hash))} className={hash === '/posts' ? 'activeNavItem' : ''}>Posts</a>
           </Grid>
           <Grid item pr="20px">
-            <a href="/course" onClick={() => (setHash(hash))} className={hash === '/course' ? 'activeNavItem' : ''}>Courses</a>
+            <a href="/courses" onClick={() => (setHash(hash))} className={hash === '/courses' ? 'activeNavItem' : ''}>Courses</a>
           </Grid>
         </Grid>
       </Grid>

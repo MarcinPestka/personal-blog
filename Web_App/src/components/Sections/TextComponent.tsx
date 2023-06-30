@@ -6,8 +6,7 @@ export function TextComponent(props: ISection) {
     <>
       <Grid container>
         <Grid item xs={10}>
-        <p className="title">{props.title}</p>
-          <p className="subTitle">{props.subTitle}</p>
+          <div className="lineBreakDisplay">{props.text}</div>
         </Grid>
       </Grid>
     </>

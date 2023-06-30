@@ -15,7 +15,6 @@ function PostPage() {
       await store.getAllSectionsAsync(params.id);
       setSections(store.sections);
     })();
-    
   }, [params]);
 
   return (

@@ -53,6 +53,17 @@ a {
   border-bottom: 2px solid #FFAAAA;
 }
 
+code {
+  border: 2px solid rgba($color: black, $alpha: 0.1);
+  border-radius: 7px;
+  max-width: 70%;
+}
+
+.lineBreakDisplay{
+  white-space: pre-line;
+  max-width: 90%;
+}
+
 .CTAbutton {
   margin-top: 20px;
   font-family: 'Roboto Mono', monospace;
@@ -78,6 +89,11 @@ a {
   border: solid 2px $primary1;
 }
 
-#test {
-  background-color: red;
+#pickedTopic {
+  background-color: rgba($color: red, $alpha: 0.1);
 }
+
+#pickedLecture {
+  background-color: rgba($color: black, $alpha: 0.1);
+}
+

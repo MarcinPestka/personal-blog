@@ -5,10 +5,7 @@ import sadEmoji from "../image/sadEmoji.svg";
 export function NotFound() {
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        alignItems="center">
+      <Grid container direction="column" alignItems="center">
         <Grid item>
           <img src={sadEmoji} alt="TellCodeSadEmoji" width="100px" />
         </Grid>

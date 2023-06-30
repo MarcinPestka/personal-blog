@@ -42,6 +42,7 @@ export default function LessonList() {
             onClick={() => {
               handleCollapseClick(lesson.id);
             }}
+            id={lesson.id === store.lectureId ? "pickedLecture" : ""}
           >
             <ListItemText primary={lesson.title} />
             {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
@@ -53,7 +54,7 @@ export default function LessonList() {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     onClick={() => handleTopicClick(topic.id)}
-                    id={topic.id === store.topicId ? "test" : ""}
+                    id={topic.id === store.topicId ? "pickedTopic" : ""}
                   >
                     <ListItemText primary={topic.title} />
                   </ListItemButton>
