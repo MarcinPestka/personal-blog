@@ -15,7 +15,7 @@ export function AboutMe() {
         alignItems="center"
       >
         <Grid item>
-            <p>Page all about me :-)</p>
+          <p>Page all about me :-)</p>
         </Grid>
       </Grid>
     </>

@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export function FooterComponent() {
   return (
     <>
       <div id="footer">
-        <a href="https://github.com/MarcinPestka" target="_blank"> 
+        <a href="https://github.com/MarcinPestka" target="_blank">
           <Grid
             container
             spacing={3}
@@ -19,7 +19,7 @@ export function FooterComponent() {
               <GitHubIcon></GitHubIcon>
             </Grid>
 
-            <Grid item >
+            <Grid item>
               <p>Check out my github</p>
             </Grid>
           </Grid>

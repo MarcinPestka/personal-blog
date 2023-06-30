@@ -18,7 +18,7 @@ export class CourseStore {
 
   setTopicNumber = (id: number) => {
     this.topicId = id;
-  }
+  };
 
   getCourseById = async (Id: string | undefined) => {
     await axios({
@@ -43,23 +43,27 @@ export class CourseStore {
     });
   };
 
-  setActiveSections = () =>{
-    this.activeSections = this.course.lectures.find(i => i.id === this.lectureId)?.topics.find(i => i.id === this.topicId)?.sections;
+  setActiveSections = () => {
+    this.activeSections = this.course.lectures
+      .find((i) => i.id === this.lectureId)
+      ?.topics.find((i) => i.id === this.topicId)?.sections;
   };
 
-  setActiveLectureId = (id: number) =>{
-    this.lectureId = id
-    this.setActiveSections()
-  }
+  setActiveLectureId = (id: number) => {
+    this.lectureId = id;
+    this.setActiveSections();
+  };
 
-  setActiveTopicId = (id: number | null) =>{
+  setActiveTopicId = (id: number | null) => {
     if (id) {
-      this.topicId = id
-    }else{
-      this.topicId = this.course.lectures.find(i => i.id === this.lectureId)?.topics[0].id
+      this.topicId = id;
+    } else {
+      this.topicId = this.course.lectures.find(
+        (i) => i.id === this.lectureId
+      )?.topics[0].id;
     }
-    this.setActiveSections()
-  }
+    this.setActiveSections();
+  };
 }
 
 export const courseStore = new CourseStore();

@@ -15,7 +15,7 @@ export function NavBarComponent() {
       <Grid item xs>
         <a href="/">
           <Grid container alignItems="center">
-            <Grid item> 
+            <Grid item>
               <Box display="flex" justifyContent="flex-end">
                 <img src={tellCodeLogo} alt="TellCodeLogo" width="40px" />
               </Box>
@@ -29,19 +29,43 @@ export function NavBarComponent() {
       <Grid item xs={8} pl={5}>
         <Grid container alignItems="center">
           <Grid item pr="90px">
-            <a href="/" onClick={() => (setHash(hash))} className={hash === '/' ? 'activeNavItem' : ''}>Home</a>
+            <a
+              href="/"
+              onClick={() => setHash(hash)}
+              className={hash === "/" ? "activeNavItem" : ""}
+            >
+              Home
+            </a>
           </Grid>
           <Grid item pr="90px">
-            <a href="/posts" onClick={() => (setHash(hash))} className={hash === '/posts' ? 'activeNavItem' : ''}>Posts</a>
+            <a
+              href="/posts"
+              onClick={() => setHash(hash)}
+              className={hash === "/posts" ? "activeNavItem" : ""}
+            >
+              Posts
+            </a>
           </Grid>
           <Grid item pr="20px">
-            <a href="/courses" onClick={() => (setHash(hash))} className={hash === '/courses' ? 'activeNavItem' : ''}>Courses</a>
+            <a
+              href="/courses"
+              onClick={() => setHash(hash)}
+              className={hash === "/courses" ? "activeNavItem" : ""}
+            >
+              Courses
+            </a>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs>
         <Box display="flex" justifyContent="flex-end">
-            <a href="/login" onClick={() => (setHash(hash))} className={hash === '/login' ? 'activeNavItem' : ''}>Zaloguj</a>
+          <a
+            href="/login"
+            onClick={() => setHash(hash)}
+            className={hash === "/login" ? "activeNavItem" : ""}
+          >
+            Zaloguj
+          </a>
         </Box>
       </Grid>
     </Grid>

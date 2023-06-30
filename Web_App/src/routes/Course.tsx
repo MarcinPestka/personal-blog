@@ -19,22 +19,31 @@ export function Course() {
   useEffect(() => {
     (async () => {
       await store.getCourseById(params.id);
-  })();
+    })();
   }, []);
 
-  return <Observer>{() => (
-    <>
-      <Grid container spacing={0}>
-        <Grid item>
-          <NestedList></NestedList>
-        </Grid>
-        <Grid item xs ml={10}>
-          {store.activeSections &&
-            store.activeSections.map((section) => {
-              return <BaseComponent key={section.id} {...section}></BaseComponent>;
-            })}
-        </Grid>
-      </Grid>
-    </>
-  )}</Observer>
+  return (
+    <Observer>
+      {() => (
+        <>
+          <Grid container spacing={0}>
+            <Grid item>
+              <NestedList></NestedList>
+            </Grid>
+            <Grid item xs ml={10}>
+              {store.activeSections &&
+                store.activeSections.map((section) => {
+                  return (
+                    <BaseComponent
+                      key={section.id}
+                      {...section}
+                    ></BaseComponent>
+                  );
+                })}
+            </Grid>
+          </Grid>
+        </>
+      )}
+    </Observer>
+  );
 }

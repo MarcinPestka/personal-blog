@@ -15,8 +15,8 @@ export default function LessonList() {
 
   useEffect(() => {
     (async () => {
-      await store.getCourseById('3');
-      setCollapse(store.course.lectures[0].id)
+      await store.getCourseById("3");
+      setCollapse(store.course.lectures[0].id);
     })();
   }, []);
 
@@ -35,37 +35,37 @@ export default function LessonList() {
 
   return (
     <>
-      {store.course &&  
-      store.course.lectures.map((lesson) => (
-        <React.Fragment key={lesson.id}>
-          <ListItemButton
-            onClick={() => {
-              handleCollapseClick(lesson.id);
-            }}
-            id={lesson.id === store.lectureId ? "pickedLecture" : ""}
-          >
-            <ListItemText primary={lesson.title} />
-            {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
-          </ListItemButton>
-          {collapse === lesson.id ? (
-            lesson.topics.map((topic) => (
-              <Collapse in={true} timeout="auto" unmountOnExit key={topic.id}>
-                <List component="div" disablePadding>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={() => handleTopicClick(topic.id)}
-                    id={topic.id === store.topicId ? "pickedTopic" : ""}
-                  >
-                    <ListItemText primary={topic.title} />
-                  </ListItemButton>
-                </List>
-              </Collapse>
-            ))
-          ) : (
-            <></>
-          )}
+      {store.course &&
+        store.course.lectures.map((lesson) => (
+          <React.Fragment key={lesson.id}>
+            <ListItemButton
+              onClick={() => {
+                handleCollapseClick(lesson.id);
+              }}
+              id={lesson.id === store.lectureId ? "pickedLecture" : ""}
+            >
+              <ListItemText primary={lesson.title} />
+              {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
+            </ListItemButton>
+            {collapse === lesson.id ? (
+              lesson.topics.map((topic) => (
+                <Collapse in={true} timeout="auto" unmountOnExit key={topic.id}>
+                  <List component="div" disablePadding>
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={() => handleTopicClick(topic.id)}
+                      id={topic.id === store.topicId ? "pickedTopic" : ""}
+                    >
+                      <ListItemText primary={topic.title} />
+                    </ListItemButton>
+                  </List>
+                </Collapse>
+              ))
+            ) : (
+              <></>
+            )}
           </React.Fragment>
-      ))}
+        ))}
     </>
   );
 }

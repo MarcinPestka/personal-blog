@@ -14,11 +14,11 @@ export class SectionsStore {
   }
 
   getPostById = async (Id: string | undefined) => {
-    await ApiGet("Post?=" + Id).then(resp => {
+    await ApiGet("Post?=" + Id).then((resp) => {
       let post: IPost = resp.data;
       this.post = post;
     });
-  }
+  };
 
   getAllSectionsAsync = async (Id: string | undefined) => {
     await ApiGet("Post?Id=" + Id).then((resp) => {

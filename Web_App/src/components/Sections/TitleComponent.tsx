@@ -6,7 +6,12 @@ export function TitleComponent(props: ISection) {
     <>
       <Grid container alignItems="center">
         <Grid item>
-          <img alt="TellCodeLogo" src={props.Img} width="200px" className="logoSvg" />
+          <img
+            alt="TellCodeLogo"
+            src={props.Img}
+            width="200px"
+            className="logoSvg"
+          />
         </Grid>
         <Grid item pl={7} mt={3}>
           <h1 id="header">{props.title}</h1>

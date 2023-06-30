@@ -8,5 +8,5 @@ export async function ApiGet(params: any) {
   return axios({
     method: "get",
     url: `${apiUrl}/${params}`,
-  })
+  });
 }
