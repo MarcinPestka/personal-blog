@@ -36,7 +36,7 @@ export default function LessonList() {
   return (
     <>
       {store.course &&
-        store.course.lectures.map((lesson) => (
+        store.course.lectures.map((lesson, index) => (
           <React.Fragment key={lesson.id}>
             <ListItemButton
               onClick={() => {
@@ -44,11 +44,11 @@ export default function LessonList() {
               }}
               id={lesson.id === store.lectureId ? "pickedLecture" : ""}
             >
-              <ListItemText primary={lesson.title} />
+              <ListItemText primary={`${index+1}. ${lesson.title}`} />
               {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
             </ListItemButton>
             {collapse === lesson.id ? (
-              lesson.topics.map((topic) => (
+              lesson.topics.map((topic,topicIndex) => (
                 <Collapse in={true} timeout="auto" unmountOnExit key={topic.id}>
                   <List component="div" disablePadding>
                     <ListItemButton
@@ -56,7 +56,7 @@ export default function LessonList() {
                       onClick={() => handleTopicClick(topic.id)}
                       id={topic.id === store.topicId ? "pickedTopic" : ""}
                     >
-                      <ListItemText primary={topic.title} />
+                      <ListItemText primary={`${index+1}.${topicIndex+1}. ${topic.title}`} />
                     </ListItemButton>
                   </List>
                 </Collapse>
