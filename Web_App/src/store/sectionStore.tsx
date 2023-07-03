@@ -33,6 +33,13 @@ export class SectionsStore {
       this.posts = posts;
     });
   };
+
+  GetFeaturedPosts = async () => {
+    await ApiGet("Post/GetFeaturedPosts").then((resp) => {
+      let posts: IPost[] = resp.data;
+      this.posts = posts;
+    });
+  };
 }
 
 export const sectionStore = new SectionsStore();

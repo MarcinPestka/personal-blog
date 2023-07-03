@@ -4,11 +4,82 @@ $primary1: #d01317;
 $primary2: #9d1915;
 $primary3: #6a1415;
 
+
+.wrapper {
+  overflow: hidden;
+}
+
+.indicators{
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+.dot{
+  width: 12px;
+  height: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #FFAAAA;
+  border-radius: 100%;
+  transition: 0.4s cubic-bezier(0.96, 0.32, 0.29, 0.83) 0s;
+}
+
+.selected{
+  background-color: #d01317;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: left 0.4s cubic-bezier(0.96, 0.32, 0.29, 0.83) 0s;
+  transition: left 0.4s ease 0s;
+}
+
+
+.noAnimation {
+  transition: none;
+}
+
+.item{
+  margin: 64px;
+}
+
+.carouselItem {
+  border-radius: 30px;
+  width: 540px;
+  aspect-ratio: 16/9;
+  cursor: default;
+  display:block;
+}
+
+.chosenItem{
+  scale: 1.2;
+  cursor: pointer;
+  transition: scale 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+}
+
 body {
   font-family: 'Roboto Mono', monospace;
   background-color: #ffffff;
   background-image: radial-gradient(#FFAAAA 1px, #ffffff 1px);
   background-size: 20px 20px;
+}
+
+.header{
+  padding-top: 40px;
+}
+
+.Chosen{
+  transition: all 0.3s ease-in-out 0s;
+  opacity: 1;
+}
+
+.NotChosen{
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s;
 }
 
 .title {

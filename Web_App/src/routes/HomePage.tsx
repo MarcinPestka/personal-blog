@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../App.scss";
 import { Grid } from "@mui/material";
 import { sectionStore } from "../store/sectionStore";
 import { BaseComponent } from "../components/BaseComponent";
-import { IPost } from "../models/post.model";
 import { Observer } from "mobx-react-lite";
+import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
+import { CarouselComponent } from "../components/Sections/CarouselComponent";
 
-// async function getPosts():IPost[] {
-//   store
-//   return
-// }
 
 export function HomePage() {
   const store = sectionStore;
@@ -26,7 +23,7 @@ export function HomePage() {
         <>
           <Grid
             container
-            spacing={0}
+            spacing={2}
             direction="column"
             justifyContent="center"
             alignItems="center"
@@ -40,7 +37,11 @@ export function HomePage() {
                 );
               })}
             </Grid>
+            <Grid item>
+              <FeaturedPosts/>
+            </Grid>
           </Grid>
+          <CarouselComponent></CarouselComponent>
         </>
       )}
     </Observer>
