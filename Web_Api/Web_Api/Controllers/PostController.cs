@@ -26,6 +26,12 @@ namespace Web_Api.Controllers
             return this.blogService.GetAllPosts();
         }
 
+        [HttpGet("GetFeaturedPosts")]
+        public Task<IEnumerable<Post>> GetFeaturedPosts()
+        {
+            return this.blogService.GetFeaturedPosts();
+        }
+
         [HttpPost]
         public Task<Post> AddPost(Post post)
         {

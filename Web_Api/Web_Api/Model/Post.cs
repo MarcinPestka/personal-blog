@@ -9,6 +9,7 @@
         public string Description { get; set; }
         public int AuthorId { get; set; }
         public string Content { get; set; }
+        public bool Featured { get; set; }
         public ICollection<Section> Sections { get; set; }
 
         public Post(DateTime publishDate, string title, string description, string content)

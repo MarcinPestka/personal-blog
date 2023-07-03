@@ -6,6 +6,7 @@ namespace Web_Api.Service.Blog
     {
         Task<Post> GetPostById(int Id);
         Task<IEnumerable<Post>> GetAllPosts();
+        Task<IEnumerable<Post>> GetFeaturedPosts();
         Task<Post> AddPost(Post post);
     }
 }

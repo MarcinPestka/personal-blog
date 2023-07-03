@@ -20,7 +20,10 @@ namespace Web_Api.Service.Blog
         {
             return await context.Posts.ToArrayAsync();
         }
-
+        public async Task<IEnumerable<Post>> GetFeaturedPosts()
+        {
+            return await context.Posts.Where(p => p.Featured).ToArrayAsync();
+        }
         public async Task<Post> AddPost(Post post)
         {
             context.Posts.Add(post);

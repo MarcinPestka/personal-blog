@@ -7,28 +7,28 @@ namespace Web_Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LectureController : ControllerBase
+    public class CourseController : ControllerBase
     {
         private readonly ICourseService courseService;
-        public LectureController(ICourseService courseService)
+        public CourseController(ICourseService courseService)
         {
             this.courseService = courseService;
         }
 
         [HttpGet]
-        public Task<Course> GetLectureById(int Id)
+        public Task<Course> GetCourseById(int Id)
         {
             return this.courseService.GetCourseById(Id);
         }
 
-        [HttpGet("GetAllLectures")]
-        public Task<IEnumerable<Course>> GetAllPosts()
+        [HttpGet("GetAllCourses")]
+        public Task<IEnumerable<Course>> GetAllCourses()
         {
             return this.courseService.GetAllCourses();
         }
 
         [HttpPost]
-        public Task<Course> AddPost(Course course)
+        public Task<Course> AddCourse(Course course)
         {
             var res = this.courseService.AddCourse(course);
             return res;

@@ -19,7 +19,7 @@ namespace Web_Api.Service.Blog
             context.Courses.Add(course);
             await context.SaveChangesAsync();
 
-            return await context.Courses.FirstOrDefaultAsync();
+            return await context.Courses.Where(x=>x.Id == course.Id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Course>> GetAllCourses()
