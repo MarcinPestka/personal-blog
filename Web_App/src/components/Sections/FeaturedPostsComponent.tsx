@@ -26,7 +26,7 @@ export function FeaturedPosts() {
       >
         {store.posts.map((section) => {
           return (
-            <Grid item>
+            <Grid item key={section.id}>
               <PostTile {...section}></PostTile>
             </Grid>
           );

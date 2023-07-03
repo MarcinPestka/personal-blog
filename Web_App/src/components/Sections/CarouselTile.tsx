@@ -1,20 +1,19 @@
 import { Box, Grid } from "@mui/material";
-import { ICarouselItem } from "./CarouselComponent";
 import { ICourse } from "../../models/course.model";
-import img from "../../test/htmlcss.jpg";
+import img from "../../image/htmlcss.jpg";
 
 export function CarouselTile(props:{course: ICourse, carouselId: number, dragStart:any, handleClick:any, index:number}) {
   return (
     <>
     {props.course &&
-      <div className={"item"} key={props.course.id} style={{textAlign:'center'}}>
+    <div className={"item"} key={props.course.id} style={{textAlign:'center'}}>
       <img
         draggable={false}
         src={img}
         className={
           props.index === props.carouselId ? "carouselItem chosenItem" : "carouselItem"
         }
-        onMouseDown={(e) => props.dragStart(e)}
+        onMouseDown={(e) => {props.dragStart(e)}}
         onClick={(e) => {
             props.handleClick(e);
         }}

@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import { IPost } from "../models/post.model";
 import { ICourse } from "../models/course.model";
@@ -26,9 +26,11 @@ export class CourseStore {
       url: "https://localhost:7143/Course?Id=" + Id,
     }).then((resp) => {
       let course: ICourse = resp.data;
-      this.course = course;
-      this.lectureId = course.lectures[0].id;
-      this.topicId = course.lectures[0].topics[0].id;
+      runInAction(() => {
+        this.course = course;
+        this.lectureId = course.lectures[0].id;
+        this.topicId = course.lectures[0].topics[0].id;
+      })
     });
     this.setActiveSections();
   };
@@ -39,7 +41,10 @@ export class CourseStore {
       url: "https://localhost:7143/Course/GetAllCourses",
     }).then((resp) => {
       let courses: ICourse[] = resp.data;
-      this.courses = courses;
+      runInAction(() => {
+        this.courses = courses;
+      })
+      
     });
   };
 

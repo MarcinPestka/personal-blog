@@ -1,10 +1,4 @@
 import { useEffect, useState } from "react";
-import img from "../../test/htmlcss.jpg";
-import img2 from "../../test/Banner.png";
-import img3 from "../../test/images.jpg";
-import img4 from "../../test/images.png";
-import img5 from "../../test/test.jpg";
-import img6 from "../../test/js.jpg";
 import { CarouselTile } from "./CarouselTile";
 import { courseStore } from "../../store/courseStore";
 import { Observer } from "mobx-react-lite";
@@ -133,7 +127,7 @@ export function CarouselComponent() {
           {store.courses.map((course, index) => {
             index+=1;
             return (
-              <CarouselTile
+              <CarouselTile key={index}
                 {...{ course, carouselId, dragStart, handleClick, index }}
               ></CarouselTile>
             );

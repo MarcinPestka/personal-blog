@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, makeObservable, observable } from "mobx";
+import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import { IPost } from "../models/post.model";
 import { ISection } from "../models/section.model";
@@ -16,28 +16,36 @@ export class SectionsStore {
   getPostById = async (Id: string | undefined) => {
     await ApiGet("Post?=" + Id).then((resp) => {
       let post: IPost = resp.data;
-      this.post = post;
+      runInAction(() => {
+        this.post = post;
+      })
     });
   };
 
   getAllSectionsAsync = async (Id: string | undefined) => {
     await ApiGet("Post?Id=" + Id).then((resp) => {
       let post: IPost = resp.data;
-      this.sections = post.sections;
+      runInAction(() => {
+        this.sections = post.sections;
+      })
     });
   };
 
   getAllPosts = async () => {
     await ApiGet("Post/GetAllPosts").then((resp) => {
       let posts: IPost[] = resp.data;
+      runInAction(() => {
       this.posts = posts;
+      })
     });
   };
 
   GetFeaturedPosts = async () => {
     await ApiGet("Post/GetFeaturedPosts").then((resp) => {
       let posts: IPost[] = resp.data;
-      this.posts = posts;
+      runInAction(() => {
+        this.posts = posts;
+      })
     });
   };
 }
