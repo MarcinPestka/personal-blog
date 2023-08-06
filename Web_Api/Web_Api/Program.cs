@@ -48,7 +48,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 
 builder.Services.AddDbContext<BlogContext>();
-builder.Services.AddDbContext<UserContext>();
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -57,7 +56,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost:3000");
+                          builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                       });
 });
 

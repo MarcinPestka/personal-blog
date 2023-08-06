@@ -8,7 +8,7 @@ export function TitleComponent(props: ISection) {
         <Grid item>
           <img
             alt="TellCodeLogo"
-            src={props.Img}
+            src={'https://marcinpestka.netlify.app/static/media/logo_nav.ee109a8f57ef38bf35a2.png'}
             width="200px"
             className="logoSvg"
           />

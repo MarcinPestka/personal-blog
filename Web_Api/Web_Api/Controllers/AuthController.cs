@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web_Api.Model.User;
+using Web_Api.Model;
 using Web_Api.Service.AuthService;
 using Web_Api.Service.CourseService;
 
 namespace Web_Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -21,6 +22,7 @@ namespace Web_Api.Controllers
         public async Task<ActionResult> Login(UserDTO user)
         {
             bool correctLogOn = await this.authService.Login(user);
+            user.Id = await authService.GetUserId(user.userName);
             string token = this.authService.CreateToken(user);
             
             if (correctLogOn)
@@ -34,11 +36,19 @@ namespace Web_Api.Controllers
         }
 
         [HttpPost("Register")]
-        public ActionResult<User> Register(UserDTO user) {
+        public async Task<ActionResult<User>> Register(UserDTO user) {
             User _user = new User(user.userName,user.password);
 
-            this.authService.Register(_user);
+            await this.authService.Register(_user);
             return Ok(_user);
+        }
+
+        [HttpGet("GetUserId")]
+        [Authorize]
+        public async Task<int> GetUserId()
+        {
+            string userName = HttpContext.User.Identity.Name;
+            return await this.authService.GetUserId(userName);
         }
     }
 }

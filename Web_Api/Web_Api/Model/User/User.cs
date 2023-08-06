@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Web_Api.Model.User
+namespace Web_Api.Model
 {
     public class User
     {
@@ -10,14 +10,15 @@ namespace Web_Api.Model.User
         }
         public User(string userName, string password)
         {
-            this.userName = userName;
-            this.passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+            this.UserName = userName;
+            this.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         }
 
 
         public int Id { get; set; }
-        public string userName { get; set; }
-        public string passwordHash { get; set; }
+        public string UserName { get; set; }
+        public string PasswordHash { get; set; }
+        public List<CompletedTopic> CompletedTopics { get; set; }
 
-    }
+}
 }

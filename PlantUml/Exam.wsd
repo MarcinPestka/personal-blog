@@ -1,0 +1,26 @@
+@startuml
+
+class Exam {
+  +examId: int
+  +title: string
+  +duration: int
+  +questions: List<Question>
+  +addQuestion(question: Question): void
+  +removeQuestion(question: Question): void
+  +startExam(): void
+  +endExam(): void
+}
+
+class Question {
+  +questionId: int
+  +text: string
+  +options: List<string>
+  +correctAnswer: int
+  +addOption(option: string): void
+  +removeOption(option: string): void
+  +setCorrectAnswer(answer: int): void
+}
+
+Exam "1" *-- "*" Question
+
+@enduml

@@ -1,12 +1,14 @@
 import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import { IPost } from "../models/post.model";
-import { ICourse } from "../models/course.model";
+import { ICourse, ITopic } from "../models/course.model";
 import { ISection } from "../models/section.model";
+import { ApiAuthDelete, ApiAuthPost, ApiGet, ApiGetAuth } from "../services/ApiService";
 
 export class CourseStore {
   courses: ICourse[] = [];
   course!: ICourse;
+  completedTopicId: number[] = [];
 
   lectureId: number = 7;
   topicId: number | undefined;
@@ -47,6 +49,43 @@ export class CourseStore {
       
     });
   };
+
+  GetAllActiveCourses = async () => {
+    await ApiGetAuth("Course/GetAllActiveCourses").then((resp) => {
+      let courses: ICourse[] = resp.data;
+      runInAction(() => {
+        this.courses = courses;
+      })
+    });
+  }
+
+  GetCompletedTopics = async (activeCourseId: string | undefined) => {
+    await ApiGetAuth(`Course/GetCompletedTopicIds?courseId=${activeCourseId}`).then((resp) => {
+      let completedTopics: number[] = resp.data;
+      runInAction(() => {
+        this.completedTopicId = completedTopics;
+      })
+    });
+  }
+
+  HandleTopicCompletion = async (TopicId: number, ActiveCourseId:number) =>{
+    if (!this.completedTopicId.includes(TopicId)) {
+      this.CompleteTopic(TopicId,ActiveCourseId);
+    }else{
+      this.UnCompletedTopic(TopicId,ActiveCourseId);
+    }
+  }
+
+  CompleteTopic = async (TopicId: number, ActiveCourseId:number) => {
+    this.completedTopicId.push(TopicId);
+    await ApiAuthPost("Course/CompleteTopic",{TopicId,ActiveCourseId}).then((resp) =>{})
+  }
+  
+  UnCompletedTopic = async (TopicId: number, ActiveCourseId:number) => {
+    var index = this.completedTopicId.indexOf(TopicId);
+    this.completedTopicId.splice(index,1);
+    await ApiAuthDelete("Course/UnCompleteTopic",{TopicId,ActiveCourseId}).then((resp) =>{})
+  }
 
   setActiveSections = () => {
     this.activeSections = this.course.lectures

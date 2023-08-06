@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-$primary1: #d01317;
-$primary2: #9d1915;
-$primary3: #6a1415;
+$primary1: #90e0ef;
+$primary2: #00b4d8;
+$primary3: #0096c7;
 
 
 .wrapper {
@@ -21,13 +21,13 @@ $primary3: #6a1415;
   height: 12px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color: #FFAAAA;
+  background-color: $primary1;
   border-radius: 100%;
   transition: 0.4s cubic-bezier(0.96, 0.32, 0.29, 0.83) 0s;
 }
 
 .selected{
-  background-color: #d01317;
+  background-color: $primary3;
 }
 
 .carousel {
@@ -64,7 +64,7 @@ $primary3: #6a1415;
 body {
   font-family: 'Roboto Mono', monospace;
   background-color: #ffffff;
-  background-image: radial-gradient(#FFAAAA 1px, #ffffff 1px);
+  background-image: radial-gradient($primary1 1px, #ffffff 1px);
   background-size: 20px 20px;
 }
 
@@ -101,7 +101,7 @@ body {
 }
 
 #header {
-  font-size: 50px;
+  font-size: 70px;
   margin: 0px;
 }
 
@@ -161,10 +161,10 @@ code {
 }
 
 #pickedTopic {
-  background-color: rgba($color: red, $alpha: 0.1);
+  background-color: rgba($color: $primary3, $alpha: 0.2);
 }
 
 #pickedLecture {
-  background-color: rgba($color: black, $alpha: 0.1);
+  background-color: rgba($color: $primary3, $alpha: 0.5);
 }
 

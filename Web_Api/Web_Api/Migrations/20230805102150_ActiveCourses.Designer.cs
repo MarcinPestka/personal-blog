@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Api.Data;
 
@@ -10,9 +11,11 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20230805102150_ActiveCourses")]
+    partial class ActiveCourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ActiveCourses", (string)null);
+                    b.ToTable("ActiveCourses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.CompletedTopic", b =>
@@ -63,7 +66,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CompletedTopic", (string)null);
+                    b.ToTable("CompletedTopic");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Course", b =>
@@ -92,7 +95,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
@@ -123,7 +126,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
@@ -155,7 +158,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
@@ -188,7 +191,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Sections", (string)null);
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
@@ -208,7 +211,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Topics", (string)null);
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("Web_Api.Model.User", b =>
@@ -227,7 +230,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Web_Api.Model.ActiveCourse", b =>

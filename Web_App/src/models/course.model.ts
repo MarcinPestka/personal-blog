@@ -18,5 +18,6 @@ export interface ILecture {
 export interface ITopic {
   id: number;
   title: string;
+  completed: boolean;
   sections: ISection[];
 }

@@ -11,6 +11,9 @@ namespace Web_Api.Data
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<CompletedTopic> CompletedTopic { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<ActiveCourse> ActiveCourses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

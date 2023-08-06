@@ -2,26 +2,33 @@ import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import tellCodeLogo from "../../image/TellCodeLogo.svg";
 import { useParams } from "react-router-dom";
+import { userStore } from "../../store/userStore";
+import { Observer } from "mobx-react-lite";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export function NavBarComponent() {
   const [hash, setHash] = useState("");
+  const store = userStore;
 
   useEffect(() => {
     setHash(window.location.pathname);
   }, [window.location.pathname]);
 
   return (
+    <Observer>
+      {() => (
+        <>
     <Grid container marginBottom={3} alignItems="center" p="25px">
       <Grid item xs>
         <a href="/">
           <Grid container alignItems="center">
             <Grid item>
               <Box display="flex" justifyContent="flex-end">
-                <img src={tellCodeLogo} alt="TellCodeLogo" width="40px" />
+                <img src={'https://marcinpestka.netlify.app/static/media/logo_nav.ee109a8f57ef38bf35a2.png'} alt="TellCodeLogo" width="40px" />
               </Box>
             </Grid>
             <Grid item pl={2}>
-              <h4>TellCode</h4>
+              <h4>Pestka.it</h4>
             </Grid>
           </Grid>
         </a>
@@ -59,15 +66,38 @@ export function NavBarComponent() {
       </Grid>
       <Grid item xs>
         <Box display="flex" justifyContent="flex-end">
+
+          {store.loggedIn ? 
+          <>
+          <AccountCircleIcon/>
           <a
-            href="/login"
-            onClick={() => setHash(hash)}
-            className={hash === "/login" ? "activeNavItem" : ""}
-          >
-            Zaloguj
-          </a>
+          href="/login"
+          onClick={() => setHash(hash)}
+          className={hash === "/login" ? "activeNavItem" : ""}
+        >
+          
+          Marcin Pestka
+        </a>
+          </>
+          :
+          <>
+                    <a
+          href="/login"
+          onClick={() => setHash(hash)}
+          className={hash === "/login" ? "activeNavItem" : ""}
+        >
+          
+          Zaloguj
+        </a>
+          </>
+
+        }
+
         </Box>
       </Grid>
     </Grid>
+    </>
+      )}
+    </Observer>
   );
 }

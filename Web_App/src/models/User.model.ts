@@ -1,4 +1,11 @@
-export interface IUser {
-  Id: number;
-  Name: string;
+export class IUser {
+  UserName: string;
+  Password: string;
+
+  constructor(userName: string, password: string ) {
+    this.UserName = userName;
+    this.Password = password;
 }
+}
+
+

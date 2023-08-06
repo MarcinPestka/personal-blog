@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Web_Api.Model;
 using Web_Api.Service.Blog;
 
@@ -14,6 +15,7 @@ namespace Web_Api.Controllers
             this.blogService = blogService;
         }
 
+        
         [HttpGet]
         public Task<Post> GetPostById(int Id)
         {

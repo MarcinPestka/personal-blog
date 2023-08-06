@@ -6,6 +6,7 @@ import { BaseComponent } from "../components/BaseComponent";
 import { Observer } from "mobx-react-lite";
 import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
 import { CarouselComponent } from "../components/Sections/CarouselComponent";
+import img from "../../src/image/path.svg";
 
 
 export function HomePage() {
@@ -44,6 +45,7 @@ export function HomePage() {
           <CarouselComponent></CarouselComponent>
         </>
       )}
+      
     </Observer>
   );
 }

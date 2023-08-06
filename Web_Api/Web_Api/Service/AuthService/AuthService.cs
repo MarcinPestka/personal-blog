@@ -6,14 +6,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Web_Api.Data;
-using Web_Api.Model.User;
+using Web_Api.Model;
 
 namespace Web_Api.Service.AuthService
 {
     public class AuthService : IAuthService
     {
-        private readonly UserContext context;
-        public AuthService(UserContext context)
+        private readonly BlogContext context;
+        public AuthService(BlogContext context)
         {
             this.context = context;
         }
@@ -22,7 +22,7 @@ namespace Web_Api.Service.AuthService
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.userName)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
             //Move key to the KEY VAULT
@@ -44,14 +44,14 @@ namespace Web_Api.Service.AuthService
         {
             context.Add(user);
             context.SaveChanges();
-            return await context.Users.Where(x => x.userName == user.userName).FirstOrDefaultAsync();
+            return await context.Users.Where(x => x.UserName == user.UserName).FirstOrDefaultAsync();
         }
 
         public async Task<bool> Login(UserDTO user)
         {
-           User user2 = await context.Users.Where(x => x.userName == user.userName).FirstOrDefaultAsync();
+           User user2 = await context.Users.Where(x => x.UserName == user.userName).FirstOrDefaultAsync();
 
-           if (BCrypt.Net.BCrypt.Verify(user.password, user2.passwordHash))
+           if (BCrypt.Net.BCrypt.Verify(user.password, user2.PasswordHash))
             {
                 return true;
             }
@@ -59,6 +59,10 @@ namespace Web_Api.Service.AuthService
             {
                 return false;
             }
+        }
+        public async Task<int> GetUserId(string userName)
+        {
+            return await context.Users.Where(x => x.UserName == userName).Select(x => x.Id).FirstOrDefaultAsync();
         }
     }
 }
