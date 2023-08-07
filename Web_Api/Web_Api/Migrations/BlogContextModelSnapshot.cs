@@ -37,7 +37,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ActiveCourses", (string)null);
+                    b.ToTable("ActiveCourses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.CompletedTopic", b =>
@@ -52,18 +52,13 @@ namespace Web_Api.Migrations
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActiveCourseId");
 
                     b.HasIndex("TopicId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CompletedTopic", (string)null);
+                    b.ToTable("CompletedTopic");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Course", b =>
@@ -92,7 +87,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
@@ -123,7 +118,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
@@ -155,7 +150,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
@@ -188,7 +183,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Sections", (string)null);
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
@@ -208,7 +203,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Topics", (string)null);
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("Web_Api.Model.User", b =>
@@ -217,17 +212,25 @@ namespace Web_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("passwordHash")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("userName")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Web_Api.Model.ActiveCourse", b =>
@@ -262,10 +265,6 @@ namespace Web_Api.Migrations
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Web_Api.Model.User", null)
-                        .WithMany("completedTopics")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("ActiveCourse");
 
@@ -330,11 +329,6 @@ namespace Web_Api.Migrations
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
                 {
                     b.Navigation("Sections");
-                });
-
-            modelBuilder.Entity("Web_Api.Model.User", b =>
-                {
-                    b.Navigation("completedTopics");
                 });
 #pragma warning restore 612, 618
         }

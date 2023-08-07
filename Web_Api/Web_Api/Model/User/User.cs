@@ -18,7 +18,7 @@ namespace Web_Api.Model
         public int Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
-        public List<CompletedTopic> CompletedTopics { get; set; }
-
-}
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
 }

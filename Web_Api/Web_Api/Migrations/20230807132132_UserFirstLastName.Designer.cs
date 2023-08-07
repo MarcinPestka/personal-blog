@@ -11,8 +11,8 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20230805102150_ActiveCourses")]
-    partial class ActiveCourses
+    [Migration("20230807132132_UserFirstLastName")]
+    partial class UserFirstLastName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,16 +55,11 @@ namespace Web_Api.Migrations
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActiveCourseId");
 
                     b.HasIndex("TopicId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CompletedTopic");
                 });
@@ -220,11 +215,19 @@ namespace Web_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("passwordHash")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("userName")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -265,10 +268,6 @@ namespace Web_Api.Migrations
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Web_Api.Model.User", null)
-                        .WithMany("completedTopics")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("ActiveCourse");
 
@@ -333,11 +332,6 @@ namespace Web_Api.Migrations
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
                 {
                     b.Navigation("Sections");
-                });
-
-            modelBuilder.Entity("Web_Api.Model.User", b =>
-                {
-                    b.Navigation("completedTopics");
                 });
 #pragma warning restore 612, 618
         }

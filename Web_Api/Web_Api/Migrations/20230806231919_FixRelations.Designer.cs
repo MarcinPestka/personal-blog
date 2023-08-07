@@ -11,8 +11,8 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20230628115246_AddTopic")]
-    partial class AddTopic
+    [Migration("20230806231919_FixRelations")]
+    partial class FixRelations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,48 @@ namespace Web_Api.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Web_Api.Model.ActiveCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ActiveCourses");
+                });
+
+            modelBuilder.Entity("Web_Api.Model.CompletedTopic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActiveCourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActiveCourseId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("CompletedTopic");
+                });
 
             modelBuilder.Entity("Web_Api.Model.Course", b =>
                 {
@@ -48,7 +90,7 @@ namespace Web_Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
@@ -61,7 +103,7 @@ namespace Web_Api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -79,7 +121,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lecture");
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Post", b =>
@@ -98,6 +140,9 @@ namespace Web_Api.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("Featured")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("PublishDate")
                         .HasColumnType("datetime(6)");
@@ -141,7 +186,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Section");
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
@@ -150,7 +195,7 @@ namespace Web_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("LectureId")
+                    b.Property<int>("LectureId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -161,19 +206,80 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Topic");
+                    b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("Web_Api.Model.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Web_Api.Model.ActiveCourse", b =>
+                {
+                    b.HasOne("Web_Api.Model.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Api.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Web_Api.Model.CompletedTopic", b =>
+                {
+                    b.HasOne("Web_Api.Model.ActiveCourse", "ActiveCourse")
+                        .WithMany("CompletedTopics")
+                        .HasForeignKey("ActiveCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web_Api.Model.Topic", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiveCourse");
+
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Lecture", b =>
                 {
-                    b.HasOne("Web_Api.Model.Course", null)
+                    b.HasOne("Web_Api.Model.Course", "Course")
                         .WithMany("Lectures")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Section", b =>
                 {
-                    b.HasOne("Web_Api.Model.Post", "Post")
+                    b.HasOne("Web_Api.Model.Post", null)
                         .WithMany("Sections")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -182,15 +288,22 @@ namespace Web_Api.Migrations
                     b.HasOne("Web_Api.Model.Topic", null)
                         .WithMany("Sections")
                         .HasForeignKey("TopicId");
-
-                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Topic", b =>
                 {
-                    b.HasOne("Web_Api.Model.Lecture", null)
+                    b.HasOne("Web_Api.Model.Lecture", "Lecture")
                         .WithMany("Topics")
-                        .HasForeignKey("LectureId");
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lecture");
+                });
+
+            modelBuilder.Entity("Web_Api.Model.ActiveCourse", b =>
+                {
+                    b.Navigation("CompletedTopics");
                 });
 
             modelBuilder.Entity("Web_Api.Model.Course", b =>

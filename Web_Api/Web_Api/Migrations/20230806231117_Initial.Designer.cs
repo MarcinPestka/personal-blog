@@ -11,8 +11,8 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20230805095748_RelationsFix")]
-    partial class RelationsFix
+    [Migration("20230806231117_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace Web_Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ActiveCourse");
+                    b.ToTable("ActiveCourses");
                 });
 
             modelBuilder.Entity("Web_Api.Model.CompletedTopic", b =>
@@ -220,11 +220,11 @@ namespace Web_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("passwordHash")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("userName")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -267,7 +267,7 @@ namespace Web_Api.Migrations
                         .IsRequired();
 
                     b.HasOne("Web_Api.Model.User", null)
-                        .WithMany("completedTopics")
+                        .WithMany("CompletedTopics")
                         .HasForeignKey("UserId");
 
                     b.Navigation("ActiveCourse");
@@ -337,7 +337,7 @@ namespace Web_Api.Migrations
 
             modelBuilder.Entity("Web_Api.Model.User", b =>
                 {
-                    b.Navigation("completedTopics");
+                    b.Navigation("CompletedTopics");
                 });
 #pragma warning restore 612, 618
         }
