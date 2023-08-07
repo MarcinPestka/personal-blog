@@ -19,3 +19,9 @@ export enum SectionTypeEnum {
   TitleNoImage,
   Code,
 }
+
+
+export enum SectionAddStage {
+  sectionType = 1,
+  sectionContents,
+}

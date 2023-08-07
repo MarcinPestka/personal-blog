@@ -5,7 +5,7 @@ import { sectionStore } from "../store/sectionStore";
 import { BaseComponent } from "../components/BaseComponent";
 import { Observer } from "mobx-react-lite";
 import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
-import { CarouselComponent } from "../components/Sections/CarouselComponent";
+import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
 import img from "../../src/image/path.svg";
 
 

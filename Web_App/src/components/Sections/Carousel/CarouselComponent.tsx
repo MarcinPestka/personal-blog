@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CarouselTile } from "./CarouselTile";
-import { courseStore } from "../../store/courseStore";
+import { courseStore } from "../../../store/courseStore";
 import { Observer } from "mobx-react-lite";
 
 export interface ICarouselItem {

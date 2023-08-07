@@ -1,18 +1,16 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { GetAllSections } from "../services/SectionService";
 import { BaseComponent } from "../components/BaseComponent";
 import { useEffect, useState } from "react";
-import { IPost } from "../models/post.model";
 import { useParams } from "react-router-dom";
-import { sectionStore } from "../store/sectionStore";
 import NestedList from "../components/CourseComponents/SideBar/SideBar";
-import { ISection } from "../models/section.model";
-import { Observer, useObserver } from "mobx-react-lite";
+import { Observer } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
-import { ICourse } from "../models/course.model";
+import { SectionAddStage, SectionTypeEnum } from "../services/SectionService";
 
 export function EditCourse() {
+  const [addNewSection, setAddNewSection] = useState<SectionAddStage>();
+  const [NewSectionStage, setNewSectionStage] = useState<SectionTypeEnum>();
   const store = courseStore;
   var params = useParams();
 
@@ -43,6 +41,46 @@ export function EditCourse() {
                       ></BaseComponent>
                     );
                   })}
+                  {!addNewSection ? (
+                    <button
+                      onClick={() => {
+                        setAddNewSection(SectionAddStage.sectionType);
+                      }}
+                    >
+                      Dodaj następną sekcję
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                  {addNewSection === SectionAddStage.sectionType ? (
+                    <div className="sectionTypeDiv">
+                      <div
+                        onClick={() => {
+                          setNewSectionStage(SectionTypeEnum.title);
+                          setAddNewSection(SectionAddStage.sectionContents);
+                        }}
+                      >
+                        section title
+                      </div>
+                      <div
+                        onClick={() => {
+                          setNewSectionStage(SectionTypeEnum.Code);
+                          setAddNewSection(SectionAddStage.sectionContents);
+                        }}
+                      >
+                        section code
+                      </div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {addNewSection === SectionAddStage.sectionContents ? (
+                    <div className="sectionTypeDiv">
+                      <div>{NewSectionStage}</div>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </>
               )}
             </Grid>

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { ISection } from "../../models/section.model";
+import { ISection } from "../../../models/section.model";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
 import { useEffect } from "react";

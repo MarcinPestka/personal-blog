@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import { ISection } from "../../models/section.model";
+import { ISection } from "../../../models/section.model";
 
 export function TitleNoImageComponent(props: ISection) {
   return (

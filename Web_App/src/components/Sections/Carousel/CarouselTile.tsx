@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
-import { ICourse } from "../../models/course.model";
-import img from "../../image/htmlcss.jpg";
+import { ICourse } from "../../../models/course.model";
+import img from "../../../image/htmlcss.jpg";
 
 export function CarouselTile(props:{course: ICourse, carouselId: number, dragStart:any, handleClick:any, index:number}) {
   return (
