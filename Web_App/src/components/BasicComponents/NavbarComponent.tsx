@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { userStore } from "../../store/userStore";
 import { Observer } from "mobx-react-lite";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { LoginNavBarComponent } from "./LoginNavBarComponent";
 
 export function NavBarComponent() {
   const [hash, setHash] = useState("");
@@ -66,33 +67,7 @@ export function NavBarComponent() {
       </Grid>
       <Grid item xs>
         <Box display="flex" justifyContent="flex-end">
-
-          {store.loggedIn ? 
-          <>
-          <AccountCircleIcon/>
-          <a
-          href="/login"
-          onClick={() => setHash(hash)}
-          className={hash === "/login" ? "activeNavItem" : ""}
-        >
-          
-          Marcin Pestka
-        </a>
-          </>
-          :
-          <>
-                    <a
-          href="/login"
-          onClick={() => setHash(hash)}
-          className={hash === "/login" ? "activeNavItem" : ""}
-        >
-          
-          Zaloguj
-        </a>
-          </>
-
-        }
-
+          <LoginNavBarComponent></LoginNavBarComponent>
         </Box>
       </Grid>
     </Grid>

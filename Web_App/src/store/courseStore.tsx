@@ -10,7 +10,7 @@ export class CourseStore {
   course!: ICourse;
   completedTopicId: number[] = [];
 
-  lectureId: number = 7;
+  lectureId!: number;
   topicId: number | undefined;
   activeSections: ISection[] | undefined;
 

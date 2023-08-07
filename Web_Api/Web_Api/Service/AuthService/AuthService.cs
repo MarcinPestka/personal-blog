@@ -49,9 +49,9 @@ namespace Web_Api.Service.AuthService
 
         public async Task<bool> Login(UserDTO user)
         {
-           User user2 = await context.Users.Where(x => x.UserName == user.userName).FirstOrDefaultAsync();
+           User user2 = await context.Users.Where(x => x.UserName == user.UserName).FirstOrDefaultAsync();
 
-           if (BCrypt.Net.BCrypt.Verify(user.password, user2.PasswordHash))
+           if (BCrypt.Net.BCrypt.Verify(user.Password, user2.PasswordHash))
             {
                 return true;
             }
@@ -63,6 +63,13 @@ namespace Web_Api.Service.AuthService
         public async Task<int> GetUserId(string userName)
         {
             return await context.Users.Where(x => x.UserName == userName).Select(x => x.Id).FirstOrDefaultAsync();
+        }
+
+        public async Task<UserDTO> GetUserDetails(int userId)
+        {
+            User user = await context.Users.Where(x => x.Id == userId).FirstOrDefaultAsync();
+            UserDTO userDTO = new UserDTO() {FirstName = user.FirstName, LastName = user.LastName };
+            return userDTO;
         }
     }
 }

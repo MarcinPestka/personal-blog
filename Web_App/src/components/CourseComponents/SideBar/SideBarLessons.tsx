@@ -52,7 +52,8 @@ export default function LessonList() {
               {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
             </ListItemButton>
             {collapse === lesson.id ? (
-              lesson.topics.map((topic,topicIndex) => (
+              <>
+              {lesson.topics.map((topic,topicIndex) => (
                 <Collapse in={true} timeout="auto" unmountOnExit key={topic.id}>
                   <List component="div" disablePadding>
                     <ListItemButton
@@ -60,12 +61,13 @@ export default function LessonList() {
                       onClick={() => handleTopicClick(topic.id)}
                       id={topic.id === store.topicId ? "pickedTopic" : ""}
                     >
-                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,5)}} />
+                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,6)}} />
                       <ListItemText primary={`${index+1}.${topicIndex+1}. ${topic.title}`} />
                     </ListItemButton>
                   </List>
                 </Collapse>
-              ))
+              ))}
+              </>
             ) : (
               <></>
             )}

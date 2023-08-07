@@ -8,10 +8,12 @@ namespace Web_Api.Model
         private User()
         {
         }
-        public User(string userName, string password)
+        public User(string userName, string password, string firstName, string lastName)
         {
             this.UserName = userName;
             this.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+            this.FirstName = firstName;
+            this.LastName = lastName;
         }
 
 

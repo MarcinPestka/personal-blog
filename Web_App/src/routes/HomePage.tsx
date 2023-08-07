@@ -14,7 +14,7 @@ export function HomePage() {
 
   useEffect(() => {
     (async () => {
-      await store.getAllSectionsAsync("0");
+      await store.getAllSectionsAsync("1");
     })();
   }, []);
 

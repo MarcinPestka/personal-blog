@@ -16,12 +16,13 @@ namespace Web_Api.Service.Blog
             this.context = context;
         }
 
-        public async Task<Course> AddCourse(Course course)
+        public async Task<Course> AddCourse(CourseDTO course)
         {
-            context.Courses.Add(course);
+            Course _course = new Course(course);
+            context.Courses.Add(_course);
             await context.SaveChangesAsync();
 
-            return await context.Courses.Where(x=>x.Id == course.Id).FirstOrDefaultAsync();
+            return await context.Courses.Where(x=>x.Id == _course.Id).FirstOrDefaultAsync();
         }
 
         public async Task<CompletedTopic> CompleteTopic(CompletedTopicDTO completedTopic)

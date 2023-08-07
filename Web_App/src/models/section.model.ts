@@ -10,4 +10,5 @@ export interface ISection {
   Img?: string;
   order: number;
   sectionType: SectionTypeEnum;
+  imageName?: string;
 }

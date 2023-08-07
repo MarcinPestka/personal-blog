@@ -12,6 +12,9 @@
         public bool Featured { get; set; }
         public ICollection<Section> Sections { get; set; }
 
+        public Post()
+        {
+        }
         public Post(DateTime publishDate, string title, string description, string content)
         {
             PublishDate = publishDate;

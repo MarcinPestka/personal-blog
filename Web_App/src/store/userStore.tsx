@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ApiGet, ApiPost } from "../services/ApiService";
-import { IUser } from "../models/User.model";
+import { ApiGet, ApiGetAuth, ApiPost } from "../services/ApiService";
+import { User } from "../models/User.model";
 
 export class UserStore {
-  user!: IUser;
+  user!: User;
   loggedIn!: boolean;
 
   constructor() {
@@ -13,9 +13,9 @@ export class UserStore {
     }
   }
 
-  GetCurrentUser = async () => {
-    await ApiGet("Auth/GetUserId").then((resp) => {
-      let user: IUser = resp.data;
+  GetUserDetails = async () => {
+    await ApiGetAuth("Auth/GetUserDetails").then((resp) => {
+      let user: User = resp.data;
       runInAction(() => {
         this.user = user;
       })
@@ -24,6 +24,15 @@ export class UserStore {
 
   Login = async (test: any) => {
     await ApiPost("Auth/Login",test).then((resp) =>{
+        localStorage.setItem("token", `bearer ${resp.data}`);
+        runInAction(() => {
+          this.loggedIn = true;
+        })
+    })
+  }
+
+  Register = async (test: any) => {
+    await ApiPost("Auth/Register",test).then((resp) =>{
         localStorage.setItem("token", `bearer ${resp.data}`);
         runInAction(() => {
           this.loggedIn = true;

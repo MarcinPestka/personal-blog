@@ -1,4 +1,4 @@
-import { IUser } from "./User.model";
+import { User } from "./User.model";
 import { ISection } from "./section.model";
 
 export interface IPost {

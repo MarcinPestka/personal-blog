@@ -3,13 +3,13 @@ import { Button, Grid, Paper, TextField } from "@mui/material";
 import sadEmoji from "../image/sadEmoji.svg";
 import { userStore } from "../store/userStore";
 import { useEffect, useRef, useState } from "react";
-import { IUser } from "../models/User.model";
+import { UserDTO } from "../models/User.model";
 
 export function Login() {
   const store = userStore;
   const [userName,setUserName]=useState('');
   const [password,setPassword]=useState('');
-  const user:IUser = new IUser(userName,password);
+  const user:UserDTO = new UserDTO(userName,password);
 
   return (
     <>

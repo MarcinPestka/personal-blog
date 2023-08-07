@@ -12,15 +12,15 @@ import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { ICourse } from "../models/course.model";
 
-export function ActiveCourse() {
+export function EditCourse() {
   const store = courseStore;
   var params = useParams();
 
   useEffect(() => {
     (async () => {
-      const activeCourseID = params.activeId;
-      await store.getCourseById(activeCourseID);
-      await store.GetCompletedTopics(activeCourseID);
+      const courseId = params.courseId;
+      await store.getCourseById(courseId);
+      await store.GetCompletedTopics(courseId);
     })();
   }, []);
 
@@ -33,15 +33,18 @@ export function ActiveCourse() {
               <NestedList></NestedList>
             </Grid>
             <Grid item xs ml={10}>
-              {store.activeSections &&
-                store.activeSections.map((section) => {
-                  return (
-                    <BaseComponent
-                      key={section.id}
-                      {...section}
-                    ></BaseComponent>
-                  );
-                })}
+              {store.activeSections && (
+                <>
+                  {store.activeSections.map((section) => {
+                    return (
+                      <BaseComponent
+                        key={section.id}
+                        {...section}
+                      ></BaseComponent>
+                    );
+                  })}
+                </>
+              )}
             </Grid>
           </Grid>
         </>
