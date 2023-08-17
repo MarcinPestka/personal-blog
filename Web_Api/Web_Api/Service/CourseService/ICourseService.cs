@@ -14,5 +14,8 @@ namespace Web_Api.Service.CourseService
         Task<int> GetActiveCourseIdByTopicId(int topicId);
         Task<ActiveCourse> ActivateCourse(int userId, int courseId);
         Task<Course> AddCourse(CourseDTO course);
+        Task<Section> AddNewSection(Section section);
+        Task<IActionResult> DeleteSection(int sectionId);
+        Task<IEnumerable<Section>> EditSection(Section section);
     }
 }

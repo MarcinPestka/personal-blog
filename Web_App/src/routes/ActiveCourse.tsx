@@ -11,6 +11,7 @@ import { ISection } from "../models/section.model";
 import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { ICourse } from "../models/course.model";
+import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 
 export function ActiveCourse() {
   const store = courseStore;
@@ -19,6 +20,7 @@ export function ActiveCourse() {
   useEffect(() => {
     (async () => {
       const activeCourseID = params.activeId;
+      courseStore.activeCourse = true;
       await store.getCourseById(activeCourseID);
       await store.GetCompletedTopics(activeCourseID);
     })();
@@ -36,10 +38,10 @@ export function ActiveCourse() {
               {store.activeSections &&
                 store.activeSections.map((section) => {
                   return (
-                    <BaseComponent
+                    <BaseComponentWrapper
                       key={section.id}
                       {...section}
-                    ></BaseComponent>
+                    />
                   );
                 })}
             </Grid>

@@ -7,10 +7,14 @@ import NestedList from "../components/CourseComponents/SideBar/SideBar";
 import { Observer } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { SectionAddStage, SectionTypeEnum } from "../services/SectionService";
+import { BaseEditComponent } from "../components/BaseEditComponent";
+import { editingCourseStore } from "../store/editingSectionsStore";
+import { sectionStore } from "../store/sectionStore";
+import { AddNewSection } from "../components/SectionEditingComponents/AddNewSectionComponent";
+import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
+import { AddNewSectionInbetweenButton } from "../components/SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 
 export function EditCourse() {
-  const [addNewSection, setAddNewSection] = useState<SectionAddStage>();
-  const [NewSectionStage, setNewSectionStage] = useState<SectionTypeEnum>();
   const store = courseStore;
   var params = useParams();
 
@@ -18,7 +22,7 @@ export function EditCourse() {
     (async () => {
       const courseId = params.courseId;
       await store.getCourseById(courseId);
-      await store.GetCompletedTopics(courseId);
+      editingCourseStore.editPage = true;
     })();
   }, []);
 
@@ -35,52 +39,14 @@ export function EditCourse() {
                 <>
                   {store.activeSections.map((section) => {
                     return (
-                      <BaseComponent
+                      <BaseComponentWrapper
                         key={section.id}
                         {...section}
-                      ></BaseComponent>
+                      />
                     );
                   })}
-                  {!addNewSection ? (
-                    <button
-                      onClick={() => {
-                        setAddNewSection(SectionAddStage.sectionType);
-                      }}
-                    >
-                      Dodaj następną sekcję
-                    </button>
-                  ) : (
-                    <></>
-                  )}
-                  {addNewSection === SectionAddStage.sectionType ? (
-                    <div className="sectionTypeDiv">
-                      <div
-                        onClick={() => {
-                          setNewSectionStage(SectionTypeEnum.title);
-                          setAddNewSection(SectionAddStage.sectionContents);
-                        }}
-                      >
-                        section title
-                      </div>
-                      <div
-                        onClick={() => {
-                          setNewSectionStage(SectionTypeEnum.Code);
-                          setAddNewSection(SectionAddStage.sectionContents);
-                        }}
-                      >
-                        section code
-                      </div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {addNewSection === SectionAddStage.sectionContents ? (
-                    <div className="sectionTypeDiv">
-                      <div>{NewSectionStage}</div>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                  <AddNewSectionInbetweenButton sectionOrder={7 + 1}/>
+                  <AddNewSection/>
                 </>
               )}
             </Grid>

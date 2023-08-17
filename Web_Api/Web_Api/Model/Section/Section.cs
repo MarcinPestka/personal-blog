@@ -8,8 +8,10 @@ namespace Web_Api.Model
         public string? Title { get; set; }
         public string? SubTitle { get; set; }
         public string? Text { get; set; } = null!;
-        public int PostId { get; set; }
+        public int? SectionOrder { get; set; }
+        public int? PostId { get; set; }
+        public int? TopicId { get; set; }
         public SectionType SectionType { get; set; }
-        public string imageName { get; set; }
+        public string? imageName { get; set; }
     }
 }

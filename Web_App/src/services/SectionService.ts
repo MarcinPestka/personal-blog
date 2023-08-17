@@ -1,11 +1,23 @@
+import { ISection } from "../models/section.model";
 import { sectionStore } from "../store/sectionStore";
 
 export function GetAllSections() {
   const store = sectionStore;
-
+  
   var sections = store.sections;
+  console.log(sections);
   sections = sections.sort((n1, n2) => {
-    if (n1.order == null || n1.order > (n2.order ?? Infinity)) {
+    if (n1.sectionOrder == null || n1.sectionOrder > (n2.sectionOrder ?? Infinity)) {
+      return 1;
+    }
+    return -1;
+  });
+  return sections;
+}
+
+export function OrderSections(sections: ISection[]) {
+  sections = sections.sort((n1, n2) => {
+    if (n1.sectionOrder == null || n1.sectionOrder > (n2.sectionOrder ?? Infinity)) {
       return 1;
     }
     return -1;
@@ -14,10 +26,10 @@ export function GetAllSections() {
 }
 
 export enum SectionTypeEnum {
-  title = 1,
-  text,
+  Title = 1,
+  TextSection,
   TitleNoImage,
-  Code,
+  CodeBlockSection,
 }
 
 
@@ -25,3 +37,5 @@ export enum SectionAddStage {
   sectionType = 1,
   sectionContents,
 }
+
+

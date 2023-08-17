@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Api.Data;
 
@@ -10,9 +11,11 @@ using Web_Api.Data;
 namespace Web_Api.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20230807192934_SectionFix")]
+    partial class SectionFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +166,6 @@ namespace Web_Api.Migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SectionOrder")
-                        .HasColumnType("int");
-
                     b.Property<int>("SectionType")
                         .HasColumnType("int");
 
@@ -182,6 +182,7 @@ namespace Web_Api.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("imageName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

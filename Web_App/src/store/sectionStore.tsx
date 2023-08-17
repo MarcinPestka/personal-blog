@@ -2,12 +2,15 @@ import { action, makeAutoObservable, makeObservable, observable, runInAction } f
 import axios from "axios";
 import { IPost } from "../models/post.model";
 import { ISection } from "../models/section.model";
-import { ApiGet } from "../services/ApiService";
+import { ApiAuthPost, ApiGet } from "../services/ApiService";
+import { editingCourseStore } from "./editingSectionsStore";
+import { courseStore } from "./courseStore";
 
 export class SectionsStore {
   sections: ISection[] = [];
   posts: IPost[] = [];
   post: IPost = {} as IPost;
+  newSection: ISection = {} as ISection;
 
   constructor() {
     makeAutoObservable(this);
@@ -48,6 +51,20 @@ export class SectionsStore {
       })
     });
   };
+
+  AddNewSection = async () => {
+    this.newSection.topicId = courseStore.topicId;
+    this.newSection.postId = 1;
+    this.newSection.sectionType = editingCourseStore.newSectionType;
+    this.newSection.title = editingCourseStore.editingSection.title;
+    this.newSection.subTitle = editingCourseStore.editingSection.subTitle;
+    this.newSection.sectionOrder = editingCourseStore.editingSection.sectionOrder;
+    await ApiAuthPost("Course/AddNewSection",this.newSection).then((resp) =>{})
+    await courseStore.getCourseById('6');
+    editingCourseStore.newSectionStage = undefined;
+    editingCourseStore.newSectionType = undefined;
+    editingCourseStore.editing = false;
+  }
 }
 
 export const sectionStore = new SectionsStore();

@@ -11,6 +11,7 @@ import { ISection } from "../models/section.model";
 import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { ICourse } from "../models/course.model";
+import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 
 export function Course() {
   const store = courseStore;
@@ -34,10 +35,10 @@ export function Course() {
               {store.activeSections &&
                 store.activeSections.map((section) => {
                   return (
-                    <BaseComponent
+                    <BaseComponentWrapper
                       key={section.id}
                       {...section}
-                    ></BaseComponent>
+                    />
                   );
                 })}
             </Grid>

@@ -3,6 +3,7 @@ import { ISection } from "../../../models/section.model";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
 import { useEffect } from "react";
+import { editingCourseStore } from "../../../store/editingSectionsStore";
 
 export function CodeComponent(props: ISection) {
   useEffect(() => {
@@ -13,8 +14,8 @@ export function CodeComponent(props: ISection) {
     <>
       <Grid container>
         <Grid item xs={10}>
-          <pre>
-            <code className="language-typescript">{props.text}</code>
+          <pre className="theme-base16-material">
+            <code className="language-html">{editingCourseStore.editingSection ? props.subTitle:editingCourseStore.editingSection}</code>
           </pre>
         </Grid>
       </Grid>

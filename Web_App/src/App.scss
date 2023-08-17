@@ -61,11 +61,64 @@ $primary3: #0096c7;
   transition: scale 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
 
-.sectionTypeDiv{
-  background-color: rgba($color: black, $alpha: 0.2);
-  border-radius: 20px;
+.editingColor{
+  color: rgb(255, 191, 71);
+}
+
+.editViewDiv{
+  display: flex;
+  color: rgba(128, 128, 128, 0.315);
+  cursor: pointer;
+}
+
+
+.inbetweenButtonActive{
+  color: $primary2;
   width: 80%;
-  height: 200px;
+  height: 20px;
+  border-style: solid;
+  border-radius: 8px;
+  margin-top: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+  opacity: 1;
+}
+
+.inbetweenButton{
+  color: $primary2;
+  width: 80%;
+  height: 20px;
+  border-style: solid;
+  border-radius: 8px;
+  margin-top: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  opacity: 0;
+}
+
+.inbetweenButton:hover{
+  transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+  opacity: 1;
+}
+
+.highlighted{
+  color: $primary2;
+}
+
+.test2{
+  float: left;
+}
+
+.sectionTypeDiv{
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body {
@@ -74,6 +127,127 @@ body {
   background-image: radial-gradient($primary1 1px, #ffffff 1px);
   background-size: 20px 20px;
 }
+
+.editSection{
+  float: right;
+  padding-right: 15px;
+  padding-top: 10px;
+  margin-right: 10px;
+  border-style: solid;
+  border-width: 0px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+  color: rgba(128, 128, 128, 0.315);
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editButton{
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:5px
+}
+
+.editButton:hover{
+  color: rgb(255, 191, 71);
+  transition: color 0.5s ease
+}
+
+.editButton:not(:hover){
+  transition: color 0.5s ease
+}
+
+.deleteButton{
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right:5px
+}
+
+.deleteButton:hover{
+  color: rgb(211, 57, 57);
+  transition: color 0.5s ease
+}
+.deleteButton:not(:hover){
+  transition: color 0.5s ease
+}
+
+.editButton2{
+  float: left;
+  width: 50px;
+  height: 20px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  border-style: solid;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-bottom-left-radius: 8px;
+  position: relative;
+  left: -30px;
+  top: -10px;
+  color: rgba(128, 128, 128, 0.315);
+}
+
+.addSectionWrapper{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.addSectionInnerWrapper{
+  display: inline-flex;
+  justify-content: center;
+}
+
+.addSectionBackButton{
+  width: fit-content;
+  color: $primary3;
+  font-weight: 450;
+  cursor:pointer;
+}
+
+.addSectionButton{
+  text-align: center;
+  border-radius: 4px;
+  border-width: 2px;
+  border-color: $primary3;
+  color: $primary3;
+  font-weight: 450;
+  border-style: solid;
+  cursor:pointer;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.stepOne{
+  width: 20%;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.stepTwo{
+  padding: 10px;
+  margin-right: 20px;
+  width: 20%;
+  aspect-ratio: 1/1;
+}
+
+.addSectionButton:hover{
+  background-color: rgba($color: $primary3, $alpha: 0.1);
+  transition: background-color 0.5s ease
+}
+
+.addSectionButton:not(:hover){
+  transition: background-color 0.5s ease
+}
+
 
 .header{
   padding-top: 40px;

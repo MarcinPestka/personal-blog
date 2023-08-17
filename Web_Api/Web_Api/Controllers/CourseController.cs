@@ -70,7 +70,6 @@ namespace Web_Api.Controllers
         [Authorize]
         public Task<CompletedTopic> CompleteTopic(CompletedTopicDTO completedTopic)
         {
-            int userId = Int32.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             return this.courseService.CompleteTopic(completedTopic);
         }
@@ -79,8 +78,28 @@ namespace Web_Api.Controllers
         [Authorize]
         public Task<IActionResult> UnCompleteTopic(CompletedTopicDTO completedTopic)
         {
-            int userId = Int32.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             return this.courseService.UnCompleteTopic(completedTopic);
+        }
+
+        [HttpDelete("DeleteSection")]
+        [Authorize]
+        public Task<IActionResult> DeleteSection(int sectionId)
+        {
+            return this.courseService.DeleteSection(sectionId);
+        }
+
+        [HttpPut("EditSection")]
+        [Authorize]
+        public Task<IEnumerable<Section>> EditSection(Section section)
+        {
+            return this.courseService.EditSection(section);
+        }
+
+        [HttpPost("AddNewSection")]
+        [Authorize]
+        public Task<Section> AddNewSection(Section section)
+        {
+            return this.courseService.AddNewSection(section);
         }
     }
 }

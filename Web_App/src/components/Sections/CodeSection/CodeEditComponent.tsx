@@ -1,21 +1,13 @@
-import { Grid } from "@mui/material";
-import { ISection } from "../../../models/section.model";
+import { Grid, TextField } from "@mui/material";
 import "highlight.js/styles/github.css";
-import hljs from "highlight.js";
-import { useEffect } from "react";
+import { editingCourseStore } from "../../../store/editingSectionsStore";
 
-export function CodeEditComponent(props: ISection) {
-  useEffect(() => {
-    hljs.highlightAll();
-  }, []);
-
+export function CodeEditComponent() {
   return (
     <>
       <Grid container>
         <Grid item xs={10}>
-          <pre>
-            <code className="language-typescript">{props.text}</code>
-          </pre>
+            <TextField fullWidth multiline rows={5} defaultValue={editingCourseStore.editingSection ? editingCourseStore.editingSection.subTitle:""} onChange={(e) => {editingCourseStore.editingSection.subTitle = e.target.value}}/>
         </Grid>
       </Grid>
     </>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ISection } from "../models/section.model";
 import { sectionStore, SectionsStore } from "../store/sectionStore";
 import { useParams } from "react-router-dom";
+import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 
 function PostPage() {
   const [sections, setSections] = useState<ISection[]>([]);
@@ -27,13 +28,9 @@ function PostPage() {
         alignItems="center"
       >
         <Grid item marginLeft="100px" marginRight="100px">
-          {sections.map((section) => {
-            return (
-              <div key={section.id}>
-                <BaseComponent {...section} />
-              </div>
-            );
-          })}
+          {sections.map((section) => (
+            <BaseComponentWrapper key={section.id} {...section} />
+          ))}
         </Grid>
       </Grid>
     </>

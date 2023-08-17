@@ -6,21 +6,12 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { courseStore } from "../../../store/courseStore";
-import { useEffect } from "react";
-import { Button, Checkbox } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Checkbox } from "@mui/material";
 import { Observer } from "mobx-react-lite";
 
 export default function LessonList() {
   const [collapse, setCollapse] = React.useState(1);
-  const [sectionState, setSection] = React.useState(1);
   const store = courseStore;
-  var params = useParams();
-
-  useEffect(() => {
-    (async () => {
-    })();
-  }, [store.completedTopicId]);
 
   async function handleCollapseClick(test: number) {
     setCollapse(test);
@@ -30,7 +21,6 @@ export default function LessonList() {
   }
 
   async function handleTopicClick(test: number) {
-    setSection(test);
     store.setActiveTopicId(test);
     store.setActiveSections();
   }
@@ -61,7 +51,10 @@ export default function LessonList() {
                       onClick={() => handleTopicClick(topic.id)}
                       id={topic.id === store.topicId ? "pickedTopic" : ""}
                     >
-                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,6)}} />
+                      {courseStore.activeCourse ?
+                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,1)}} />:
+                      <></>
+                      }
                       <ListItemText primary={`${index+1}.${topicIndex+1}. ${topic.title}`} />
                     </ListItemButton>
                   </List>

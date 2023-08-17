@@ -4,11 +4,14 @@ import { IPost } from "../models/post.model";
 import { ICourse, ITopic } from "../models/course.model";
 import { ISection } from "../models/section.model";
 import { ApiAuthDelete, ApiAuthPost, ApiGet, ApiGetAuth } from "../services/ApiService";
+import { editingCourseStore } from "./editingSectionsStore";
+import { OrderSections } from "../services/SectionService";
 
 export class CourseStore {
   courses: ICourse[] = [];
   course!: ICourse;
   completedTopicId: number[] = [];
+  activeCourse:boolean = false;
 
   lectureId!: number;
   topicId: number | undefined;
@@ -29,9 +32,11 @@ export class CourseStore {
     }).then((resp) => {
       let course: ICourse = resp.data;
       runInAction(() => {
-        this.course = course;
-        this.lectureId = course.lectures[0].id;
-        this.topicId = course.lectures[0].topics[0].id;
+          this.course = course;
+          if (!editingCourseStore.editing) {
+          this.lectureId = course.lectures[0].id;
+          this.topicId = course.lectures[0].topics[0].id;
+        }
       })
     });
     this.setActiveSections();
@@ -91,6 +96,9 @@ export class CourseStore {
     this.activeSections = this.course.lectures
       .find((i) => i.id === this.lectureId)
       ?.topics.find((i) => i.id === this.topicId)?.sections;
+      if (this.activeSections !== undefined) {
+        this.activeSections = OrderSections(this.activeSections);
+      }
   };
 
   setActiveLectureId = (id: number) => {

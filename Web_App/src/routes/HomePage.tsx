@@ -7,6 +7,7 @@ import { Observer } from "mobx-react-lite";
 import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
 import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
 import img from "../../src/image/path.svg";
+import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 
 
 export function HomePage() {
@@ -32,9 +33,7 @@ export function HomePage() {
             <Grid item>
               {store.sections.map((section) => {
                 return (
-                  <div key={section.id}>
-                    <BaseComponent {...section} />
-                  </div>
+                    <BaseComponentWrapper key={section.id} {...section} />
                 );
               })}
             </Grid>
