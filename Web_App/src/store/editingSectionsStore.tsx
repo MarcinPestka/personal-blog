@@ -15,6 +15,9 @@ export class EditingCourseStore {
   sectionPreview: boolean = false;
   elementDrag: boolean = false;
   elementDragSection: ISection = {} as ISection;
+  elementDragId: number = 1;
+
+  initialDragOrder: number = 0;
 
   constructor() {
     makeAutoObservable(this);

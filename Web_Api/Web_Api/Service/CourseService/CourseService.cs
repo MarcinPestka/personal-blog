@@ -114,7 +114,23 @@ namespace Web_Api.Service.Blog
         public async Task<IEnumerable<Section>> EditSection(Section section)
         {
             Section _section = await context.Sections.Where(x => x.Id == section.Id).FirstOrDefaultAsync();
-
+            if (_section.SectionOrder > section.SectionOrder)
+            {
+                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder >= section.SectionOrder && x.SectionOrder <= _section.SectionOrder).ToArrayAsync();
+                foreach (var s in sections)
+                {
+                    s.SectionOrder = s.SectionOrder + 1;
+                }
+            }
+            else
+            {
+                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder <= section.SectionOrder && x.SectionOrder >= _section.SectionOrder).ToArrayAsync();
+                foreach (var s in sections)
+                {
+                    s.SectionOrder = s.SectionOrder - 1;
+                }
+            }
+            
             context.Entry(_section).CurrentValues.SetValues(section);
             await context.SaveChangesAsync();
             return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();

@@ -45,8 +45,10 @@ export function EditCourse() {
                       />
                     );
                   })}
-                  <AddNewSectionInbetweenButton sectionOrder={7 + 1}/>
-                  <AddNewSection/>
+                  {
+                    courseStore.activeSections &&
+                    <AddNewSectionInbetweenButton section={courseStore.activeSections.length + 1}/>
+                  }
                 </>
               )}
             </Grid>

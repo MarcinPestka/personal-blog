@@ -13,8 +13,7 @@ export function AddNewSectionStepTwo() {
           onClick={() => {
             editingCourseStore.newSectionType = SectionTypeEnum.Title;
             editingCourseStore.editingSection.sectionType = SectionTypeEnum.Title;
-            editingCourseStore.newSectionStage =
-              SectionAddStage.sectionContents;
+            editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
           }}
         >
           Title Section

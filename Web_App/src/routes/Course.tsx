@@ -31,7 +31,7 @@ export function Course() {
             <Grid item>
               <NestedList></NestedList>
             </Grid>
-            <Grid item xs ml={10}>
+            <Grid item xs ml={3}>
               {store.activeSections &&
                 store.activeSections.map((section) => {
                   return (

@@ -73,36 +73,49 @@ $primary3: #0096c7;
 
 
 .inbetweenButtonActive{
+    color: $primary2;
+    width: 80%;
+    height: 20px;
+    border-style: solid;
+    border-radius: 8px;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+}
+
+// .inbetweenButton:hover{
+//   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+//   opacity: 1;
+// }
+
+.inbetweenButton {
   color: $primary2;
   width: 80%;
-  height: 20px;
   border-style: solid;
   border-radius: 8px;
-  margin-top: 50px;
+  text-align: center;
+  margin-top: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-bottom: 10px;
   opacity: 0;
-  transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+}
+
+
+.inbetweenButton:hover {
   opacity: 1;
+  transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
 
-.inbetweenButton{
+.over{
   color: $primary2;
   width: 80%;
-  height: 20px;
   border-style: solid;
   border-radius: 8px;
-  margin-top: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
   text-align: center;
-  opacity: 0;
-}
-
-.inbetweenButton:hover{
   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
   opacity: 1;
 }
@@ -150,6 +163,10 @@ body {
   justify-content: center;
   align-items: center;
   margin-left:5px
+}
+
+.invisible{
+ opacity:0;
 }
 
 .editButton:hover{
@@ -264,12 +281,12 @@ body {
 }
 
 .title {
-  font-size: 65px;
+  font-size: clamp(40px, 7vw, 70px);
   margin: 0px;
 }
 
 .subTitle {
-  font-size: 30px;
+  font-size: clamp(25px, 3vw, 30px);
   color: $primary1;
   margin: 0px;
 }

@@ -7,7 +7,8 @@ import { CodeComponent } from "./Sections/CodeSection/CodeComponent";
 import { BaseComponentWrapper } from "./BaseComponentWrapper";
 
 export function BaseComponent(props: ISection) {
-  var Component = <TitleComponent {...props}></TitleComponent>;
+  var Component;
+  
   (() => {
     switch (props.sectionType) {
       case SectionTypeEnum.Title:

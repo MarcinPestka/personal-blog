@@ -11,7 +11,7 @@ export function AddNewSectionBackButton() {
         break;
       case SectionAddStage.sectionContents:
         editingCourseStore.newSectionType = undefined;
-        editingCourseStore.newSectionStage = SectionAddStage.sectionType;
+        editingCourseStore.newSectionStage = undefined;
         break;
       default:
         break;
