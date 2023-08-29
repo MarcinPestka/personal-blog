@@ -8,5 +8,15 @@
         public Lecture Lecture { get; set; }
 
         public ICollection<Section> Sections { get; set; }
+
+        public Topic()
+        {
+
+        }
+        public Topic(TopicDTO topic)
+        {
+            this.Title = topic.Title;
+            this.LectureId = topic.LectureId;
+        }
     }
 }

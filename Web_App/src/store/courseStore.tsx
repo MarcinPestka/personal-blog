@@ -1,9 +1,8 @@
-import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
-import { IPost } from "../models/post.model";
-import { ICourse, ITopic } from "../models/course.model";
+import { ICourse } from "../models/course.model";
 import { ISection } from "../models/section.model";
-import { ApiAuthDelete, ApiAuthPost, ApiGet, ApiGetAuth } from "../services/ApiService";
+import { ApiAuthDelete, ApiAuthPost, ApiGetAuth } from "../services/ApiService";
 import { editingCourseStore } from "./editingSectionsStore";
 import { OrderSections } from "../services/SectionService";
 
@@ -110,9 +109,11 @@ export class CourseStore {
     if (id) {
       this.topicId = id;
     } else {
-      this.topicId = this.course.lectures.find(
-        (i) => i.id === this.lectureId
-      )?.topics[0].id;
+      if (this.course.lectures.find((i) => i.id === this.lectureId)?.topics.length !== 0) {
+        this.topicId = this.course.lectures.find(
+          (i) => i.id === this.lectureId
+        )?.topics[0].id;
+      }
     }
     this.setActiveSections();
   };

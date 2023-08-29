@@ -101,5 +101,32 @@ namespace Web_Api.Controllers
         {
             return this.courseService.AddNewSection(section);
         }
+
+        [HttpPost("AddNewTopic")]
+        [Authorize]
+        public Task<Topic> AddNewTopic(TopicDTO topic)
+        {
+            return this.courseService.AddNewTopic(topic);
+        }
+
+        [HttpDelete("DeleteTopic")]
+        [Authorize]
+        public Task<IActionResult> DeleteTopic(int topicId)
+        {
+            return this.courseService.DeleteTopic(topicId);
+        }
+        [HttpPost("AddNewLecture")]
+        [Authorize]
+        public Task<Lecture> AddNewLecture(LectureDTO lecture)
+        {
+            return this.courseService.AddNewLecture(lecture);
+        }
+
+        [HttpDelete("DeleteLecture")]
+        [Authorize]
+        public Task<IActionResult> DeleteLecture(int lectureId)
+        {
+            return this.courseService.DeleteLecture(lectureId);
+        }
     }
 }

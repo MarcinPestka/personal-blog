@@ -11,13 +11,16 @@ export interface ICourse {
 export interface ILecture {
   id: number;
   title: string;
+  content: string;
   description?: string;
+  CourseId: number;
   topics: ITopic[];
 }
 
 export interface ITopic {
   id: number;
   title: string;
-  completed: boolean;
-  sections: ISection[];
+  LectureId: number;
+  completed?: boolean;
+  sections?: ISection[];
 }

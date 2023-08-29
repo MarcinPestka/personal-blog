@@ -10,5 +10,17 @@
         public int CourseId { get; set; }
         public Course Course { get; set; }
         public ICollection<Topic> Topics { get; set; }
+        public Lecture()
+        {
+
+        }
+        public Lecture(LectureDTO lecture)
+        {
+            this.Title = lecture.Title;
+            this.Description = lecture.Description;
+            this.Content = lecture.Content;
+            this.CourseId = lecture.CourseId;
+
+        }
     }
 }
