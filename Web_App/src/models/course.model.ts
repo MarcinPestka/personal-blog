@@ -21,8 +21,8 @@ export interface ILecture {
 export interface ITopic {
   id: number;
   title: string;
-  LectureId: number;
+  lectureId: number;
   topicOrder?:number;
   completed?: boolean;
-  sections?: ISection[];
+  sections: ISection[];
 }

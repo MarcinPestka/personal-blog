@@ -4,8 +4,13 @@ import { courseStore } from "../store/courseStore";
 import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
 
 export async function addTopic(topic: ITopic) {
-  await ApiAuthPost("Course/AddNewTopic", topic).then((resp) => {});
+  await ApiAuthPost("Course/AddNewTopic", topic).then((resp) => {
+    let newTopic = resp.data as ITopic;
+    courseStore.topicId = newTopic.id;
+    courseStore.lectureId = newTopic.lectureId;
+  });
   await courseStore.getCourseById(courseStore.course.id);
+  
 }
 
 export async function deleteTopic(topicId: number) {
@@ -22,3 +27,7 @@ export function OrderTopics(topics: ITopic[]) {
   });
   return topics;
 }
+function setActiveLectureId() {
+    throw new Error("Function not implemented.");
+}
+

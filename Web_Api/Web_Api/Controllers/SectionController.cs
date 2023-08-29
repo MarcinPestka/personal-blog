@@ -20,7 +20,7 @@ namespace Web_Api.Controllers
 
         [HttpDelete("DeleteSection")]
         [Authorize]
-        public Task<IActionResult> DeleteSection(int sectionId)
+        public Task<IEnumerable<Section>> DeleteSection(int sectionId)
         {
             return this.sectionService.DeleteSection(sectionId);
         }
@@ -34,7 +34,7 @@ namespace Web_Api.Controllers
 
         [HttpPost("AddNewSection")]
         [Authorize]
-        public Task<Section> AddNewSection(Section section)
+        public Task<IEnumerable<Section>> AddNewSection(Section section)
         {
             return this.sectionService.AddNewSection(section);
         }

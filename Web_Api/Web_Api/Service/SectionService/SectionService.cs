@@ -13,7 +13,7 @@ namespace Web_Api.Service.SectionService
             this.context = context;
         }
 
-        public async Task<Section> AddNewSection(Section section)
+        public async Task<IEnumerable<Section>> AddNewSection(Section section)
         {
             IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder >= section.SectionOrder).ToArrayAsync();
             foreach (var s in sections)
@@ -23,10 +23,11 @@ namespace Web_Api.Service.SectionService
 
             context.Sections.Add(section);
             await context.SaveChangesAsync();
-            return section;
+
+            return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();
         }
 
-        public async Task<IActionResult> DeleteSection(int sectionId)
+        public async Task<IEnumerable<Section>> DeleteSection(int sectionId)
         {
             Section section = await context.Sections.Where(x => x.Id == sectionId).FirstOrDefaultAsync();
             context.Sections.Remove(section);
@@ -38,7 +39,7 @@ namespace Web_Api.Service.SectionService
             }
 
             await context.SaveChangesAsync();
-            return new OkResult();
+            return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Section>> EditSection(Section section)

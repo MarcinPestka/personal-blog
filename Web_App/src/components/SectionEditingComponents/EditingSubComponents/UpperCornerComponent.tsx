@@ -1,18 +1,14 @@
 import { Observer } from "mobx-react-lite";
-import { SectionAddStage } from "../../../services/SectionService";
+import { deleteSectionById } from "../../../services/SectionService";
 import { editingCourseStore } from "../../../store/editingSectionsStore";
-import { AddNewSectionBackButton } from "./AddNewSectionBackButtonComponent";
 import { Tooltip } from "@mui/material";
-import { ApiAuthDelete } from "../../../services/ApiService";
 import { ISection } from "../../../models/section.model";
-import { courseStore } from "../../../store/courseStore";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export function UpperCorner(props: ISection) {
   async function handleClick() {
-    await ApiAuthDelete(`Section/DeleteSection?sectionId=${props.id}`, "");
-    await courseStore.getCourseById(courseStore.course.id);
+    deleteSectionById(props.id);
   }
 
   return (
