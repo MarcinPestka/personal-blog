@@ -14,7 +14,7 @@ export function BaseComponentWrapper(props: ISection) {
   async function handleClikc() {
     await ApiAuthPut("Course/EditSection", editingCourseStore.editingSection);
     editingCourseStore.editingSection = {} as ISection;
-    await courseStore.getCourseById("6");
+    await courseStore.getCourseById(courseStore.course.id);
   }
 
   async function handleDragEnd() {

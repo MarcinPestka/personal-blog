@@ -12,6 +12,7 @@ namespace Web_Api.Service.CourseService
         Task<IActionResult> UnCompleteTopic(CompletedTopicDTO completedTopic);
         Task<IEnumerable<Course>> GetAllActiveCourses(int userId);
         Task<int> GetActiveCourseIdByTopicId(int topicId);
+        Task<int> GetActiveCourseId(int userId, int courseId);
         Task<ActiveCourse> ActivateCourse(int userId, int courseId);
         Task<Course> AddCourse(CourseDTO course);
         Task<Section> AddNewSection(Section section);

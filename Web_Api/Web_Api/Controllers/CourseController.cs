@@ -128,5 +128,12 @@ namespace Web_Api.Controllers
         {
             return this.courseService.DeleteLecture(lectureId);
         }
+
+        [HttpGet("GetActiveCourseId")]
+        public Task<int> GetActiveCourseId(int coruseId)
+        {
+            int userId = Int32.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return this.courseService.GetActiveCourseId(userId, coruseId);
+        }
     }
 }

@@ -19,10 +19,10 @@ export function ActiveCourse() {
 
   useEffect(() => {
     (async () => {
-      const activeCourseID = params.activeId;
       courseStore.activeCourse = true;
-      await store.getCourseById(activeCourseID);
-      await store.GetCompletedTopics(activeCourseID);
+      await store.getCourseById(Number(params.activeId));
+      await store.GetCompletedTopics(params.activeId);
+      await courseStore.getActiveCourseId();
     })();
   }, []);
 

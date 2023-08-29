@@ -13,6 +13,7 @@ export interface ILecture {
   title: string;
   content: string;
   description?: string;
+  lectureOrder?:number;
   CourseId: number;
   topics: ITopic[];
 }
@@ -21,6 +22,7 @@ export interface ITopic {
   id: number;
   title: string;
   LectureId: number;
+  topicOrder?:number;
   completed?: boolean;
   sections?: ISection[];
 }

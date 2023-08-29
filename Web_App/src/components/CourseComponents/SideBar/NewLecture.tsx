@@ -5,15 +5,15 @@ import { TextField } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 import { editingCourseStore } from "../../../store/editingSectionsStore";
-import { addTopic } from "../../../services/TopicService";
 import { addNewLecture } from "../../../services/LectureService";
+import { courseStore } from "../../../store/courseStore";
 
 export default function AddNewLectureComponent() {
     const [edit,setEdit] = React.useState(false);
 
     function handleFirstClick() {
         setEdit(true);
-        editingCourseStore.newLecture.CourseId = 6; 
+        editingCourseStore.newLecture.CourseId = courseStore.course.id; 
         editingCourseStore.newLecture.description = '6'; 
         editingCourseStore.newLecture.content = '6'; 
     }

@@ -170,5 +170,10 @@ namespace Web_Api.Service.Blog
             await context.SaveChangesAsync();
             return new OkResult();
         }
+
+        public async Task<int> GetActiveCourseId(int userId, int courseId)
+        {
+            return await context.ActiveCourses.Where(x => x.CourseId == courseId && x.UserId == userId).Select(x => x.Id).FirstOrDefaultAsync();
+        }
     }
 }

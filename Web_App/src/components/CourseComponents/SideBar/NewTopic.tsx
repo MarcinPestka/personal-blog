@@ -5,8 +5,7 @@ import { TextField } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 import { courseStore } from "../../../store/courseStore";
-import { EditingCourseStore, editingCourseStore } from "../../../store/editingSectionsStore";
-import { ApiAuthPost } from "../../../services/ApiService";
+import { editingCourseStore } from "../../../store/editingSectionsStore";
 import { addTopic } from "../../../services/TopicService";
 
 export default function AddNewTopicComponent() {

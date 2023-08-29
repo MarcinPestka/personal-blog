@@ -5,12 +5,15 @@ import { ISection } from "../models/section.model";
 import { ApiAuthDelete, ApiAuthPost, ApiGetAuth } from "../services/ApiService";
 import { editingCourseStore } from "./editingSectionsStore";
 import { OrderSections } from "../services/SectionService";
+import { OrderLectures } from "../services/LectureService";
+import { OrderTopics } from "../services/TopicService";
 
 export class CourseStore {
   courses: ICourse[] = [];
   course!: ICourse;
   completedTopicId: number[] = [];
   activeCourse:boolean = false;
+  activeCourseId:number = 0;
 
   lectureId!: number;
   topicId: number | undefined;
@@ -24,7 +27,7 @@ export class CourseStore {
     this.topicId = id;
   };
 
-  getCourseById = async (Id: string | undefined) => {
+  getCourseById = async (Id: number | undefined) => {
     await axios({
       method: "get",
       url: "https://localhost:7143/Course?Id=" + Id,
@@ -32,7 +35,12 @@ export class CourseStore {
       let course: ICourse = resp.data;
       runInAction(() => {
           this.course = course;
-          if (!editingCourseStore.editing) {
+          this.course.lectures = OrderLectures(this.course.lectures);
+          this.course.lectures.forEach(x => {
+            x.topics = OrderTopics(x.topics);
+          });
+
+          if (!editingCourseStore.editing && course.lectures.length !== 0 && course.lectures[0].topics.length !== 0) {
           this.lectureId = course.lectures[0].id;
           this.topicId = course.lectures[0].topics[0].id;
         }
@@ -40,6 +48,15 @@ export class CourseStore {
     });
     this.setActiveSections();
   };
+
+  getActiveCourseId = async () =>{
+    ApiGetAuth(`Course/GetActiveCourseId?coruseId=${courseStore.course.id}`).then((resp) => {
+      runInAction(() => {
+        this.activeCourseId = resp.data;
+      })
+    });
+  }
+  
 
   getAllCourses = async () => {
     await axios({
@@ -50,7 +67,6 @@ export class CourseStore {
       runInAction(() => {
         this.courses = courses;
       })
-      
     });
   };
 
@@ -73,6 +89,7 @@ export class CourseStore {
   }
 
   HandleTopicCompletion = async (TopicId: number, ActiveCourseId:number) =>{
+    console.log(ActiveCourseId);
     if (!this.completedTopicId.includes(TopicId)) {
       this.CompleteTopic(TopicId,ActiveCourseId);
     }else{

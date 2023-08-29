@@ -61,7 +61,7 @@ export default function LessonList() {
                       id={topic.id === store.topicId ? "pickedTopic" : ""}
                     >
                       {courseStore.activeCourse ?
-                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,1)}} />:
+                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,courseStore.activeCourseId)}} />:
                       <></>
                       }
                       <ListItemText primary={`${index+1}.${topicIndex+1}. ${topic.title}`} />
