@@ -21,7 +21,7 @@ export default function LessonList() {
   async function handleCollapseClick(test: number) {
     setCollapse(test);
     store.setActiveLectureId(test);
-    store.setActiveTopicId(null);
+    store.setActiveTopicId(0);
     store.setActiveSections();
   }
 

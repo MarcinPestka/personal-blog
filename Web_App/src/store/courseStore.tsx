@@ -121,22 +121,21 @@ export class CourseStore {
   };
 
   setActiveSections = () => {
-    this.activeSections = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? [];
-    this.activeSections = OrderSections(this.activeSections);
+    this.activeSections = OrderSections(this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? []);
   };
 
   setActiveLectureId = (id: number) => {
     this.activeLectureId = id;
-    this.setActiveSections();
+    this.setActiveTopicId(0);
   };
 
-  setActiveTopicId = (id: number | null) => {
+  setActiveTopicId = (id: number) => {
     if (id) {
       this.activeTopicId = id;
     } else {
       this.activeTopicId = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics[0]?.id ?? 0;
-      this.setActiveSections();
     }
+    this.setActiveSections();
   };
 }
 
