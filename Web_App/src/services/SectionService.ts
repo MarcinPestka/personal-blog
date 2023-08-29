@@ -2,17 +2,7 @@ import { ISection } from "../models/section.model";
 import { sectionStore } from "../store/sectionStore";
 
 export function GetAllSections() {
-  const store = sectionStore;
-  
-  var sections = store.sections;
-  console.log(sections);
-  sections = sections.sort((n1, n2) => {
-    if (n1.sectionOrder == null || n1.sectionOrder > (n2.sectionOrder ?? Infinity)) {
-      return 1;
-    }
-    return -1;
-  });
-  return sections;
+  return OrderSections(sectionStore.sections);
 }
 
 export function OrderSections(sections: ISection[]) {
