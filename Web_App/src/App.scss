@@ -86,10 +86,62 @@ $primary3: #0096c7;
     transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
 
-// .inbetweenButton:hover{
-//   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
-//   opacity: 1;
-// }
+.sideBarWrapper{
+  border-right: black solid 1.5px;
+}
+
+.topicElement{
+  display: flex;
+  padding: 5px;
+  padding-left: 30px;
+  border-bottom: black solid 1.5px;
+}
+
+.picked{
+  background-color: rgba($primary3, 0.2);
+}
+
+.lectureSideBarElement{
+}
+
+.IconContainer{
+  min-width: fit-content;
+  margin-left:auto;
+}
+
+.lectureHeader{
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: black solid 1.5px;
+  border-top: black solid 1.5px;
+}
+
+.editIcon{
+  opacity: 0.2;
+}
+.editIcon:hover{
+  opacity: 0.7;
+  color: rgb(255, 191, 71);
+  transition: 0.5s ease
+}
+
+.editIcon:not(:hover){
+  transition: 0.5s ease
+}
+
+.deleteIcon{
+  opacity: 0.2;
+}
+.deleteIcon:hover{
+  color: #ff1717;
+  opacity: 0.7;
+  transition: 0.5s ease
+}
+
+.deleteIcon:not(:hover){
+  transition: 0.5s ease
+}
 
 .inbetweenButton {
   color: $primary2;
@@ -117,9 +169,7 @@ $primary3: #0096c7;
   opacity: 1;
   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
-.picked{
-  font-weight: bold;
-}
+
 
 .over{
   color: $primary2;

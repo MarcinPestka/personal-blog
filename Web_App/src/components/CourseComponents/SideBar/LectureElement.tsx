@@ -14,8 +14,8 @@ export function LectureElement(props:prop) {
 
       return (
         <>
-        <div key={props.lecture.id} className="lectureSideBarElement" style={{ borderStyle: "solid", margin: "5px" }}>
-          <h5 onClick={()=>handleLectureClick(props.lecture.id)}>{props.lecture.lectureOrder}. {props.lecture.title}</h5>
+        <div key={props.lecture.id} className="lectureSideBarElement">
+          <p className="lectureHeader" onClick={()=>handleLectureClick(props.lecture.id)}>{props.lecture.lectureOrder}. {props.lecture.title}</p>
           <div className={courseStore.activeLectureId === props.lecture.id ? "collapsingElement": "collapsingElement collapsed"}>
             {props.lecture.topics.map((topic,j)=>(
               <>

@@ -7,7 +7,7 @@ export default function NestedList() {
   return (
     <Observer>
       {() => (
-        <div style={{ borderStyle: "solid", maxWidth: "360px", minWidth: "360px" }}>
+        <div className="sideBarWrapper" style={{ maxWidth: "360px", minWidth: "360px" }}>
           <>
             {courseStore.course &&
               courseStore.course.lectures.map((lecture, i) => (
