@@ -6,8 +6,8 @@ import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
 export async function addTopic(topic: ITopic) {
   await ApiAuthPost("Course/AddNewTopic", topic).then((resp) => {
     let newTopic = resp.data as ITopic;
-    courseStore.topicId = newTopic.id;
-    courseStore.lectureId = newTopic.lectureId;
+    courseStore.activeTopicId = newTopic.id;
+    courseStore.activeLectureId = newTopic.lectureId;
   });
   await courseStore.getCourseById(courseStore.course.id);
   

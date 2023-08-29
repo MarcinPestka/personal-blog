@@ -15,8 +15,9 @@ export class CourseStore {
   activeCourse: boolean = false;
   activeCourseId: number = 0;
 
-  lectureId!: number;
-  topicId: number = 0;
+  activeLectureId!: number;
+  activeTopicId: number = 0;
+
   activeSections: ISection[] | undefined;
 
   constructor() {
@@ -24,7 +25,7 @@ export class CourseStore {
   }
 
   setTopicNumber = (id: number) => {
-    this.topicId = id;
+    this.activeTopicId = id;
   };
 
   getCourseById = async (Id: number | undefined) => {
@@ -46,7 +47,7 @@ export class CourseStore {
           course.lectures[0].topics.length !== 0
         ) {
           //this.lectureId = course.lectures[0].id;
-          this.topicId = course.lectures[0].topics[0].id;
+          this.activeTopicId = course.lectures[0].topics[0].id;
         }
       });
     });
@@ -120,20 +121,20 @@ export class CourseStore {
   };
 
   setActiveSections = () => {
-    this.activeSections = this.course.lectures.find((i) => i.id === this.lectureId)?.topics.find((i) => i.id === this.topicId)?.sections ?? [];
+    this.activeSections = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? [];
     this.activeSections = OrderSections(this.activeSections);
   };
 
   setActiveLectureId = (id: number) => {
-    this.lectureId = id;
+    this.activeLectureId = id;
     this.setActiveSections();
   };
 
   setActiveTopicId = (id: number | null) => {
     if (id) {
-      this.topicId = id;
+      this.activeTopicId = id;
     } else {
-      this.topicId = this.course.lectures.find((i) => i.id === this.lectureId)?.topics[0]?.id ?? 0;
+      this.activeTopicId = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics[0]?.id ?? 0;
       this.setActiveSections();
     }
   };

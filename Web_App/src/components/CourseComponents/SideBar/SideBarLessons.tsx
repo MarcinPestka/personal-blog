@@ -45,7 +45,7 @@ export default function LessonList() {
               onClick={() => {
                 handleCollapseClick(lesson.id);
               }}
-              id={lesson.id === store.lectureId ? "pickedLecture" : ""}
+              id={lesson.id === store.activeLectureId ? "pickedLecture" : ""}
             >
               <ListItemText primary={`${index+1}. ${lesson.title}`} />
               {collapse === lesson.id ? <ExpandMore /> : <ExpandLess />}
@@ -58,7 +58,7 @@ export default function LessonList() {
                     <ListItemButton
                       sx={{ pl: 4 }}
                       onClick={() => handleTopicClick(topic.id)}
-                      id={topic.id === store.topicId ? "pickedTopic" : ""}
+                      id={topic.id === store.activeTopicId ? "pickedTopic" : ""}
                     >
                       {courseStore.activeCourse ?
                       <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,courseStore.activeCourseId)}} />:

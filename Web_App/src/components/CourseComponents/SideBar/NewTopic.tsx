@@ -13,7 +13,7 @@ export default function AddNewTopicComponent() {
 
     function handleFirstClick() {
         setEdit(true);
-        editingCourseStore.newTopic.lectureId = courseStore.lectureId; 
+        editingCourseStore.newTopic.lectureId = courseStore.activeLectureId; 
     }
 
     async function handleAddClick() {

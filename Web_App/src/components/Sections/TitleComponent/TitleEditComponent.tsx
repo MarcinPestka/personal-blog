@@ -8,7 +8,7 @@ import { editingCourseStore } from "../../../store/editingSectionsStore";
 export function TitleEditComponent() {
   
   useEffect(() => {
-      sectionStore.newSection.topicId = courseStore.topicId;
+      sectionStore.newSection.topicId = courseStore.activeTopicId;
       sectionStore.newSection.postId = 1;
   }, []);
 
