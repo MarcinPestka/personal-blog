@@ -59,7 +59,7 @@ export class SectionsStore {
     this.newSection.title = editingCourseStore.editingSection.title;
     this.newSection.subTitle = editingCourseStore.editingSection.subTitle;
     this.newSection.sectionOrder = editingCourseStore.editingSection.sectionOrder;
-    await ApiAuthPost("Course/AddNewSection",this.newSection).then((resp) =>{})
+    await ApiAuthPost("Section/AddNewSection",this.newSection).then((resp) =>{})
     await courseStore.getCourseById(courseStore.course.id);
     editingCourseStore.newSectionStage = undefined;
     editingCourseStore.newSectionType = undefined;

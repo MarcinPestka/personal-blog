@@ -12,7 +12,7 @@ import { EditingViewComponent } from "./SectionEditingComponents/EditingSubCompo
 
 export function BaseComponentWrapper(props: ISection) {
   async function handleClikc() {
-    await ApiAuthPut("Course/EditSection", editingCourseStore.editingSection);
+    await ApiAuthPut("Section/EditSection", editingCourseStore.editingSection);
     editingCourseStore.editingSection = {} as ISection;
     await courseStore.getCourseById(courseStore.course.id);
   }
@@ -27,7 +27,7 @@ export function BaseComponentWrapper(props: ISection) {
 
     }     
     await ApiAuthPut(
-      "Course/EditSection",
+      "Section/EditSection",
       editingCourseStore.elementDragSection
     );
     editingCourseStore.elementDrag = false;

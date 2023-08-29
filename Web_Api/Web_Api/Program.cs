@@ -10,6 +10,7 @@ using Web_Api.Data;
 using Web_Api.Service.AuthService;
 using Web_Api.Service.Blog;
 using Web_Api.Service.CourseService;
+using Web_Api.Service.SectionService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSwaggerGen(options =>
 {

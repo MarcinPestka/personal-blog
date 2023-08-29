@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export function UpperCorner(props: ISection) {
   async function handleClick() {
-    await ApiAuthDelete(`Course/DeleteSection?sectionId=${props.id}`, "");
+    await ApiAuthDelete(`Section/DeleteSection?sectionId=${props.id}`, "");
     await courseStore.getCourseById(courseStore.course.id);
   }
 
