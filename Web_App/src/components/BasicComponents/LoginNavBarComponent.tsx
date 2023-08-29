@@ -11,7 +11,9 @@ export function LoginNavBarComponent() {
   }, [window.location.pathname]);
 
   useEffect(() => {
-    userStore.GetUserDetails();
+    if (userStore.loggedIn) {
+      userStore.GetUserDetails();
+    }
   }, []);
 
   return (

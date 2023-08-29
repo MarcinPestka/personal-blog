@@ -135,5 +135,45 @@ namespace Web_Api.Service.Blog
             await context.SaveChangesAsync();
             return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();
         }
+
+
+        public async Task<Topic> AddNewTopic(TopicDTO topic)
+        {
+            Topic _topic = new Topic(topic); 
+            context.Topics.Add(_topic);
+            await context.SaveChangesAsync();
+            return _topic;
+        }
+
+        public async Task<IActionResult> DeleteTopic(int topicId)
+        {
+            Topic topic = await context.Topics.Where(x => x.Id == topicId).Include(x=>x.Sections).FirstOrDefaultAsync();
+
+            context.Topics.Remove(topic);
+            await context.SaveChangesAsync();
+            return new OkResult();
+        }
+
+        public async Task<Lecture> AddNewLecture(LectureDTO lecture)
+        {
+            Lecture _lecture = new Lecture(lecture);
+            context.Lectures.Add(_lecture);
+            await context.SaveChangesAsync();
+            return _lecture;
+        }
+
+        public async Task<IActionResult> DeleteLecture(int lectureId)
+        {
+            Lecture lecture = await context.Lectures.Where(x => x.Id == lectureId).Include(x => x.Topics).ThenInclude(x=>x.Sections).FirstOrDefaultAsync();
+
+            context.Lectures.Remove(lecture);
+            await context.SaveChangesAsync();
+            return new OkResult();
+        }
+
+        public async Task<int> GetActiveCourseId(int userId, int courseId)
+        {
+            return await context.ActiveCourses.Where(x => x.CourseId == courseId && x.UserId == userId).Select(x => x.Id).FirstOrDefaultAsync();
+        }
     }
 }

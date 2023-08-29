@@ -8,6 +8,11 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { courseStore } from "../../../store/courseStore";
 import { Checkbox } from "@mui/material";
 import { Observer } from "mobx-react-lite";
+import AddNewTopicComponent from "./NewTopic";
+import { editingCourseStore } from "../../../store/editingSectionsStore";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteTopic } from "../../../services/TopicService";
+import AddNewLectureComponent from "./NewLecture";
 
 export default function LessonList() {
   const [collapse, setCollapse] = React.useState(1);
@@ -23,6 +28,10 @@ export default function LessonList() {
   async function handleTopicClick(test: number) {
     store.setActiveTopicId(test);
     store.setActiveSections();
+  }
+
+  async function handleTopicDelete(topicId:number) {
+    deleteTopic(topicId);
   }
 
   return (
@@ -52,20 +61,27 @@ export default function LessonList() {
                       id={topic.id === store.topicId ? "pickedTopic" : ""}
                     >
                       {courseStore.activeCourse ?
-                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,1)}} />:
+                      <Checkbox checked={store.completedTopicId.some(x => x === topic.id) ? true : false} onClick={(e)=>{e.stopPropagation(); store.HandleTopicCompletion(topic.id,courseStore.activeCourseId)}} />:
                       <></>
                       }
                       <ListItemText primary={`${index+1}.${topicIndex+1}. ${topic.title}`} />
+                      
+                      {editingCourseStore.editPage ?
+                       <DeleteIcon onClick={() => handleTopicDelete(topic.id)}></DeleteIcon> :
+                      <></>
+                      }
                     </ListItemButton>
                   </List>
                 </Collapse>
               ))}
+              <AddNewTopicComponent />
               </>
             ) : (
               <></>
             )}
           </React.Fragment>
         ))}
+              <AddNewLectureComponent/>
     </>
       )}
     </Observer>

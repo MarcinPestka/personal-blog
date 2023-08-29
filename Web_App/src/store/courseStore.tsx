@@ -1,20 +1,22 @@
-import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
-import { IPost } from "../models/post.model";
-import { ICourse, ITopic } from "../models/course.model";
+import { ICourse } from "../models/course.model";
 import { ISection } from "../models/section.model";
-import { ApiAuthDelete, ApiAuthPost, ApiGet, ApiGetAuth } from "../services/ApiService";
+import { ApiAuthDelete, ApiAuthPost, ApiGetAuth } from "../services/ApiService";
 import { editingCourseStore } from "./editingSectionsStore";
 import { OrderSections } from "../services/SectionService";
+import { OrderLectures } from "../services/LectureService";
+import { OrderTopics } from "../services/TopicService";
 
 export class CourseStore {
   courses: ICourse[] = [];
   course!: ICourse;
   completedTopicId: number[] = [];
-  activeCourse:boolean = false;
+  activeCourse: boolean = false;
+  activeCourseId: number = 0;
 
   lectureId!: number;
-  topicId: number | undefined;
+  topicId: number = 0;
   activeSections: ISection[] | undefined;
 
   constructor() {
@@ -25,21 +27,40 @@ export class CourseStore {
     this.topicId = id;
   };
 
-  getCourseById = async (Id: string | undefined) => {
+  getCourseById = async (Id: number | undefined) => {
     await axios({
       method: "get",
       url: "https://localhost:7143/Course?Id=" + Id,
     }).then((resp) => {
       let course: ICourse = resp.data;
       runInAction(() => {
-          this.course = course;
-          if (!editingCourseStore.editing) {
-          this.lectureId = course.lectures[0].id;
+        this.course = course;
+        this.course.lectures = OrderLectures(this.course.lectures);
+        this.course.lectures.forEach((x) => {
+          x.topics = OrderTopics(x.topics);
+        });
+
+        if (
+          !editingCourseStore.editing &&
+          course.lectures.length !== 0 &&
+          course.lectures[0].topics.length !== 0
+        ) {
+          //this.lectureId = course.lectures[0].id;
           this.topicId = course.lectures[0].topics[0].id;
         }
-      })
+      });
     });
     this.setActiveSections();
+  };
+
+  getActiveCourseId = async () => {
+    ApiGetAuth(
+      `Course/GetActiveCourseId?coruseId=${courseStore.course.id}`
+    ).then((resp) => {
+      runInAction(() => {
+        this.activeCourseId = resp.data;
+      });
+    });
   };
 
   getAllCourses = async () => {
@@ -50,8 +71,7 @@ export class CourseStore {
       let courses: ICourse[] = resp.data;
       runInAction(() => {
         this.courses = courses;
-      })
-      
+      });
     });
   };
 
@@ -60,45 +80,48 @@ export class CourseStore {
       let courses: ICourse[] = resp.data;
       runInAction(() => {
         this.courses = courses;
-      })
+      });
     });
-  }
+  };
 
   GetCompletedTopics = async (activeCourseId: string | undefined) => {
-    await ApiGetAuth(`Course/GetCompletedTopicIds?courseId=${activeCourseId}`).then((resp) => {
+    await ApiGetAuth(
+      `Course/GetCompletedTopicIds?courseId=${activeCourseId}`
+    ).then((resp) => {
       let completedTopics: number[] = resp.data;
       runInAction(() => {
         this.completedTopicId = completedTopics;
-      })
+      });
     });
-  }
+  };
 
-  HandleTopicCompletion = async (TopicId: number, ActiveCourseId:number) =>{
+  HandleTopicCompletion = async (TopicId: number, ActiveCourseId: number) => {
     if (!this.completedTopicId.includes(TopicId)) {
-      this.CompleteTopic(TopicId,ActiveCourseId);
-    }else{
-      this.UnCompletedTopic(TopicId,ActiveCourseId);
+      this.CompleteTopic(TopicId, ActiveCourseId);
+    } else {
+      this.UnCompletedTopic(TopicId, ActiveCourseId);
     }
-  }
+  };
 
-  CompleteTopic = async (TopicId: number, ActiveCourseId:number) => {
+  CompleteTopic = async (TopicId: number, ActiveCourseId: number) => {
     this.completedTopicId.push(TopicId);
-    await ApiAuthPost("Course/CompleteTopic",{TopicId,ActiveCourseId}).then((resp) =>{})
-  }
-  
-  UnCompletedTopic = async (TopicId: number, ActiveCourseId:number) => {
+    await ApiAuthPost("Course/CompleteTopic", { TopicId, ActiveCourseId }).then(
+      (resp) => {}
+    );
+  };
+
+  UnCompletedTopic = async (TopicId: number, ActiveCourseId: number) => {
     var index = this.completedTopicId.indexOf(TopicId);
-    this.completedTopicId.splice(index,1);
-    await ApiAuthDelete("Course/UnCompleteTopic",{TopicId,ActiveCourseId}).then((resp) =>{})
-  }
+    this.completedTopicId.splice(index, 1);
+    await ApiAuthDelete("Course/UnCompleteTopic", {
+      TopicId,
+      ActiveCourseId,
+    }).then((resp) => {});
+  };
 
   setActiveSections = () => {
-    this.activeSections = this.course.lectures
-      .find((i) => i.id === this.lectureId)
-      ?.topics.find((i) => i.id === this.topicId)?.sections;
-      if (this.activeSections !== undefined) {
-        this.activeSections = OrderSections(this.activeSections);
-      }
+    this.activeSections = this.course.lectures.find((i) => i.id === this.lectureId)?.topics.find((i) => i.id === this.topicId)?.sections ?? [];
+    this.activeSections = OrderSections(this.activeSections);
   };
 
   setActiveLectureId = (id: number) => {
@@ -110,11 +133,9 @@ export class CourseStore {
     if (id) {
       this.topicId = id;
     } else {
-      this.topicId = this.course.lectures.find(
-        (i) => i.id === this.lectureId
-      )?.topics[0].id;
+      this.topicId = this.course.lectures.find((i) => i.id === this.lectureId)?.topics[0]?.id ?? 0;
+      this.setActiveSections();
     }
-    this.setActiveSections();
   };
 }
 

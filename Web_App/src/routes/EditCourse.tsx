@@ -20,8 +20,7 @@ export function EditCourse() {
 
   useEffect(() => {
     (async () => {
-      const courseId = params.courseId;
-      await store.getCourseById(courseId);
+      await store.getCourseById(Number(params.courseId));
       editingCourseStore.editPage = true;
     })();
   }, []);

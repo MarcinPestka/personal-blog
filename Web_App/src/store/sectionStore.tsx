@@ -5,6 +5,7 @@ import { ISection } from "../models/section.model";
 import { ApiAuthPost, ApiGet } from "../services/ApiService";
 import { editingCourseStore } from "./editingSectionsStore";
 import { courseStore } from "./courseStore";
+import { AddNewSection } from "../services/SectionService";
 
 export class SectionsStore {
   sections: ISection[] = [];
@@ -59,8 +60,7 @@ export class SectionsStore {
     this.newSection.title = editingCourseStore.editingSection.title;
     this.newSection.subTitle = editingCourseStore.editingSection.subTitle;
     this.newSection.sectionOrder = editingCourseStore.editingSection.sectionOrder;
-    await ApiAuthPost("Course/AddNewSection",this.newSection).then((resp) =>{})
-    await courseStore.getCourseById('6');
+    await AddNewSection(this.newSection);
     editingCourseStore.newSectionStage = undefined;
     editingCourseStore.newSectionType = undefined;
     editingCourseStore.editing = false;

@@ -19,7 +19,7 @@ export function Course() {
 
   useEffect(() => {
     (async () => {
-      await store.getCourseById(params.courseId);
+      await store.getCourseById(Number(params.courseId));
     })();
   }, []);
 
