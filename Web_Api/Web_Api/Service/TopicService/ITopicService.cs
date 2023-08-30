@@ -9,6 +9,6 @@ namespace Web_Api.Service.TopicService
         Task<CompletedTopic> CompleteTopic(CompletedTopicDTO completedTopic);
         Task<IActionResult> UnCompleteTopic(CompletedTopicDTO completedTopic);
         Task<Topic> AddNewTopic(TopicDTO topic);
-        Task<IActionResult> DeleteTopic(int topicId);
+        Task<IEnumerable<Topic>> DeleteTopic(int topicId);
     }
 }

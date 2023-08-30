@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_Api.Data;
+using Web_Api.Migrations;
 using Web_Api.Model;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Web_Api.Service.TopicService
 {
@@ -37,19 +39,32 @@ namespace Web_Api.Service.TopicService
 
         public async Task<Topic> AddNewTopic(TopicDTO topic)
         {
+            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder >= topic.TopicOrder).ToArrayAsync();
+            foreach (var t in topics)
+            {
+                t.TopicOrder = t.TopicOrder + 1;
+            }
+
             Topic _topic = new Topic(topic);
             context.Topics.Add(_topic);
+
             await context.SaveChangesAsync();
             return _topic;
         }
 
-        public async Task<IActionResult> DeleteTopic(int topicId)
+        public async Task<IEnumerable<Topic>> DeleteTopic(int topicId)
         {
-            Topic topic = await context.Topics.Where(x => x.Id == topicId).Include(x => x.Sections).FirstOrDefaultAsync();
-
+            Topic topic = await context.Topics.Where(x => x.Id == topicId).FirstOrDefaultAsync();
             context.Topics.Remove(topic);
+
+            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder > topic.TopicOrder).ToArrayAsync();
+            foreach (var t in topics)
+            {
+                t.TopicOrder = topic.TopicOrder - 1;
+            }
+
             await context.SaveChangesAsync();
-            return new OkResult();
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
         }
 
     }

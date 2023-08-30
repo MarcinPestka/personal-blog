@@ -51,7 +51,7 @@ namespace Web_Api.Controllers
 
         [HttpDelete("DeleteTopic")]
         [Authorize]
-        public Task<IActionResult> DeleteTopic(int topicId)
+        public Task<IEnumerable<Topic>> DeleteTopic(int topicId)
         {
             return this.topicService.DeleteTopic(topicId);
         }
