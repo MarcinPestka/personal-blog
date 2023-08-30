@@ -1,6 +1,5 @@
 import { courseStore } from "../../../store/courseStore";
 import { Observer } from "mobx-react-lite";
-import { TopicElement } from "./TopicElement";
 import { LectureElement } from "./LectureElement";
 
 export default function NestedList() {

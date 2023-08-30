@@ -1,5 +1,4 @@
 import { ITopic } from "../models/course.model";
-import { ISection } from "../models/section.model";
 import { courseStore } from "../store/courseStore";
 import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
 
@@ -26,8 +25,5 @@ export function OrderTopics(topics: ITopic[]) {
     return -1;
   });
   return topics;
-}
-function setActiveLectureId() {
-    throw new Error("Function not implemented.");
 }
 

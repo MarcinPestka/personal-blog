@@ -1,5 +1,4 @@
 import { Box, Grid, TextField } from "@mui/material";
-import { ISection } from "../../../models/section.model";
 import { sectionStore } from "../../../store/sectionStore";
 import { useEffect } from "react";
 import { courseStore } from "../../../store/courseStore";
