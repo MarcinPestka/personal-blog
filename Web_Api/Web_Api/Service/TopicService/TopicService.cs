@@ -54,18 +54,43 @@ namespace Web_Api.Service.TopicService
 
         public async Task<IEnumerable<Topic>> DeleteTopic(int topicId)
         {
-            Topic topic = await context.Topics.Where(x => x.Id == topicId).FirstOrDefaultAsync();
+            Topic topic = await context.Topics.Where(x => x.Id == topicId).Include(x=>x.Sections).FirstOrDefaultAsync();
             context.Topics.Remove(topic);
 
             IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder > topic.TopicOrder).ToArrayAsync();
             foreach (var t in topics)
             {
-                t.TopicOrder = topic.TopicOrder - 1;
+                t.TopicOrder = t.TopicOrder - 1;
             }
 
             await context.SaveChangesAsync();
             return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
         }
 
+        public async Task<IEnumerable<Topic>> EditSection(TopicDTO topic)
+        {
+            Topic _topic = await context.Topics.Where(x => x.Id == topic.Id).FirstOrDefaultAsync();
+
+            if (_topic.TopicOrder > topic.TopicOrder)
+            {
+                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder >= topic.TopicOrder && x.TopicOrder <= _topic.TopicOrder).ToArrayAsync();
+                foreach (var t in topics)
+                {
+                    t.TopicOrder = t.TopicOrder + 1;
+                }
+            }
+            else
+            {
+                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder <= topic.TopicOrder && x.TopicOrder >= _topic.TopicOrder).ToArrayAsync();
+                foreach (var t in topics)
+                {
+                    t.TopicOrder = t.TopicOrder - 1;
+                }
+            }
+
+            context.Entry(_topic).CurrentValues.SetValues(topic);
+            await context.SaveChangesAsync();
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
+        }
     }
 }

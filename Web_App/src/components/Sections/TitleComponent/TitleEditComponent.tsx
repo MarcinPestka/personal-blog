@@ -2,7 +2,7 @@ import { Box, Grid, TextField } from "@mui/material";
 import { sectionStore } from "../../../store/sectionStore";
 import { useEffect } from "react";
 import { courseStore } from "../../../store/courseStore";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function TitleEditComponent() {
   

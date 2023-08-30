@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { IPost } from "../models/post.model";
 import { ISection } from "../models/section.model";
 import { ApiGet } from "../services/ApiService";
-import { editingCourseStore } from "./editingSectionsStore";
+import { editingCourseStore } from "./editingCourseStore";
 import { courseStore } from "./courseStore";
 import { AddNewSection } from "../services/SectionService";
 

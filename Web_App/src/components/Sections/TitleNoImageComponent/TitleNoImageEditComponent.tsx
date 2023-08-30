@@ -1,7 +1,7 @@
 import { Box, Grid, TextField } from "@mui/material";
 import { ISection } from "../../../models/section.model";
 import { sectionStore } from "../../../store/sectionStore";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function TitleNoImageEditComponent() {
   return (

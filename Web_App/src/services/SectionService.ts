@@ -23,9 +23,6 @@ export function OrderSections(sections: ISection[]) {
 
 export async function AddNewSection(section:ISection) {
   await ApiAuthPost("Section/AddNewSection",section).then((resp) =>{
-    console.log(courseStore.activeLectureId);
-    console.log(courseStore.activeTopicId);
-    console.log(resp.data);
     courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics.find(x => x.id === courseStore.activeTopicId)!.sections = resp.data;
     courseStore.setActiveSections();
   })

@@ -17,6 +17,7 @@
         {
             this.Title = topic.Title;
             this.LectureId = topic.LectureId;
+            this.TopicOrder = topic.TopicOrder;
         }
     }
 }

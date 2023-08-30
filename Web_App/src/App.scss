@@ -117,30 +117,25 @@ $primary3: #0096c7;
   border-top: black solid 1.5px;
 }
 
-.editIcon{
+.icon{
   opacity: 0.2;
 }
-.editIcon:hover{
+.icon:hover{
   opacity: 0.7;
+  transition: 0.5s ease
+}
+.icon:not(:hover){
+  transition: 0.5s ease
+}
+
+.editIcon:hover{
   color: rgb(255, 191, 71);
-  transition: 0.5s ease
-}
-
-.editIcon:not(:hover){
-  transition: 0.5s ease
-}
-
-.deleteIcon{
-  opacity: 0.2;
 }
 .deleteIcon:hover{
   color: #ff1717;
-  opacity: 0.7;
-  transition: 0.5s ease
 }
-
-.deleteIcon:not(:hover){
-  transition: 0.5s ease
+.addIcon:hover{
+  color: #04a81f;
 }
 
 .inbetweenButton {

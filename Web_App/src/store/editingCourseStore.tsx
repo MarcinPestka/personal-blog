@@ -13,13 +13,16 @@ export class EditingCourseStore {
   editingSection: ISection = {} as ISection;
   editPage: boolean = false;
   sectionPreview: boolean = false;
+
   elementDrag: boolean = false;
   elementDragSection: ISection = {} as ISection;
   elementDragId: number = 1;
   initialDragOrder: number = 0;
 
+  editingTopic: boolean = false;
   newTopic: ITopic = {} as ITopic;
   newLecture: ILecture = {} as ILecture;
+  dragTopic: ITopic = {} as ITopic;
 
   constructor() {
     makeAutoObservable(this);

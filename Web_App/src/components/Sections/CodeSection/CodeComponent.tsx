@@ -3,7 +3,7 @@ import { ISection } from "../../../models/section.model";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
 import { useEffect } from "react";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function CodeComponent(props: ISection) {
   useEffect(() => {

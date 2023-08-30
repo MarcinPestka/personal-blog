@@ -3,7 +3,7 @@ import axios from "axios";
 import { ICourse } from "../models/course.model";
 import { ISection } from "../models/section.model";
 import { ApiAuthDelete, ApiAuthPost, ApiGetAuth } from "../services/ApiService";
-import { editingCourseStore } from "./editingSectionsStore";
+import { editingCourseStore } from "./editingCourseStore";
 import { OrderSections } from "../services/SectionService";
 import { OrderLectures } from "../services/LectureService";
 import { OrderTopics } from "../services/TopicService";
@@ -87,7 +87,7 @@ export class CourseStore {
 
   GetCompletedTopics = async (activeCourseId: string | undefined) => {
     await ApiGetAuth(
-      `Course/GetCompletedTopicIds?courseId=${activeCourseId}`
+      `Topic/GetCompletedTopicIds?courseId=${activeCourseId}`
     ).then((resp) => {
       let completedTopics: number[] = resp.data;
       runInAction(() => {

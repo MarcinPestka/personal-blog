@@ -1,20 +1,25 @@
 import { ITopic } from "../models/course.model";
 import { courseStore } from "../store/courseStore";
-import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
+import { editingCourseStore } from "../store/editingCourseStore";
+import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
 
 export async function addTopic(topic: ITopic) {
-  await ApiAuthPost("Course/AddNewTopic", topic).then((resp) => {
-    let newTopic = resp.data as ITopic;
-    courseStore.activeTopicId = newTopic.id;
-    courseStore.activeLectureId = newTopic.lectureId;
+  await ApiAuthPost("Topic/AddNewTopic", topic).then((response) => {
+    courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = response.data;
   });
   await courseStore.getCourseById(courseStore.course.id);
-  
 }
 
 export async function deleteTopic(topicId: number) {
-  await ApiAuthDelete(`Course/DeleteTopic?topicId=${topicId}`, "");
-  await courseStore.getCourseById(courseStore.course.id);
+  await ApiAuthDelete(`Topic/DeleteTopic?topicId=${topicId}`, "").then((response)=>{
+    courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = response.data;
+  });
+}
+
+export async function editTopic(){
+  await ApiAuthPut("Topic/EditTopic",editingCourseStore.dragTopic).then((response)=>{
+    courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = OrderTopics(response.data);
+  });
 }
 
 export function OrderTopics(topics: ITopic[]) {

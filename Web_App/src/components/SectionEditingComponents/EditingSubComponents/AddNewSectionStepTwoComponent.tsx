@@ -1,4 +1,4 @@
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 import {
   SectionAddStage,
   SectionTypeEnum,

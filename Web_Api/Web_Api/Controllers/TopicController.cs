@@ -55,5 +55,13 @@ namespace Web_Api.Controllers
         {
             return this.topicService.DeleteTopic(topicId);
         }
+        
+        [HttpPut("EditTopic")]
+        [Authorize]
+        public Task<IEnumerable<Topic>> EditTopic(TopicDTO topic)
+        {
+            return this.topicService.EditSection(topic);
+        }
+
     }
 }

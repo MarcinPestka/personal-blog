@@ -1,6 +1,6 @@
 import { Observer } from "mobx-react-lite";
 import { SectionAddStage } from "../../../services/SectionService";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 import { AddNewSectionBackButton } from "./AddNewSectionBackButtonComponent";
 
 export function EditingViewComponent() {

@@ -10,5 +10,6 @@ namespace Web_Api.Service.TopicService
         Task<IActionResult> UnCompleteTopic(CompletedTopicDTO completedTopic);
         Task<IEnumerable<Topic>> AddNewTopic(TopicDTO topic);
         Task<IEnumerable<Topic>> DeleteTopic(int topicId);
+        Task<IEnumerable<Topic>> EditSection(TopicDTO topic);
     }
 }

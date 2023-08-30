@@ -1,6 +1,6 @@
 import { ISection } from "../models/section.model";
 import { BaseComponent } from "./BaseComponent";
-import { editingCourseStore } from "../store/editingSectionsStore";
+import { editingCourseStore } from "../store/editingCourseStore";
 import { Observer } from "mobx-react-lite";
 import { ApiAuthPut } from "../services/ApiService";
 import { courseStore } from "../store/courseStore";
@@ -9,10 +9,16 @@ import { UpperCorner } from "./SectionEditingComponents/EditingSubComponents/Upp
 import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 import { runInAction } from "mobx";
 import { EditingViewComponent } from "./SectionEditingComponents/EditingSubComponents/EditingViewComponent";
+import { OrderSections } from "../services/SectionService";
 
 export function BaseComponentWrapper(props: ISection) {
   async function handleClikc() {
-    await ApiAuthPut("Section/EditSection", editingCourseStore.editingSection);
+    await ApiAuthPut("Section/EditSection", editingCourseStore.editingSection).then((response) => {
+      let sections: ISection[] = response.data;
+      runInAction(() => {
+        courseStore.activeSections = OrderSections(sections);
+      });
+    });;
     editingCourseStore.editingSection = {} as ISection;
     await courseStore.getCourseById(courseStore.course.id);
   }
@@ -29,7 +35,12 @@ export function BaseComponentWrapper(props: ISection) {
     await ApiAuthPut(
       "Section/EditSection",
       editingCourseStore.elementDragSection
-    );
+    ).then((response) => {
+      let sections: ISection[] = response.data;
+      runInAction(() => {
+        courseStore.activeSections = OrderSections(sections);
+      });
+    });;
     editingCourseStore.elementDrag = false;
     editingCourseStore.elementDragSection = {} as ISection;
   }

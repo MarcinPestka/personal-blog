@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { IPost } from "../models/post.model";
 import { ISection } from "../models/section.model";
 import { runInAction } from "mobx";
-import { editingCourseStore } from "../store/editingSectionsStore";
+import { editingCourseStore } from "../store/editingCourseStore";
 import { sectionStore } from "../store/sectionStore";
 import { courseStore } from "../store/courseStore";
 import { OrderSections } from "./SectionService";
@@ -50,12 +50,7 @@ export async function ApiAuthPut(params: any, payload: any) {
       Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-  }).then((response) => {
-    let sections: ISection[] = response.data;
-    runInAction(() => {
-      courseStore.activeSections = OrderSections(sections);
-    });
-  });
+  })
 }
 
 export async function ApiAuthDelete(params: any, payload: any | undefined) {

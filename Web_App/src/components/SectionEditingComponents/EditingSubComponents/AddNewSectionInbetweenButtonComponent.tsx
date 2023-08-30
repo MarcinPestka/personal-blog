@@ -1,15 +1,11 @@
 import { Observer } from "mobx-react-lite";
 import { courseStore } from "../../../store/courseStore";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 import { AddNewSection } from "../AddNewSectionComponent";
 import { ISection } from "../../../models/section.model";
 import { SectionAddStage } from "../../../services/SectionService";
 
-export function AddNewSectionInbetweenButton({
-  section
-}: {
-  section: number;
-}) {
+export function AddNewSectionInbetweenButton({section}: {section: number;}) {
   return (
     <Observer>
       {() => (

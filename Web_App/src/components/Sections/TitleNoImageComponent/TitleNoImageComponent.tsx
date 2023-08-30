@@ -1,8 +1,5 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { ISection } from "../../../models/section.model";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
-import { runInAction } from "mobx";
-import { ApiAuthPut } from "../../../services/ApiService";
 
 export function TitleNoImageComponent(props: ISection) {
   return (

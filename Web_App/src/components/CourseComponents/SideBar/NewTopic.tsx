@@ -1,45 +1,58 @@
 import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
 import { Observer } from "mobx-react-lite";
+import { editingCourseStore } from "../../../store/editingCourseStore";
+import { courseStore } from "../../../store/courseStore";
 import { TextField } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
-import { courseStore } from "../../../store/courseStore";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
-import { addTopic } from "../../../services/TopicService";
+import { addTopic, editTopic } from "../../../services/TopicService";
+import { ITopic } from "../../../models/course.model";
 
-export default function AddNewTopicComponent() {
-    const [edit,setEdit] = React.useState(false);
+export default function AddNewTopicComponent({order}: {order: number;}) {
+    const [newTopic,setEdit] = React.useState(false);
+
+  function clearEdit() {
+    setEdit(false);
+    editingCourseStore.editingTopic = false;
+    editingCourseStore.newTopic = {} as ITopic;
+  }
 
     function handleFirstClick() {
         setEdit(true);
-        editingCourseStore.newTopic.lectureId = courseStore.activeLectureId; 
+        editingCourseStore.newTopic.lectureId = courseStore.activeLectureId;
     }
 
     async function handleAddClick() {
-      addTopic(editingCourseStore.newTopic);
-
+      if (!editingCourseStore.editingTopic) {
+        editingCourseStore.newTopic.topicOrder = order;
+        addTopic(editingCourseStore.newTopic);
+        setEdit(false); 
+      }else{
+        editTopic();
+        clearEdit();
+      }
     }
 
-    function handleDeleteClick() {
-        setEdit(false);
+    function handleClearClick() {
+        clearEdit();
     }
 
   return (
     <Observer>
       {() => (
         <>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => handleFirstClick()}>
-            {
-            edit === false ? 
-                <div> Add new topic </div>:
-                <>
-                <TextField onChange={(e)=>{editingCourseStore.newTopic.title = e.target.value}}></TextField> 
-                <AddIcon onClick={(e)=>{e.stopPropagation();handleAddClick();}}></AddIcon>
-                <ClearIcon onClick={(e)=>{e.stopPropagation();handleDeleteClick()}}></ClearIcon>
-                </>
-            }
-          </ListItemButton>
+        {newTopic === false && editingCourseStore.editingTopic !== true ?
+        <p onClick={()=>handleFirstClick()}>Add new topic</p>
+        :
+        <div style={{display:'flex',alignItems:'center'}}>
+            <TextField id="standard-basic" label="New lecture" variant="standard" value={editingCourseStore.newTopic.title} onChange={(e)=>{editingCourseStore.newTopic.title = e.target.value}}/>
+            <div className="IconContainer">
+            <AddIcon className="addIcon icon" onClick={() => handleAddClick()}></AddIcon>
+            <ClearIcon className="deleteIcon icon" onClick={() => handleClearClick()}></ClearIcon>
+            </div>
+        </div>
+        
+        }
         </>
       )}
     </Observer>
