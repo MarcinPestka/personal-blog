@@ -37,7 +37,7 @@ namespace Web_Api.Service.TopicService
             return new OkResult();
         }
 
-        public async Task<Topic> AddNewTopic(TopicDTO topic)
+        public async Task<IEnumerable<Topic>> AddNewTopic(TopicDTO topic)
         {
             IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder >= topic.TopicOrder).ToArrayAsync();
             foreach (var t in topics)
@@ -49,7 +49,7 @@ namespace Web_Api.Service.TopicService
             context.Topics.Add(_topic);
 
             await context.SaveChangesAsync();
-            return _topic;
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Topic>> DeleteTopic(int topicId)

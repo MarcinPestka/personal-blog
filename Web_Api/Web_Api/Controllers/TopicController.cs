@@ -44,7 +44,7 @@ namespace Web_Api.Controllers
 
         [HttpPost("AddNewTopic")]
         [Authorize]
-        public Task<Topic> AddNewTopic(TopicDTO topic)
+        public Task<IEnumerable<Topic>> AddNewTopic(TopicDTO topic)
         {
             return this.topicService.AddNewTopic(topic);
         }
