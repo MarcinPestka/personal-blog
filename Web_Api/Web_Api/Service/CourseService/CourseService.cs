@@ -62,23 +62,6 @@ namespace Web_Api.Service.Blog
             return await this.context.Courses.Where(x => activeCoursesId.Any(y => y == x.Id)).ToArrayAsync();
         }
 
-        public async Task<Lecture> AddNewLecture(LectureDTO lecture)
-        {
-            Lecture _lecture = new Lecture(lecture);
-            context.Lectures.Add(_lecture);
-            await context.SaveChangesAsync();
-            return _lecture;
-        }
-
-        public async Task<IActionResult> DeleteLecture(int lectureId)
-        {
-            Lecture lecture = await context.Lectures.Where(x => x.Id == lectureId).Include(x => x.Topics).ThenInclude(x=>x.Sections).FirstOrDefaultAsync();
-
-            context.Lectures.Remove(lecture);
-            await context.SaveChangesAsync();
-            return new OkResult();
-        }
-
         public async Task<int> GetActiveCourseId(int userId, int courseId)
         {
             return await context.ActiveCourses.Where(x => x.CourseId == courseId && x.UserId == userId).Select(x => x.Id).FirstOrDefaultAsync();

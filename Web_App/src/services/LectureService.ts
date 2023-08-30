@@ -4,13 +4,15 @@ import { courseStore } from "../store/courseStore";
 import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
 
 export async function addNewLecture(lecture:ILecture) {
-    await ApiAuthPost("Course/AddNewLecture",lecture).then((resp) =>{});
-    await courseStore.getCourseById(courseStore.course.id);
+    await ApiAuthPost("Lecture/AddNewLecture",lecture).then((response) =>{
+      courseStore.course.lectures = response.data
+    });
 }
 
 export async function deleteLecture(lectureId:number) {
-    await ApiAuthDelete(`Course/DeleteLecture?lectureId=${lectureId}`,"");
-    await courseStore.getCourseById(courseStore.course.id);
+    await ApiAuthDelete(`Lecture/DeleteLecture?lectureId=${lectureId}`,"").then((response) =>{
+      courseStore.course.lectures = response.data
+    });
   }
 
   

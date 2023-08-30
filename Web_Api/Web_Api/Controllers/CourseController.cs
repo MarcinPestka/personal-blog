@@ -57,20 +57,6 @@ namespace Web_Api.Controllers
             return res;
         }
 
-        [HttpPost("AddNewLecture")]
-        [Authorize]
-        public Task<Lecture> AddNewLecture(LectureDTO lecture)
-        {
-            return this.courseService.AddNewLecture(lecture);
-        }
-
-        [HttpDelete("DeleteLecture")]
-        [Authorize]
-        public Task<IActionResult> DeleteLecture(int lectureId)
-        {
-            return this.courseService.DeleteLecture(lectureId);
-        }
-
         [HttpGet("GetActiveCourseId")]
         public Task<int> GetActiveCourseId(int coruseId)
         {
