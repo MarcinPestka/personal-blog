@@ -36,7 +36,6 @@ export function TopicElement(props:prop) {
 
     function dragEnd() {
         editTopic();
-        console.log(editingCourseStore.dragTopic);
     }
 
   return (

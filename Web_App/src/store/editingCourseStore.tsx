@@ -22,7 +22,9 @@ export class EditingCourseStore {
   editingTopic: boolean = false;
   newTopic: ITopic = {} as ITopic;
   newLecture: ILecture = {} as ILecture;
+  
   dragTopic: ITopic = {} as ITopic;
+  dragLecture: ILecture = {} as ILecture;
 
   constructor() {
     makeAutoObservable(this);

@@ -66,7 +66,7 @@ namespace Web_Api.Service.LectureService
 
             context.Entry(_lecture).CurrentValues.SetValues(lecture);
             await context.SaveChangesAsync();
-            return await context.Lectures.Where(x => x.CourseId == lecture.CourseId).ToArrayAsync();
+            return await context.Lectures.Where(x => x.CourseId == lecture.CourseId).Include(x=>x.Topics).ThenInclude(x=>x.Sections).ToArrayAsync();
         }
     }
     }
