@@ -26,10 +26,10 @@ export function BaseComponentWrapper(props: ISection) {
   async function handleDragEnd() {
     if (
       editingCourseStore.elementDragId -
-        editingCourseStore.elementDragSection.sectionOrder <
+        editingCourseStore.elementDragSection.order <
       0
     ) {
-      editingCourseStore.elementDragSection.sectionOrder -= 1;
+      editingCourseStore.elementDragSection.order -= 1;
 
     }     
     await ApiAuthPut(
@@ -50,7 +50,7 @@ export function BaseComponentWrapper(props: ISection) {
       {() => (
         <>
           {editingCourseStore.editPage === true ? (
-            <AddNewSectionInbetweenButton section={props.sectionOrder} />
+            <AddNewSectionInbetweenButton section={props.order} />
           ) : (
             <></>
           )}
@@ -63,9 +63,9 @@ export function BaseComponentWrapper(props: ISection) {
             onDragStart={() => {
               runInAction(() => {
                 editingCourseStore.elementDrag = true;
-                editingCourseStore.initialDragOrder = props.sectionOrder;
+                editingCourseStore.initialDragOrder = props.order;
                 editingCourseStore.elementDragSection = props;
-                editingCourseStore.elementDragId = props.sectionOrder;
+                editingCourseStore.elementDragId = props.order;
               });
             }}
           >

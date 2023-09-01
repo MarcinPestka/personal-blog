@@ -15,10 +15,10 @@ namespace Web_Api.Service.LectureService
 
         public async Task<IEnumerable<Lecture>> AddNewLecture(LectureDTO lecture)
         {
-            IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.LectureOrder >= lecture.LectureOrder).ToArrayAsync();
+            IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.Order >= lecture.Order).ToArrayAsync();
             foreach (var l in lectures)
             {
-                l.LectureOrder = l.LectureOrder + 1;
+                l.Order = l.Order + 1;
             }
 
             Lecture _lecture = new Lecture(lecture);
@@ -33,10 +33,10 @@ namespace Web_Api.Service.LectureService
             Lecture lecture = await context.Lectures.Where(x => x.Id == lectureId).Include(x=>x.Topics).ThenInclude(x=>x.Sections).FirstOrDefaultAsync();
             context.Lectures.Remove(lecture);
 
-            IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.LectureOrder > lecture.LectureOrder).ToArrayAsync();
+            IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.Order > lecture.Order).ToArrayAsync();
             foreach (var l in lectures)
             {
-                l.LectureOrder = l.LectureOrder - 1;
+                l.Order = l.Order - 1;
             }
 
             await context.SaveChangesAsync();
@@ -47,20 +47,20 @@ namespace Web_Api.Service.LectureService
         {
             Lecture _lecture = await context.Lectures.Where(x => x.Id == lecture.Id).FirstOrDefaultAsync();
 
-            if (_lecture.LectureOrder > lecture.LectureOrder)
+            if (_lecture.Order > lecture.Order)
             {
-                IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.LectureOrder >= lecture.LectureOrder && x.LectureOrder <= _lecture.LectureOrder).ToArrayAsync();
+                IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.Order >= lecture.Order && x.Order <= _lecture.Order).ToArrayAsync();
                 foreach (var t in lectures)
                 {
-                    t.LectureOrder = t.LectureOrder + 1;
+                    t.Order = t.Order + 1;
                 }
             }
             else
             {
-                IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.LectureOrder <= lecture.LectureOrder && x.LectureOrder >= _lecture.LectureOrder).ToArrayAsync();
+                IEnumerable<Lecture> lectures = await context.Lectures.Where(x => x.CourseId == lecture.CourseId && x.Order <= lecture.Order && x.Order >= _lecture.Order).ToArrayAsync();
                 foreach (var t in lectures)
                 {
-                    t.LectureOrder = t.LectureOrder - 1;
+                    t.Order = t.Order - 1;
                 }
             }
 

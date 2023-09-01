@@ -12,14 +12,14 @@ export function AddNewSectionInbetweenButton({section}: {section: number;}) {
         <>
           <div
             onDragOver={() => {
-                if (editingCourseStore.elementDragSection.sectionOrder === section || editingCourseStore.elementDragSection.sectionOrder === (section-1)) {
+                if (editingCourseStore.elementDragSection.order === section || editingCourseStore.elementDragSection.order === (section-1)) {
                   console.log("nie powinno się zmieniać");
                 }else{
-                  editingCourseStore.elementDragSection.sectionOrder = section;
+                  editingCourseStore.elementDragSection.order = section;
                 }
             }}
             // className={`inbetweenButton${editingCourseStore.elementDrag === true &&
-            //   editingCourseStore.elementDragSection.sectionOrder === section 
+            //   editingCourseStore.elementDragSection.order === section 
             //     ? "inbetweenButtonActive"
             //     : "inbetweenButton"
             //     } ${section === editingCourseStore.elementDragId || 
@@ -27,10 +27,10 @@ export function AddNewSectionInbetweenButton({section}: {section: number;}) {
             // }
             //${editingCourseStore.initialDragOrder === section || editingCourseStore.initialDragOrder === section - 1 ? "invisible":""}
             className={`inbetweenButton ${editingCourseStore.initialDragOrder === section || editingCourseStore.initialDragOrder === section - 1 ? "invisible":""} ${
-                editingCourseStore.elementDragSection.sectionOrder === section ? "over":""}`}
+                editingCourseStore.elementDragSection.order === section ? "over":""}`}
             
             onClick={() => {
-              editingCourseStore.editingSection.sectionOrder = section;
+              editingCourseStore.editingSection.order = section;
               editingCourseStore.newSectionStage = SectionAddStage.sectionType;
               editingCourseStore.editing = true;
             }}
@@ -39,7 +39,7 @@ export function AddNewSectionInbetweenButton({section}: {section: number;}) {
               ? "Drop me here" 
               : "Add new section"}
           </div>
-          {editingCourseStore.editingSection.sectionOrder ===
+          {editingCourseStore.editingSection.order ===
             section ? (
             <AddNewSection />
           ) : (

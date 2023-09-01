@@ -18,14 +18,13 @@ export async function deleteLecture(lectureId:number) {
 
   export async function editLecture(){
     await ApiAuthPut("Lecture/EditLecture",editingCourseStore.dragLecture).then((response)=>{
-      console.log(response.data);
       courseStore.course.lectures = OrderLectures(response.data);
     });
   }
   
 export function OrderLectures(lectures: ILecture[]) {
     lectures = lectures.sort((n1, n2) => {
-      if (n1.lectureOrder == null || n1.lectureOrder > (n2.lectureOrder ?? Infinity)) {
+      if (n1.order == null || n1.order > (n2.order ?? Infinity)) {
         return 1;
       }
       return -1;

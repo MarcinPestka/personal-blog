@@ -58,7 +58,7 @@ export class SectionsStore {
     this.newSection.sectionType = editingCourseStore.newSectionType;
     this.newSection.title = editingCourseStore.editingSection.title;
     this.newSection.subTitle = editingCourseStore.editingSection.subTitle;
-    this.newSection.sectionOrder = editingCourseStore.editingSection.sectionOrder;
+    this.newSection.order = editingCourseStore.editingSection.order;
     await AddNewSection(this.newSection);
     editingCourseStore.newSectionStage = undefined;
     editingCourseStore.newSectionType = undefined;

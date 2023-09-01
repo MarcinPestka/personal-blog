@@ -15,10 +15,10 @@ namespace Web_Api.Service.SectionService
 
         public async Task<IEnumerable<Section>> AddNewSection(Section section)
         {
-            IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder >= section.SectionOrder).ToArrayAsync();
+            IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.Order >= section.Order).ToArrayAsync();
             foreach (var s in sections)
             {
-                s.SectionOrder = s.SectionOrder + 1;
+                s.Order = s.Order + 1;
             }
 
             context.Sections.Add(section);
@@ -32,10 +32,10 @@ namespace Web_Api.Service.SectionService
             Section section = await context.Sections.Where(x => x.Id == sectionId).FirstOrDefaultAsync();
             context.Sections.Remove(section);
 
-            IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder > section.SectionOrder).ToArrayAsync();
+            IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.Order > section.Order).ToArrayAsync();
             foreach (var s in sections)
             {
-                s.SectionOrder = s.SectionOrder - 1;
+                s.Order = s.Order - 1;
             }
 
             await context.SaveChangesAsync();
@@ -45,20 +45,20 @@ namespace Web_Api.Service.SectionService
         public async Task<IEnumerable<Section>> EditSection(Section section)
         {
             Section _section = await context.Sections.Where(x => x.Id == section.Id).FirstOrDefaultAsync();
-            if (_section.SectionOrder > section.SectionOrder)
+            if (_section.Order > section.Order)
             {
-                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder >= section.SectionOrder && x.SectionOrder <= _section.SectionOrder).ToArrayAsync();
+                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.Order >= section.Order && x.Order <= _section.Order).ToArrayAsync();
                 foreach (var s in sections)
                 {
-                    s.SectionOrder = s.SectionOrder + 1;
+                    s.Order = s.Order + 1;
                 }
             }
             else
             {
-                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.SectionOrder <= section.SectionOrder && x.SectionOrder >= _section.SectionOrder).ToArrayAsync();
+                IEnumerable<Section> sections = await context.Sections.Where(x => x.TopicId == section.TopicId && x.Order <= section.Order && x.Order >= _section.Order).ToArrayAsync();
                 foreach (var s in sections)
                 {
-                    s.SectionOrder = s.SectionOrder - 1;
+                    s.Order = s.Order - 1;
                 }
             }
 

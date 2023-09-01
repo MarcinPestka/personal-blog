@@ -24,7 +24,7 @@ export default function AddNewTopicComponent({order}: {order: number;}) {
 
     async function handleAddClick() {
       if (!editingCourseStore.editingTopic) {
-        editingCourseStore.newTopic.topicOrder = order;
+        editingCourseStore.newTopic.order = order;
         addTopic(editingCourseStore.newTopic);
         setEdit(false); 
       }else{

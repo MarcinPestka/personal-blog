@@ -6,7 +6,7 @@
         public string Title { get; set; }
         public int LectureId { get; set; }
         public Lecture Lecture { get; set; }
-        public int? TopicOrder { get; set; }
+        public int? Order { get; set; }
         public ICollection<Section> Sections { get; set; }
 
         public Topic()
@@ -17,7 +17,7 @@
         {
             this.Title = topic.Title;
             this.LectureId = topic.LectureId;
-            this.TopicOrder = topic.TopicOrder;
+            this.Order = topic.Order;
         }
     }
 }

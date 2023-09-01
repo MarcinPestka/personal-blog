@@ -11,8 +11,8 @@ export function GetAllSections() {
 export function OrderSections(sections: ISection[]) {
   sections = sections.sort((n1, n2) => {
     if (
-      n1.sectionOrder == null ||
-      n1.sectionOrder > (n2.sectionOrder ?? Infinity)
+      n1.order == null ||
+      n1.order > (n2.order ?? Infinity)
     ) {
       return 1;
     }

@@ -24,7 +24,7 @@ export async function editTopic(){
 
 export function OrderTopics(topics: ITopic[]) {
   topics = topics.sort((n1, n2) => {
-    if (n1.topicOrder == null || n1.topicOrder > (n2.topicOrder ?? Infinity)) {
+    if (n1.order == null || n1.order > (n2.order ?? Infinity)) {
       return 1;
     }
     return -1;

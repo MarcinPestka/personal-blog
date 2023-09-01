@@ -17,7 +17,7 @@ export function LectureElement(props:prop) {
   }
 
   function dragOverElement() {
-    editingCourseStore.dragLecture.lectureOrder = props.lecture.lectureOrder;
+    editingCourseStore.dragLecture.order = props.lecture.order;
   }
 
   function dragStart() {
@@ -34,14 +34,14 @@ export function LectureElement(props:prop) {
     <>
     <div className="lectureSideBarElement">
       <div draggable="true" onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} key={props.lecture.id} >
-      <p className="lectureHeader" onClick={()=>handleLectureClick(props.lecture.id)}>{props.lecture.lectureOrder}. {props.lecture.title}</p>
+      <p className="lectureHeader" onClick={()=>handleLectureClick(props.lecture.id)}>{props.lecture.order}. {props.lecture.title}</p>
       <div className={courseStore.activeLectureId === props.lecture.id ? "collapsingElement": "collapsingElement collapsed"}>
         {props.lecture.topics.map((topic,j)=>(
           <>
           {editingCourseStore.newTopic.id === topic.id ?
-          <AddNewTopicComponent order={topic.topicOrder}/>
+          <AddNewTopicComponent order={topic.order}/>
           :  
-          <TopicElement {...{topic,j:props.lecture.lectureOrder}}/>
+          <TopicElement {...{topic,j:props.lecture.order}}/>
         }
           </>
         ))

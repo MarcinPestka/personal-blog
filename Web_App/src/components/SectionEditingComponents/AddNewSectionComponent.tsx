@@ -11,9 +11,9 @@ import { CourseStore, courseStore } from "../../store/courseStore";
 export function AddNewSection() {
   if (
     courseStore.activeSections &&
-    !editingCourseStore.editingSection.sectionOrder
+    !editingCourseStore.editingSection.order
   ) {
-    //editingCourseStore.editingSection.sectionOrder = courseStore.activeSections?.length + 1;
+    //editingCourseStore.editingSection.order = courseStore.activeSections?.length + 1;
   }
 
   return (
