@@ -1,18 +1,27 @@
 import { ILecture, ITopic } from "../models/course.model";
 import { Courses } from "../routes/Courses";
 import { courseStore } from "../store/courseStore";
-import { ApiAuthDelete, ApiAuthPost } from "./ApiService";
+import { editingCourseStore } from "../store/editingCourseStore";
+import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
 
 export async function addNewLecture(lecture:ILecture) {
-    await ApiAuthPost("Course/AddNewLecture",lecture).then((resp) =>{});
-    await courseStore.getCourseById(courseStore.course.id);
+    await ApiAuthPost("Lecture/AddNewLecture",lecture).then((response) =>{
+      courseStore.course.lectures = OrderLectures(response.data);
+    });
 }
 
 export async function deleteLecture(lectureId:number) {
-    await ApiAuthDelete(`Course/DeleteLecture?lectureId=${lectureId}`,"");
-    await courseStore.getCourseById(courseStore.course.id);
+    await ApiAuthDelete(`Lecture/DeleteLecture?lectureId=${lectureId}`,"").then((response) =>{
+      courseStore.course.lectures = OrderLectures(response.data);
+    });
   }
 
+  export async function editLecture(){
+    await ApiAuthPut("Lecture/EditLecture",editingCourseStore.dragLecture).then((response)=>{
+      console.log(response.data);
+      courseStore.course.lectures = OrderLectures(response.data);
+    });
+  }
   
 export function OrderLectures(lectures: ILecture[]) {
     lectures = lectures.sort((n1, n2) => {

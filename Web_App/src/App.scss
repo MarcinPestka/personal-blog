@@ -86,10 +86,57 @@ $primary3: #0096c7;
     transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
 
-// .inbetweenButton:hover{
-//   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
-//   opacity: 1;
-// }
+.sideBarWrapper{
+  border-right: black solid 1.5px;
+}
+
+.topicElement{
+  display: flex;
+  padding: 5px;
+  padding-left: 30px;
+  border-bottom: black solid 1.5px;
+}
+
+.picked{
+  background-color: rgba($primary3, 0.2);
+}
+
+.lectureSideBarElement{
+}
+
+.IconContainer{
+  min-width: fit-content;
+  margin-left:auto;
+}
+
+.lectureHeader{
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: black solid 1.5px;
+  border-top: black solid 1.5px;
+}
+
+.icon{
+  opacity: 0.2;
+}
+.icon:hover{
+  opacity: 0.7;
+  transition: 0.5s ease
+}
+.icon:not(:hover){
+  transition: 0.5s ease
+}
+
+.editIcon:hover{
+  color: rgb(255, 191, 71);
+}
+.deleteIcon:hover{
+  color: #ff1717;
+}
+.addIcon:hover{
+  color: #04a81f;
+}
 
 .inbetweenButton {
   color: $primary2;
@@ -104,11 +151,20 @@ $primary3: #0096c7;
   opacity: 0;
 }
 
+.collapsingElement{
+  max-height:none;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
 
+.collapsed{
+  max-height:0px;
+}
 .inbetweenButton:hover {
   opacity: 1;
   transition: 0.4s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
 }
+
 
 .over{
   color: $primary2;

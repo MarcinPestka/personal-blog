@@ -1,5 +1,5 @@
 import { Observer } from "mobx-react-lite";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 import { sectionStore } from "../../../store/sectionStore";
 import { BaseEditComponent } from "../../BaseEditComponent";
 import { BaseComponentWrapper } from "../../BaseComponentWrapper";

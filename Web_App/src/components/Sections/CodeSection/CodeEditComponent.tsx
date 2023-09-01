@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
 import "highlight.js/styles/github.css";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function CodeEditComponent() {
   return (

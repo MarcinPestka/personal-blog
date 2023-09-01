@@ -3,7 +3,7 @@ import axios from "axios";
 import { ICourse } from "../models/course.model";
 import { ISection } from "../models/section.model";
 import { ApiAuthDelete, ApiAuthPost, ApiGetAuth } from "../services/ApiService";
-import { editingCourseStore } from "./editingSectionsStore";
+import { editingCourseStore } from "./editingCourseStore";
 import { OrderSections } from "../services/SectionService";
 import { OrderLectures } from "../services/LectureService";
 import { OrderTopics } from "../services/TopicService";
@@ -15,8 +15,9 @@ export class CourseStore {
   activeCourse: boolean = false;
   activeCourseId: number = 0;
 
-  lectureId!: number;
-  topicId: number = 0;
+  activeLectureId!: number;
+  activeTopicId: number = 0;
+
   activeSections: ISection[] | undefined;
 
   constructor() {
@@ -24,7 +25,7 @@ export class CourseStore {
   }
 
   setTopicNumber = (id: number) => {
-    this.topicId = id;
+    this.activeTopicId = id;
   };
 
   getCourseById = async (Id: number | undefined) => {
@@ -46,7 +47,7 @@ export class CourseStore {
           course.lectures[0].topics.length !== 0
         ) {
           //this.lectureId = course.lectures[0].id;
-          this.topicId = course.lectures[0].topics[0].id;
+          this.activeTopicId = course.lectures[0].topics[0].id;
         }
       });
     });
@@ -86,7 +87,7 @@ export class CourseStore {
 
   GetCompletedTopics = async (activeCourseId: string | undefined) => {
     await ApiGetAuth(
-      `Course/GetCompletedTopicIds?courseId=${activeCourseId}`
+      `Topic/GetCompletedTopicIds?courseId=${activeCourseId}`
     ).then((resp) => {
       let completedTopics: number[] = resp.data;
       runInAction(() => {
@@ -120,22 +121,21 @@ export class CourseStore {
   };
 
   setActiveSections = () => {
-    this.activeSections = this.course.lectures.find((i) => i.id === this.lectureId)?.topics.find((i) => i.id === this.topicId)?.sections ?? [];
-    this.activeSections = OrderSections(this.activeSections);
+    this.activeSections = OrderSections(this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? []);
   };
 
   setActiveLectureId = (id: number) => {
-    this.lectureId = id;
-    this.setActiveSections();
+    this.activeLectureId = id;
+    this.setActiveTopicId(0);
   };
 
-  setActiveTopicId = (id: number | null) => {
+  setActiveTopicId = (id: number) => {
     if (id) {
-      this.topicId = id;
+      this.activeTopicId = id;
     } else {
-      this.topicId = this.course.lectures.find((i) => i.id === this.lectureId)?.topics[0]?.id ?? 0;
-      this.setActiveSections();
+      this.activeTopicId = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics[0]?.id ?? 0;
     }
+    this.setActiveSections();
   };
 }
 

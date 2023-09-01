@@ -8,7 +8,7 @@ import { Observer } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { SectionAddStage, SectionTypeEnum } from "../services/SectionService";
 import { BaseEditComponent } from "../components/BaseEditComponent";
-import { editingCourseStore } from "../store/editingSectionsStore";
+import { editingCourseStore } from "../store/editingCourseStore";
 import { sectionStore } from "../store/sectionStore";
 import { AddNewSection } from "../components/SectionEditingComponents/AddNewSectionComponent";
 import { BaseComponentWrapper } from "../components/BaseComponentWrapper";

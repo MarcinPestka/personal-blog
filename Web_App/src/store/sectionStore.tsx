@@ -1,9 +1,8 @@
-import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
-import axios from "axios";
+import { makeAutoObservable, runInAction } from "mobx";
 import { IPost } from "../models/post.model";
 import { ISection } from "../models/section.model";
-import { ApiAuthPost, ApiGet } from "../services/ApiService";
-import { editingCourseStore } from "./editingSectionsStore";
+import { ApiGet } from "../services/ApiService";
+import { editingCourseStore } from "./editingCourseStore";
 import { courseStore } from "./courseStore";
 import { AddNewSection } from "../services/SectionService";
 
@@ -54,7 +53,7 @@ export class SectionsStore {
   };
 
   AddNewSection = async () => {
-    this.newSection.topicId = courseStore.topicId;
+    this.newSection.topicId = courseStore.activeTopicId;
     this.newSection.postId = 1;
     this.newSection.sectionType = editingCourseStore.newSectionType;
     this.newSection.title = editingCourseStore.editingSection.title;

@@ -1,14 +1,20 @@
-import List from "@mui/material/List";
-import LessonList from "./SideBarLessons";
+import { courseStore } from "../../../store/courseStore";
+import { Observer } from "mobx-react-lite";
+import { LectureElement } from "./LectureElement";
 
 export default function NestedList() {
   return (
-    <List
-      sx={{ width: "100%", maxWidth: 360, minWidth:360 }}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-    >
-      <LessonList></LessonList>
-    </List>
+    <Observer>
+      {() => (
+        <div className="sideBarWrapper" style={{ maxWidth: "360px", minWidth: "360px" }}>
+          <>
+            {courseStore.course &&
+              courseStore.course.lectures.map((lecture, i) => (
+                <LectureElement {...{ lecture, i: lecture.id }} />
+              ))}
+          </>
+        </div>
+      )}
+    </Observer>
   );
 }

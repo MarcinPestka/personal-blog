@@ -1,14 +1,13 @@
 import { Box, Grid, TextField } from "@mui/material";
-import { ISection } from "../../../models/section.model";
 import { sectionStore } from "../../../store/sectionStore";
 import { useEffect } from "react";
 import { courseStore } from "../../../store/courseStore";
-import { editingCourseStore } from "../../../store/editingSectionsStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function TitleEditComponent() {
   
   useEffect(() => {
-      sectionStore.newSection.topicId = courseStore.topicId;
+      sectionStore.newSection.topicId = courseStore.activeTopicId;
       sectionStore.newSection.postId = 1;
   }, []);
 

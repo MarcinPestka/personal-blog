@@ -23,10 +23,7 @@ export function OrderSections(sections: ISection[]) {
 
 export async function AddNewSection(section:ISection) {
   await ApiAuthPost("Section/AddNewSection",section).then((resp) =>{
-    console.log(courseStore.lectureId);
-    console.log(courseStore.topicId);
-    console.log(resp.data);
-    courseStore.course.lectures.find(x => x.id === courseStore.lectureId)!.topics.find(x => x.id === courseStore.topicId)!.sections = resp.data;
+    courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics.find(x => x.id === courseStore.activeTopicId)!.sections = resp.data;
     courseStore.setActiveSections();
   })
 }
@@ -36,8 +33,8 @@ export async function deleteSectionById(id: number) {
     (response) => {
       runInAction(() => {
         courseStore.course.lectures
-          .find((x) => x.id === courseStore.lectureId)!
-          .topics.find((x) => x.id === courseStore.topicId)!.sections =
+          .find((x) => x.id === courseStore.activeLectureId)!
+          .topics.find((x) => x.id === courseStore.activeTopicId)!.sections =
           response.data;
       });
       courseStore.setActiveSections();
