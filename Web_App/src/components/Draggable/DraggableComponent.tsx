@@ -66,7 +66,7 @@ export function DraggableComponent(props: DraggableProps) {
 
     return(
         <>
-        <div draggable={true} onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} >
+        <div draggable={editingCourseStore.editPage === true ? true:false} onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} >
             {component}
         </div>
         </>

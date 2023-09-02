@@ -20,7 +20,7 @@ export function LectureElement(props:prop) {
     <Observer>
       {() => (
     <>
-    <div draggable={false} className="lectureSideBarElement">
+    <div className="lectureSideBarElement">
       <p className="lectureHeader" onClick={()=>handleLectureClick(props.lecture.id)}>{props.lecture.order}. {props.lecture.title}</p>
       <div className={courseStore.activeLectureId === props.lecture.id ? "collapsingElement": "collapsingElement collapsed"}>
         {props.lecture.topics.map((topic)=>(

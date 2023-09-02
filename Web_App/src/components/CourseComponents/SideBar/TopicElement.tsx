@@ -26,7 +26,7 @@ export function TopicElement(props:prop) {
 
   return (
     <>
-    <div draggable={true} onClick={()=>handleTopicClick(props.topic.id)} className={courseStore.activeTopicId === props.topic.id ? "topicElement picked":"topicElement"} >
+    <div onClick={()=>handleTopicClick(props.topic.id)} className={courseStore.activeTopicId === props.topic.id ? "topicElement picked":"topicElement"} >
         <p>{(1)}.{(props.topic.order)} {props.topic.title}</p>
         {editingCourseStore.editPage ?
         <div className="IconContainer">

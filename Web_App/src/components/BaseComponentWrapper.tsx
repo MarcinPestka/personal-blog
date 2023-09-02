@@ -29,12 +29,13 @@ export function BaseComponentWrapper(props: ISection) {
       {() => (
         <>
           {editingCourseStore.editPage === true ? (
+            <>
             <AddNewSectionInbetweenButton section={props.order} />
-          ) : (
+            <UpperCorner {...props} />
+            </>
+            ) : (
             <></>
           )}
-          <UpperCorner {...props} />
-          <div draggable={true}>
             {editingCourseStore.editingSection?.id !== props.id ? (
               <>
 
@@ -58,7 +59,6 @@ export function BaseComponentWrapper(props: ISection) {
                 )}
               </>
             )}
-          </div>
           <div
             className={
               editingCourseStore.editPage
