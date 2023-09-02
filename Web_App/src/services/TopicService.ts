@@ -17,7 +17,7 @@ export async function deleteTopic(topicId: number) {
 }
 
 export async function editTopic(){
-  await ApiAuthPut("Topic/EditTopic",editingCourseStore.dragTopic).then((response)=>{
+  await ApiAuthPut("Topic/EditTopic",editingCourseStore.dragElement).then((response)=>{
     courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = OrderTopics(response.data);
   });
 }

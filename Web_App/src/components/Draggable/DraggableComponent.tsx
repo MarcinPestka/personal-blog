@@ -1,38 +1,54 @@
 import { ILecture, ITopic } from "../../models/course.model";
-import { ISection } from "../../models/section.model";
 import { editLecture } from "../../services/LectureService";
-import { SectionTypeEnum } from "../../services/SectionService";
 import { editTopic } from "../../services/TopicService";
 import { courseStore } from "../../store/courseStore";
 import { editingCourseStore } from "../../store/editingCourseStore";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { LectureElement } from "../CourseComponents/SideBar/LectureElement";
+import { TopicElement } from "../CourseComponents/SideBar/TopicElement";
 
 interface DraggableProps {
     test: ILecture | ITopic;
-    component: React.ReactNode;
 }
 
 
 export function DraggableComponent(props: DraggableProps) {
+    let component;
+    function isLecture(element: ILecture | ITopic): element is ILecture {
+        return "topics" in element;
+    }
 
     function dragOverElement() {
-        editingCourseStore.dragElement.order = props.test.order;
+        if (courseStore.activeLectureId !== props.test.id) {
+            editingCourseStore.dragElement.order = props.test.order;
+        }
     }
 
     function dragStart() {
-        editingCourseStore.dragElement = props.test;
+        if (courseStore.activeLectureId !== props.test.id) {
+            editingCourseStore.dragElement = props.test;
+        }
     }
 
     function dragEnd() {
-        editTopic();
-        editLecture();
+        if (!isLecture(props.test)) {
+            editTopic();
+        }else{
+            if (courseStore.activeLectureId !== props.test.id) {
+                editLecture();
+            }
+        }
+    }
+
+    if (isLecture(props.test)) {
+        component = (<LectureElement lecture={props.test} />);
+    }else{
+        component = (<TopicElement topic={props.test} />);
     }
 
     return(
         <>
-        <div draggable="true" onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} >
-            {props.component}
+        <div draggable={true} onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} >
+            {component}
         </div>
         </>
         );

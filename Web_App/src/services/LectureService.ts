@@ -17,7 +17,7 @@ export async function deleteLecture(lectureId:number) {
   }
 
   export async function editLecture(){
-    await ApiAuthPut("Lecture/EditLecture",editingCourseStore.dragLecture).then((response)=>{
+    await ApiAuthPut("Lecture/EditLecture",editingCourseStore.dragElement).then((response)=>{
       courseStore.course.lectures = OrderLectures(response.data);
     });
   }

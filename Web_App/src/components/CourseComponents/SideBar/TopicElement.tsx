@@ -4,11 +4,9 @@ import { courseStore } from "../../../store/courseStore";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { DraggableComponent } from "../../Draggable/DraggableComponent";
 
 interface prop {
     topic:ITopic;
-    j:number;
 }
 
 export function TopicElement(props:prop) {
@@ -26,23 +24,10 @@ export function TopicElement(props:prop) {
         deleteTopic(topicId);
     }
 
-
-    function dragOverElement() {
-        editingCourseStore.dragTopic.order = props.topic.order;
-    }
-
-    function dragStart() {
-        editingCourseStore.dragTopic = props.topic;
-    }
-
-    function dragEnd() {
-        editTopic();
-    }
-
-  const component = (
+  return (
     <>
-    <div draggable="true" onDragStart={()=>dragStart()} onDragEnd={()=>dragEnd()} onDragOver={() => {dragOverElement()}} onClick={()=>handleTopicClick(props.topic.id)} className={courseStore.activeTopicId === props.topic.id ? "topicElement picked":"topicElement"} >
-    <p>{(props.j)}.{(props.topic.order)} {props.topic.title}</p>
+    <div draggable={true} onClick={()=>handleTopicClick(props.topic.id)} className={courseStore.activeTopicId === props.topic.id ? "topicElement picked":"topicElement"} >
+        <p>{(1)}.{(props.topic.order)} {props.topic.title}</p>
         {editingCourseStore.editPage ?
         <div className="IconContainer">
             <EditIcon className="editIcon icon" onClick={() => handleTopicEdit(props.topic)}></EditIcon>
@@ -52,10 +37,7 @@ export function TopicElement(props:prop) {
         <></>
         }
     </div>
+        
     </>
   );
-
-  return (<>
-    <DraggableComponent {...{test:props.topic,component}}/>
-  </>);
 }
