@@ -2,12 +2,10 @@ import { useEffect } from "react";
 import "../App.scss";
 import { Grid } from "@mui/material";
 import { sectionStore } from "../store/sectionStore";
-import { BaseComponent } from "../components/BaseComponent";
 import { Observer } from "mobx-react-lite";
 import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
 import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
-import img from "../../src/image/path.svg";
-import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
+import { DraggableComponent } from "../components/Draggable/DraggableComponent";
 
 
 export function HomePage() {
@@ -33,7 +31,7 @@ export function HomePage() {
             <Grid item>
               {store.sections.map((section) => {
                 return (
-                    <BaseComponentWrapper key={section.id} {...section} />
+                    <DraggableComponent element={section} key={section.id}/>
                 );
               })}
             </Grid>

@@ -23,52 +23,19 @@ export function BaseComponentWrapper(props: ISection) {
     await courseStore.getCourseById(courseStore.course.id);
   }
 
-  async function handleDragEnd() {
-    if (
-      editingCourseStore.elementDragId -
-        editingCourseStore.elementDragSection.sectionOrder <
-      0
-    ) {
-      editingCourseStore.elementDragSection.sectionOrder -= 1;
-
-    }     
-    await ApiAuthPut(
-      "Section/EditSection",
-      editingCourseStore.elementDragSection
-    ).then((response) => {
-      let sections: ISection[] = response.data;
-      runInAction(() => {
-        courseStore.activeSections = OrderSections(sections);
-      });
-    });;
-    editingCourseStore.elementDrag = false;
-    editingCourseStore.elementDragSection = {} as ISection;
-  }
 
   return (
     <Observer>
       {() => (
         <>
           {editingCourseStore.editPage === true ? (
-            <AddNewSectionInbetweenButton section={props.sectionOrder} />
-          ) : (
+            <>
+            <AddNewSectionInbetweenButton section={props.order} />
+            <UpperCorner {...props} />
+            </>
+            ) : (
             <></>
           )}
-          <UpperCorner {...props} />
-          <div
-            draggable={true}
-            onDragEnd={async () => {
-              handleDragEnd();
-            }}
-            onDragStart={() => {
-              runInAction(() => {
-                editingCourseStore.elementDrag = true;
-                editingCourseStore.initialDragOrder = props.sectionOrder;
-                editingCourseStore.elementDragSection = props;
-                editingCourseStore.elementDragId = props.sectionOrder;
-              });
-            }}
-          >
             {editingCourseStore.editingSection?.id !== props.id ? (
               <>
 
@@ -92,7 +59,6 @@ export function BaseComponentWrapper(props: ISection) {
                 )}
               </>
             )}
-          </div>
           <div
             className={
               editingCourseStore.editPage

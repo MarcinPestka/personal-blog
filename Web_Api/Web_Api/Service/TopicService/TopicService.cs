@@ -39,10 +39,10 @@ namespace Web_Api.Service.TopicService
 
         public async Task<IEnumerable<Topic>> AddNewTopic(TopicDTO topic)
         {
-            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder >= topic.TopicOrder).ToArrayAsync();
+            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.Order >= topic.Order).ToArrayAsync();
             foreach (var t in topics)
             {
-                t.TopicOrder = t.TopicOrder + 1;
+                t.Order = t.Order + 1;
             }
 
             Topic _topic = new Topic(topic);
@@ -57,10 +57,10 @@ namespace Web_Api.Service.TopicService
             Topic topic = await context.Topics.Where(x => x.Id == topicId).Include(x=>x.Sections).FirstOrDefaultAsync();
             context.Topics.Remove(topic);
 
-            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder > topic.TopicOrder).ToArrayAsync();
+            IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.Order > topic.Order).ToArrayAsync();
             foreach (var t in topics)
             {
-                t.TopicOrder = t.TopicOrder - 1;
+                t.Order = t.Order - 1;
             }
 
             await context.SaveChangesAsync();
@@ -71,20 +71,20 @@ namespace Web_Api.Service.TopicService
         {
             Topic _topic = await context.Topics.Where(x => x.Id == topic.Id).FirstOrDefaultAsync();
 
-            if (_topic.TopicOrder > topic.TopicOrder)
+            if (_topic.Order > topic.Order)
             {
-                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder >= topic.TopicOrder && x.TopicOrder <= _topic.TopicOrder).ToArrayAsync();
+                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.Order >= topic.Order && x.Order <= _topic.Order).ToArrayAsync();
                 foreach (var t in topics)
                 {
-                    t.TopicOrder = t.TopicOrder + 1;
+                    t.Order = t.Order + 1;
                 }
             }
             else
             {
-                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.TopicOrder <= topic.TopicOrder && x.TopicOrder >= _topic.TopicOrder).ToArrayAsync();
+                IEnumerable<Topic> topics = await context.Topics.Where(x => x.LectureId == topic.LectureId && x.Order <= topic.Order && x.Order >= _topic.Order).ToArrayAsync();
                 foreach (var t in topics)
                 {
-                    t.TopicOrder = t.TopicOrder - 1;
+                    t.Order = t.Order - 1;
                 }
             }
 

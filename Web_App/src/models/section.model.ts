@@ -8,7 +8,7 @@ export interface ISection {
   subTitle?: string;
   text?: string;
   Img?: string;
-  sectionOrder: number;
+  order: number;
   sectionType: SectionTypeEnum | undefined;
   imageName?: string;
   topicId?: number;

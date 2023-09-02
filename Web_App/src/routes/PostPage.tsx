@@ -1,11 +1,10 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { BaseComponent } from "../components/BaseComponent";
 import { useEffect, useState } from "react";
 import { ISection } from "../models/section.model";
-import { sectionStore, SectionsStore } from "../store/sectionStore";
+import { sectionStore } from "../store/sectionStore";
 import { useParams } from "react-router-dom";
-import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
+import { DraggableComponent } from "../components/Draggable/DraggableComponent";
 
 function PostPage() {
   const [sections, setSections] = useState<ISection[]>([]);
@@ -29,7 +28,7 @@ function PostPage() {
       >
         <Grid item marginLeft="100px" marginRight="100px">
           {sections.map((section) => (
-            <BaseComponentWrapper key={section.id} {...section} />
+            <DraggableComponent element={section} key={section.id}/>
           ))}
         </Grid>
       </Grid>

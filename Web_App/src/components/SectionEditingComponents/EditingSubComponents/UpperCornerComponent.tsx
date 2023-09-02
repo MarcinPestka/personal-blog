@@ -1,7 +1,6 @@
 import { Observer } from "mobx-react-lite";
 import { deleteSectionById } from "../../../services/SectionService";
 import { editingCourseStore } from "../../../store/editingCourseStore";
-import { Tooltip } from "@mui/material";
 import { ISection } from "../../../models/section.model";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,7 +15,6 @@ export function UpperCorner(props: ISection) {
       {() => (
         <>
           <div className={editingCourseStore.editPage ? "editSection":"editingSection invisible"}>
-            <Tooltip title={"tets"}>
               <span
                 className="deleteButton"
                 onClick={() => {
@@ -26,8 +24,7 @@ export function UpperCorner(props: ISection) {
                 <DeleteIcon fontSize="small" />
                 usuń
               </span>
-            </Tooltip>{" "}
-            |{" "}
+            |
             <span
               className={
                 editingCourseStore.editingSection.id === props.id

@@ -7,6 +7,6 @@
         public string Description { get; set; }
         public string? Content { get; set; }
         public int CourseId { get; set; }
-        public int? LectureOrder { get; set; }
+        public int? Order { get; set; }
     }
 }

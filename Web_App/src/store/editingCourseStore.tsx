@@ -1,9 +1,6 @@
-import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx";
-import axios from "axios";
-import { IPost } from "../models/post.model";
-import { ICourse, ILecture, ITopic } from "../models/course.model";
+import { makeAutoObservable } from "mobx";
+import { ILecture, ITopic } from "../models/course.model";
 import { ISection } from "../models/section.model";
-import { ApiAuthDelete, ApiAuthPost, ApiGet, ApiGetAuth } from "../services/ApiService";
 import { SectionAddStage, SectionTypeEnum } from "../services/SectionService";
 
 export class EditingCourseStore {
@@ -25,6 +22,8 @@ export class EditingCourseStore {
   
   dragTopic: ITopic = {} as ITopic;
   dragLecture: ILecture = {} as ILecture;
+
+  dragElement: ITopic | ILecture | ISection = {} as ITopic;
 
   constructor() {
     makeAutoObservable(this);
