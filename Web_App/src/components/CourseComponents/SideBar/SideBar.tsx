@@ -12,7 +12,7 @@ export default function NestedList() {
             {courseStore.course &&
               courseStore.course.lectures.map((lecture) => (
                 <>
-                  <DraggableComponent test={lecture}/>
+                  <DraggableComponent element={lecture}/>
                 </>
               ))}
           </>

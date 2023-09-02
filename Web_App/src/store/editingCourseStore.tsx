@@ -23,7 +23,7 @@ export class EditingCourseStore {
   dragTopic: ITopic = {} as ITopic;
   dragLecture: ILecture = {} as ILecture;
 
-  dragElement: ITopic | ILecture = {} as ITopic;
+  dragElement: ITopic | ILecture | ISection = {} as ITopic;
 
   constructor() {
     makeAutoObservable(this);

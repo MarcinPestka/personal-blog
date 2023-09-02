@@ -12,6 +12,7 @@ import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { ICourse } from "../models/course.model";
 import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
+import { DraggableComponent } from "../components/Draggable/DraggableComponent";
 
 export function Course() {
   const store = courseStore;
@@ -35,10 +36,7 @@ export function Course() {
               {store.activeSections &&
                 store.activeSections.map((section) => {
                   return (
-                    <BaseComponentWrapper
-                      key={section.id}
-                      {...section}
-                    />
+                    <DraggableComponent element={section} key={section.id}/>
                   );
                 })}
             </Grid>

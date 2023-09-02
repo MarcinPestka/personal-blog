@@ -23,27 +23,6 @@ export function BaseComponentWrapper(props: ISection) {
     await courseStore.getCourseById(courseStore.course.id);
   }
 
-  async function handleDragEnd() {
-    if (
-      editingCourseStore.elementDragId -
-        editingCourseStore.elementDragSection.order <
-      0
-    ) {
-      editingCourseStore.elementDragSection.order -= 1;
-
-    }     
-    await ApiAuthPut(
-      "Section/EditSection",
-      editingCourseStore.elementDragSection
-    ).then((response) => {
-      let sections: ISection[] = response.data;
-      runInAction(() => {
-        courseStore.activeSections = OrderSections(sections);
-      });
-    });;
-    editingCourseStore.elementDrag = false;
-    editingCourseStore.elementDragSection = {} as ISection;
-  }
 
   return (
     <Observer>
@@ -55,20 +34,7 @@ export function BaseComponentWrapper(props: ISection) {
             <></>
           )}
           <UpperCorner {...props} />
-          <div
-            draggable={true}
-            onDragEnd={async () => {
-              handleDragEnd();
-            }}
-            onDragStart={() => {
-              runInAction(() => {
-                editingCourseStore.elementDrag = true;
-                editingCourseStore.initialDragOrder = props.order;
-                editingCourseStore.elementDragSection = props;
-                editingCourseStore.elementDragId = props.order;
-              });
-            }}
-          >
+          <div draggable={true}>
             {editingCourseStore.editingSection?.id !== props.id ? (
               <>
 

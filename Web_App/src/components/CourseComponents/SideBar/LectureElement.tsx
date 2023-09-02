@@ -28,7 +28,7 @@ export function LectureElement(props:prop) {
           {editingCourseStore.newTopic.id === topic.id ?
           <AddNewTopicComponent order={topic.order}/>
           :  
-          <DraggableComponent test={topic}/>
+          <DraggableComponent element={topic}/>
         }
           </>
         ))
