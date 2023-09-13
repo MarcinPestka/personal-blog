@@ -102,6 +102,17 @@ $primary3: #0096c7;
 }
 
 .lectureSideBarElement{
+  //display: flex;
+
+}
+
+.test{
+  display: flex;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: black solid 1.5px;
+  border-top: black solid 1.5px;
 }
 
 .IconContainer{
@@ -110,11 +121,6 @@ $primary3: #0096c7;
 }
 
 .lectureHeader{
-  margin: 0px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: black solid 1.5px;
-  border-top: black solid 1.5px;
 }
 
 .icon{

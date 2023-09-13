@@ -49,7 +49,7 @@ namespace Web_Api.Service.TopicService
             context.Topics.Add(_topic);
 
             await context.SaveChangesAsync();
-            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).Include(x=>x.Sections).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Topic>> DeleteTopic(int topicId)
@@ -64,7 +64,7 @@ namespace Web_Api.Service.TopicService
             }
 
             await context.SaveChangesAsync();
-            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).Include(x => x.Sections).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Topic>> EditSection(TopicDTO topic)
@@ -90,7 +90,7 @@ namespace Web_Api.Service.TopicService
 
             context.Entry(_topic).CurrentValues.SetValues(topic);
             await context.SaveChangesAsync();
-            return await context.Topics.Where(x => x.LectureId == topic.LectureId).ToArrayAsync();
+            return await context.Topics.Where(x => x.LectureId == topic.LectureId).Include(x => x.Sections).ToArrayAsync();
         }
     }
 }

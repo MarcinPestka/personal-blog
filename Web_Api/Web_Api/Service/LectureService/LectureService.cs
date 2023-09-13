@@ -25,7 +25,7 @@ namespace Web_Api.Service.LectureService
             context.Lectures.Add(_lecture);
 
             await context.SaveChangesAsync();
-            return await context.Lectures.Where(x => x.CourseId  == lecture.CourseId).ToArrayAsync();
+            return await context.Lectures.Where(x => x.CourseId  == lecture.CourseId).Include(x=>x.Topics).ThenInclude(x=>x.Sections).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Lecture>> DeleteLecture(int lectureId)
@@ -40,7 +40,7 @@ namespace Web_Api.Service.LectureService
             }
 
             await context.SaveChangesAsync();
-            return await context.Lectures.Where(x => x.CourseId == lecture.CourseId).ToArrayAsync();
+            return await context.Lectures.Where(x => x.CourseId == lecture.CourseId).Include(x => x.Topics).ThenInclude(x => x.Sections).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Lecture>> EditLecture(LectureDTO lecture)

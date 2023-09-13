@@ -17,14 +17,17 @@ export class EditingCourseStore {
   initialDragOrder: number = 0;
 
   editingTopic: boolean = false;
-  newTopic: ITopic = {} as ITopic;
-  newLecture: ILecture = {} as ILecture;
+  newTopic: ITopic = {title: ""} as ITopic;
+  newLecture: ILecture = {title: ""} as ILecture;
   
   dragging: boolean = false;
   dragTopic: ITopic = {} as ITopic;
   dragLecture: ILecture = {} as ILecture;
 
   dragElement: ITopic | ILecture | ISection = {} as ITopic;
+
+  editingLecture: boolean = false;
+
 
   constructor() {
     makeAutoObservable(this);
