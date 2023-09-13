@@ -1,6 +1,6 @@
 import { ILecture, ITopic } from "../../models/course.model";
 import { ISection } from "../../models/section.model";
-import { editLecture } from "../../services/LectureService";
+import { OrderLectures, editLecture } from "../../services/LectureService";
 import { editSection } from "../../services/SectionService";
 import { editTopic } from "../../services/TopicService";
 import { courseStore } from "../../store/courseStore";
@@ -27,21 +27,25 @@ export function DraggableComponent(props: DraggableProps) {
         return "sectionType" in element;
     }
 
-    function dragOverElement() {
+    async function dragOverElement() {
+        if (isLecture(props.element) && props.element.order !== editingCourseStore.dragElement.order) {
+            courseStore.course.lectures = OrderLectures(courseStore.course.lectures);
+        }
         if (courseStore.activeLectureId !== props.element.id) {
             editingCourseStore.dragElement.order = props.element.order;
         }
     }
 
     function dragStart() {
+        editingCourseStore.dragging = true;
         if (courseStore.activeLectureId !== props.element.id) {
             editingCourseStore.dragElement = props.element;
         }
     }
 
     function dragEnd() {
+        editingCourseStore.dragging = false;
         if (isSection(props.element)) {
-            console.log("section");
             editSection();
             return;
         }
