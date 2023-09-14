@@ -46,13 +46,20 @@ export default function NewLecture({order}: {order: number;}) {
         {newLecture === false && editingCourseStore.editingLecture !== true ?
         <p onClick={()=>handleFirstClick()}>Add new lecture</p>
         :
-        <div style={{display:'flex',alignItems:'center'}}>
+        <>
+        {editingCourseStore.newLecture.order === order || newLecture === true?<>
+          <div style={{display:'flex',alignItems:'center'}}>
             <TextField id="standard-basic" label="New lecture" variant="standard" value={editingCourseStore.newLecture.title} onChange={(e)=>{editingCourseStore.newLecture.title = e.target.value}}/>
             <div className="IconContainer">
             <AddIcon className="addIcon icon" onClick={() => handleAddClick()}></AddIcon>
             <ClearIcon className="deleteIcon icon" onClick={() => handleClearClick()}></ClearIcon>
             </div>
         </div>
+        </>:<></>
+
+        }
+        </>
+
         
         }
         </>

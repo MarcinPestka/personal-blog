@@ -9,7 +9,7 @@ import { addTopic, editTopic } from "../../../services/TopicService";
 import { ITopic } from "../../../models/course.model";
 
 export default function AddNewTopicComponent({order}: {order: number;}) {
-    const [newTopic,setEdit] = React.useState(false);
+  const [newTopic,setEdit] = React.useState(false);
 
   function clearEdit() {
     setEdit(false);
@@ -41,17 +41,21 @@ export default function AddNewTopicComponent({order}: {order: number;}) {
     <Observer>
       {() => (
         <>
-        {newTopic === false && editingCourseStore.editingTopic !== true ?
+        {newTopic === false && editingCourseStore.editingTopic !== true  ?
         <p onClick={()=>handleFirstClick()}>Add new topic</p>
         :
-        <div style={{display:'flex',alignItems:'center'}}>
-            <TextField id="standard-basic" label="New lecture" variant="standard" value={editingCourseStore.newTopic.title} onChange={(e)=>{editingCourseStore.newTopic.title = e.target.value}}/>
-            <div className="IconContainer">
-            <AddIcon className="addIcon icon" onClick={() => handleAddClick()}></AddIcon>
-            <ClearIcon className="deleteIcon icon" onClick={() => handleClearClick()}></ClearIcon>
-            </div>
-        </div>
-        
+        <>
+        {editingCourseStore.newTopic.order === order || newTopic === true ?
+               <div style={{display:'flex',alignItems:'center'}}>
+               <TextField id="standard-basic" label="New lecture" variant="standard" value={editingCourseStore.newTopic.title} onChange={(e)=>{editingCourseStore.newTopic.title = e.target.value}}/>
+               <div className="IconContainer">
+               <AddIcon className="addIcon icon" onClick={() => handleAddClick()}></AddIcon>
+               <ClearIcon className="deleteIcon icon" onClick={() => handleClearClick()}></ClearIcon>
+               </div>
+           </div>
+        :<>
+        </>}
+        </>
         }
         </>
       )}
