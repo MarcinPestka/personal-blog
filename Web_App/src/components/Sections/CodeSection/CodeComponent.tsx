@@ -1,13 +1,17 @@
 import { Grid } from "@mui/material";
 import { ISection } from "../../../models/section.model";
 import "highlight.js/styles/github.css";
-import hljs from "highlight.js";
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import csharp from 'highlight.js/lib/languages/csharp';
 import { useEffect } from "react";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function CodeComponent(props: ISection) {
   useEffect(() => {
-    hljs.highlightAll();
+  hljs.registerLanguage('javascript', javascript);
+  hljs.registerLanguage('csharp', csharp);
+  hljs.highlightAll();
   }, []);
 
   return (
@@ -15,7 +19,7 @@ export function CodeComponent(props: ISection) {
       <Grid container>
         <Grid item xs={10}>
           <pre className="theme-base16-material">
-            <code className="language-html">{editingCourseStore.editingSection ? props.subTitle:editingCourseStore.editingSection}</code>
+            <code className="language-csharp">{editingCourseStore.editingSection ? props.subTitle:editingCourseStore.editingSection}</code>
           </pre>
         </Grid>
       </Grid>

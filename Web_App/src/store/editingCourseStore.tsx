@@ -20,6 +20,7 @@ export class EditingCourseStore {
   newTopic: ITopic = {} as ITopic;
   newLecture: ILecture = {} as ILecture;
   
+  dragging: boolean = false;
   dragTopic: ITopic = {} as ITopic;
   dragLecture: ILecture = {} as ILecture;
 
