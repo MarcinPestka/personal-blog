@@ -17,8 +17,8 @@ export function OrderSections(sections: ISection[]) {
   return sections;
 }
 
-export async function editSection(){
-  await ApiAuthPut("Section/EditSection",editingCourseStore.dragElement).then((response)=>{
+export async function editSection(section: ISection){
+  await ApiAuthPut("Section/EditSection",section).then((response)=>{
     sectionStore.sections = OrderSections(response.data);
   });
 }

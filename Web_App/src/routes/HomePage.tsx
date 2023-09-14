@@ -13,7 +13,7 @@ export function HomePage() {
 
   useEffect(() => {
     (async () => {
-      await postStore.getPostById("1");
+      await postStore.getPostById("0");
     })();
   }, []);
 
@@ -35,9 +35,9 @@ export function HomePage() {
                 );
               })}
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <FeaturedPosts/>
-            </Grid>
+            </Grid> */}
           </Grid>
           <CarouselComponent></CarouselComponent>
         </>

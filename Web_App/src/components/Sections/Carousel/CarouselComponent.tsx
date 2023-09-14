@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CarouselTile } from "./CarouselTile";
 import { courseStore } from "../../../store/courseStore";
 import { Observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 
 export interface ICarouselItem {
   id: number;
@@ -33,14 +34,6 @@ export function CarouselComponent() {
       await store.getAllCourses();
     })();
   }, []);
-
-  function handleClick(e) {
-    if (e.pageX > window.innerWidth / 2 + 270 * 1.2) {
-      moveRight();
-    } else if(e.pageX < window.innerWidth / 2 - 270 * 1.2) {
-      moveLeft();
-    }
-  }
 
   const changeTile = (id: number) => {
     setId(id);
@@ -116,19 +109,19 @@ export function CarouselComponent() {
           <CarouselTile
             course={store.courses[store.courses.length - 2]}
             index={-2}
-            {...{ carouselId, dragStart, handleClick}}
+            {...{ carouselId, dragStart}}
           ></CarouselTile>
           <CarouselTile
             course={store.courses[store.courses.length - 1]}
             index={-1}
-            {...{ carouselId, dragStart, handleClick }}
+            {...{ carouselId, dragStart }}
           ></CarouselTile>
 
           {store.courses.map((course, index) => {
             index+=1;
             return (
               <CarouselTile key={index}
-                {...{ course, carouselId, dragStart, handleClick, index }}
+                {...{ course, carouselId, dragStart, index }}
               ></CarouselTile>
             );
           })}
@@ -136,12 +129,12 @@ export function CarouselComponent() {
           <CarouselTile
             course={store.courses[0]}
             index={1}
-            {...{ carouselId, dragStart, handleClick }}
+            {...{ carouselId, dragStart }}
           ></CarouselTile>
           <CarouselTile
             course={store.courses[1]}
             index={2}
-            {...{ carouselId, dragStart, handleClick }}
+            {...{ carouselId, dragStart }}
           ></CarouselTile>
         </div>
         <div className="indicators">
