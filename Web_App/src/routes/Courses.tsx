@@ -6,6 +6,7 @@ import { Observer } from "mobx-react-lite";
 import { PostTile } from "../components/TileComponents/PostTileComponent";
 import { courseStore } from "../store/courseStore";
 import { CourseTile } from "../components/TileComponents/CourseTileComponet";
+import { NewCourseTile } from "../components/CourseComponents/CreatingCourses/NewCourseTile";
 
 export function Courses() {
   const store = courseStore;
@@ -34,6 +35,9 @@ export function Courses() {
                 </Grid>
               );
             })}
+            <Grid item>
+              <NewCourseTile/>
+            </Grid>
           </Grid>
         </>
       )}

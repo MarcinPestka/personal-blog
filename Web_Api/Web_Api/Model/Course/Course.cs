@@ -21,7 +21,7 @@ namespace Web_Api.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public int AuthorId { get; set; }
-        public string Content { get; set; }
+        public string? Content { get; set; }
         public ICollection<Lecture>? Lectures { get; set; }
     }
 }

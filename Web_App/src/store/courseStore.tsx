@@ -20,6 +20,8 @@ export class CourseStore {
 
   activeSections: ISection[] | undefined;
 
+  newCourse!: ICourse;
+
   constructor() {
     makeAutoObservable(this);
   }

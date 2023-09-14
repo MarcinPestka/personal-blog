@@ -19,7 +19,12 @@ namespace Web_Api.Service.Blog
         public async Task<Course> AddCourse(CourseDTO course)
         {
             Course _course = new Course(course);
+
+
             context.Courses.Add(_course);
+            LectureDTO placeHolderLecture = new LectureDTO() { Title = "Placeholder",Description="desc",CourseId=1,Content="content", Order = 1 };
+            _course.Lectures = new Lecture[1] { new Lecture(placeHolderLecture)};
+
             await context.SaveChangesAsync();
 
             return await context.Courses.Where(x=>x.Id == _course.Id).FirstOrDefaultAsync();
