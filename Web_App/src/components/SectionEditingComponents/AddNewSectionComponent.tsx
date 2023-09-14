@@ -7,15 +7,9 @@ import { AddNewSectionStepTwo } from "./EditingSubComponents/AddNewSectionStepTw
 import { AddNewSectionStepThree } from "./EditingSubComponents/AddNewSectionStepThreeComponent";
 import { EditingViewComponent } from "./EditingSubComponents/EditingViewComponent";
 import { CourseStore, courseStore } from "../../store/courseStore";
+import { sectionStore } from "../../store/sectionStore";
 
 export function AddNewSection() {
-  if (
-    courseStore.activeSections &&
-    !editingCourseStore.editingSection.order
-  ) {
-    //editingCourseStore.editingSection.order = courseStore.activeSections?.length + 1;
-  }
-
   return (
     <Observer>
       {() => (

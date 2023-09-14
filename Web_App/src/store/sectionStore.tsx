@@ -15,11 +15,7 @@ export class SectionsStore {
 
   AddNewSection = async () => {
     //this.newSection.topicId = courseStore.activeTopicId;
-    this.newSection.postId = 1;
-    this.newSection.sectionType = editingCourseStore.newSectionType;
-    this.newSection.title = editingCourseStore.editingSection.title;
-    this.newSection.subTitle = editingCourseStore.editingSection.subTitle;
-    this.newSection.order = editingCourseStore.editingSection.order;
+    //this.newSection.postId = 1;
     await AddNewSection(this.newSection);
     editingCourseStore.newSectionStage = undefined;
     editingCourseStore.newSectionType = undefined;

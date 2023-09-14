@@ -5,7 +5,7 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import csharp from 'highlight.js/lib/languages/csharp';
 import { useEffect } from "react";
-import { editingCourseStore } from "../../../store/editingCourseStore";
+import { sectionStore } from "../../../store/sectionStore";
 
 export function CodeComponent(props: ISection) {
   useEffect(() => {
@@ -19,7 +19,7 @@ export function CodeComponent(props: ISection) {
       <Grid container>
         <Grid item xs={10}>
           <pre className="theme-base16-material">
-            <code className="language-csharp">{editingCourseStore.editingSection ? props.subTitle:editingCourseStore.editingSection}</code>
+            <code className="language-csharp">{sectionStore.newSection ? props.subTitle:sectionStore.newSection}</code>
           </pre>
         </Grid>
       </Grid>

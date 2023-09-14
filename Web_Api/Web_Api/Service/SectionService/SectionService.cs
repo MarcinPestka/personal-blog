@@ -46,7 +46,14 @@ namespace Web_Api.Service.SectionService
             }
 
             await context.SaveChangesAsync();
-            return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();
+            if (section.TopicId == null)
+            {
+                return await context.Sections.Where(x => x.PostId == section.PostId).ToArrayAsync();
+            }
+            else
+            {
+                return await context.Sections.Where(x => x.TopicId == section.TopicId).ToArrayAsync();
+            }
         }
 
         public async Task<IEnumerable<Section>> EditSection(Section section)

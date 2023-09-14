@@ -12,7 +12,7 @@ export function AddNewSectionStepThree() {
         <>
           <div className="sectionTypeDiv">
             {editingCourseStore.sectionPreview ? (
-              <BaseComponent {...editingCourseStore.editingSection} />
+              <BaseComponent {...sectionStore.newSection} />
             ) : (
               <>
                 <BaseEditComponent

@@ -4,6 +4,7 @@ import { courseStore } from "../../../store/courseStore";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { sectionStore } from "../../../store/sectionStore";
 
 interface prop {
     topic:ITopic;
@@ -13,6 +14,7 @@ export function TopicElement(props:prop) {
 
     function handleTopicClick(id: number): void {
         courseStore.setActiveTopicId(id);
+        sectionStore.newSection.topicId = id;
     }
     
     async function handleTopicEdit(topic:ITopic) {

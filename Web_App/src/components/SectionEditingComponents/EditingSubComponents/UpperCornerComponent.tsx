@@ -4,6 +4,7 @@ import { editingCourseStore } from "../../../store/editingCourseStore";
 import { ISection } from "../../../models/section.model";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { sectionStore } from "../../../store/sectionStore";
 
 export function UpperCorner(props: ISection) {
   async function handleClick() {
@@ -27,15 +28,15 @@ export function UpperCorner(props: ISection) {
             |
             <span
               className={
-                editingCourseStore.editingSection.id === props.id
+                sectionStore.newSection.id === props.id
                   ? "editButton editingColor"
                   : "editButton"
               }
               onClick={() => {
-                if (editingCourseStore.editingSection.id === props.id) {
-                  editingCourseStore.editingSection = {} as ISection;
+                if (sectionStore.newSection.id === props.id) {
+                  sectionStore.newSection = {} as ISection;
                 } else {
-                  editingCourseStore.editingSection = props;
+                  sectionStore.newSection = props;
                 }
               }}
             >

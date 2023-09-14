@@ -16,6 +16,7 @@ function EditPost() {
     (async () => {
       await postStore.getPostById(params.id);
       editingCourseStore.editPage = true;
+      sectionStore.newSection.postId = Number(params.id);
     })();
   }, [params]);
 

@@ -10,16 +10,18 @@ import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/Editing
 import { runInAction } from "mobx";
 import { EditingViewComponent } from "./SectionEditingComponents/EditingSubComponents/EditingViewComponent";
 import { OrderSections } from "../services/SectionService";
+import { sectionStore } from "../store/sectionStore";
 
 export function BaseComponentWrapper(props: ISection) {
-  async function handleClikc() {
-    await ApiAuthPut("Section/EditSection", editingCourseStore.editingSection).then((response) => {
+  async function handleClick() {
+    await ApiAuthPut("Section/EditSection", sectionStore.newSection).then((response) => {
       let sections: ISection[] = response.data;
       runInAction(() => {
+        /// ZMIANA 
         courseStore.activeSections = OrderSections(sections);
       });
     });;
-    editingCourseStore.editingSection = {} as ISection;
+    sectionStore.newSection = {} as ISection;
     await courseStore.getCourseById(courseStore.course.id);
   }
 
@@ -36,7 +38,7 @@ export function BaseComponentWrapper(props: ISection) {
             ) : (
             <></>
           )}
-            {editingCourseStore.editingSection?.id !== props.id ? (
+            {sectionStore.newSection?.id !== props.id ? (
               <>
 
                 <BaseComponent {...props} />
@@ -44,13 +46,13 @@ export function BaseComponentWrapper(props: ISection) {
             ) : (
               <>
                 {editingCourseStore.sectionPreview ? (
-                    <BaseComponent {...editingCourseStore.editingSection} />
+                    <BaseComponent {...sectionStore.newSection} />
                 ) : (
                   <>
                     <BaseEditComponent sectionType={props.sectionType} />
                     <button
                       onClick={async () => {
-                        handleClikc();
+                        handleClick();
                       }}
                     >
                       Save changes
