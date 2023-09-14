@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { sectionStore } from "../../store/sectionStore";
-import { PostTile } from "../TileComponents/PostTileComponent";
+import { PostTile } from "../TileComponents/PostTiles/PostTileComponent";
 import { Observer } from "mobx-react-lite";
 
 export function FeaturedCourses() {

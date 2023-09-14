@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import "../App.scss";
 import { courseStore } from "../store/courseStore";
-import { CourseTile } from "../components/TileComponents/CourseTileComponet";
+import { CourseTile } from "../components/TileComponents/CourseTiles/CourseTileComponet";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";

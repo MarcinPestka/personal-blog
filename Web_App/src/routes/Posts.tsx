@@ -3,7 +3,8 @@ import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { sectionStore } from "../store/sectionStore";
 import { Observer } from "mobx-react-lite";
-import { PostTile } from "../components/TileComponents/PostTileComponent";
+import { PostTile } from "../components/TileComponents/PostTiles/PostTileComponent";
+import { NewPostTile } from "../components/TileComponents/PostTiles/NewPostTile";
 
 export function Posts() {
   const store = sectionStore;
@@ -32,6 +33,9 @@ export function Posts() {
                 </Grid>
               );
             })}
+            <Grid item>
+              <NewPostTile/>
+            </Grid>
           </Grid>
         </>
       )}

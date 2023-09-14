@@ -19,6 +19,7 @@ import { ActiveCourse } from "./routes/ActiveCourse";
 import { Register } from "./routes/Register";
 import { MyAccount } from "./routes/myAccount";
 import { EditCourse } from "./routes/EditCourse";
+import EditPost from "./routes/EditPost";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
@@ -37,6 +38,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="about" element={<><AboutMe /></>} />
         <Route path="posts" element={<><Posts /></>} />
         <Route path="post/:id" element={<><PostPage /></>} />
+        <Route path="post/:id/edit" element={<><EditPost /></>} />
 
         <Route path="login" element={<><Login /></>} />
         <Route path="register" element={<><Register /></>} />

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Web_Api.Model;
+using Web_Api.Model.Post;
 using Web_Api.Service.Blog;
 
 namespace Web_Api.Controllers
@@ -34,7 +34,7 @@ namespace Web_Api.Controllers
             return this.blogService.GetFeaturedPosts();
         }
 
-        [HttpPost]
+        [HttpPost("AddPost")]
         public Task<Post> AddPost(Post post)
         {
             var res = this.blogService.AddPost(post);

@@ -10,6 +10,7 @@ export class SectionsStore {
   sections: ISection[] = [];
   posts: IPost[] = [];
   post: IPost = {} as IPost;
+  newPost: IPost = {} as IPost;
   newSection: ISection = {} as ISection;
 
   constructor() {
@@ -20,6 +21,7 @@ export class SectionsStore {
     await ApiGet("Post?=" + Id).then((resp) => {
       let post: IPost = resp.data;
       runInAction(() => {
+        this.sections = post.sections;
         this.post = post;
       })
     });

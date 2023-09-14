@@ -1,4 +1,4 @@
-﻿using Web_Api.Model;
+﻿using Web_Api.Model.Post;
 
 namespace Web_Api.Service.Blog
 {
