@@ -28,7 +28,7 @@ export default function AddNewTopicComponent({order}: {order: number;}) {
         addTopic(editingCourseStore.newTopic);
         setEdit(false); 
       }else{
-        editTopic();
+        editTopic(editingCourseStore.newTopic);
         clearEdit();
       }
     }

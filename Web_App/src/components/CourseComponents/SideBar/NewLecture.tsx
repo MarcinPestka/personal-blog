@@ -9,23 +9,28 @@ import { ILecture, ITopic } from "../../../models/course.model";
 import { addLecture, editLecture } from "../../../services/LectureService";
 
 export default function NewLecture({order}: {order: number;}) {
+  const [newLecture,setEdit] = React.useState(false);
 
   function clearEdit() {
+    setEdit(false);
     editingCourseStore.editingLecture = false;
     editingCourseStore.newLecture = {} as ILecture;
   }
 
     function handleFirstClick() {
-        editingCourseStore.editingLecture = true;
+        setEdit(true);
         editingCourseStore.newLecture.CourseId = courseStore.course.id;
     }
 
     async function handleAddClick() {
-      if (editingCourseStore.editingLecture) {
+      console.log(editingCourseStore.editingLecture);
+      if (!editingCourseStore.editingLecture) {
         editingCourseStore.newLecture.order = order;
         addLecture(editingCourseStore.newLecture);
+        setEdit(false); 
       }else{
-        editLecture();
+        editingCourseStore.newLecture.order = order;
+        editLecture(editingCourseStore.newLecture);
         clearEdit();
       }
     }
@@ -38,7 +43,7 @@ export default function NewLecture({order}: {order: number;}) {
     <Observer>
       {() => (
         <>
-        {editingCourseStore.editingLecture !== true ?
+        {newLecture === false && editingCourseStore.editingLecture !== true ?
         <p onClick={()=>handleFirstClick()}>Add new lecture</p>
         :
         <div style={{display:'flex',alignItems:'center'}}>
