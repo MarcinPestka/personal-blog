@@ -3,6 +3,7 @@ import {
   SectionAddStage,
   SectionTypeEnum,
 } from "../../../services/SectionService";
+import { sectionStore } from "../../../store/sectionStore";
 
 export function AddNewSectionStepTwo() {
   return (
@@ -12,7 +13,7 @@ export function AddNewSectionStepTwo() {
           className="addSectionButton stepTwo"
           onClick={() => {
             editingCourseStore.newSectionType = SectionTypeEnum.Title;
-            editingCourseStore.editingSection.sectionType = SectionTypeEnum.Title;
+            sectionStore.newSection.sectionType = SectionTypeEnum.Title;
             editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
           }}
         >
@@ -22,7 +23,7 @@ export function AddNewSectionStepTwo() {
           className="addSectionButton stepTwo"
           onClick={() => {
             editingCourseStore.newSectionType = SectionTypeEnum.TitleNoImage;
-            editingCourseStore.editingSection.sectionType = SectionTypeEnum.TitleNoImage;
+            sectionStore.newSection.sectionType = SectionTypeEnum.TitleNoImage;
             editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
           }}
         >
@@ -32,7 +33,7 @@ export function AddNewSectionStepTwo() {
           className="addSectionButton stepTwo"
           onClick={() => {
             editingCourseStore.newSectionType = SectionTypeEnum.CodeBlockSection;
-            editingCourseStore.editingSection.sectionType = SectionTypeEnum.CodeBlockSection;
+            sectionStore.newSection.sectionType = SectionTypeEnum.CodeBlockSection;
             editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
           }}
         >

@@ -5,7 +5,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { IPost } from "../../models/post.model";
+import { IPost } from "../../../models/post.model";
 import { Link } from "react-router-dom";
 
 export function PostTile(props: IPost) {

@@ -8,6 +8,7 @@ import { courseStore } from "../store/courseStore";
 import { editingCourseStore } from "../store/editingCourseStore";
 import { AddNewSectionInbetweenButton } from "../components/SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 import { DraggableComponent } from "../components/Draggable/DraggableComponent";
+import { sectionStore } from "../store/sectionStore";
 
 export function EditCourse() {
   const store = courseStore;
@@ -29,16 +30,16 @@ export function EditCourse() {
               <NestedList></NestedList>
             </Grid>
             <Grid item xs ml={10}>
-              {store.activeSections && (
+              {sectionStore.sections && (
                 <>
-                  {store.activeSections.map((section) => {
+                  {sectionStore.sections.map((section) => {
                     return (
                       <DraggableComponent element={section} key={section.id}/>
                     );
                   })}
                   {
-                    courseStore.activeSections &&
-                    <AddNewSectionInbetweenButton section={courseStore.activeSections.length + 1}/>
+                    sectionStore.sections &&
+                    <AddNewSectionInbetweenButton section={sectionStore.sections.length + 1}/>
                   }
                 </>
               )}

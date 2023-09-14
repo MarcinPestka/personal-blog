@@ -2,7 +2,7 @@ import { SectionTypeEnum } from "../services/SectionService";
 
 export interface ISection {
   id: number;
-  postId: number;
+  postId?: number;
   Name: string;
   title?: string;
   subTitle?: string;

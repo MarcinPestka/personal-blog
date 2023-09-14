@@ -7,6 +7,7 @@ import { editingCourseStore } from "./editingCourseStore";
 import { OrderSections } from "../services/SectionService";
 import { OrderLectures } from "../services/LectureService";
 import { OrderTopics } from "../services/TopicService";
+import { sectionStore } from "./sectionStore";
 
 export class CourseStore {
   courses: ICourse[] = [];
@@ -123,7 +124,7 @@ export class CourseStore {
   };
 
   setActiveSections = () => {
-    this.activeSections = OrderSections(this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? []);
+    sectionStore.sections = OrderSections(this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics.find((i) => i.id === this.activeTopicId)?.sections ?? []);
   };
 
   setActiveLectureId = (id: number) => {

@@ -6,14 +6,14 @@ import { Observer } from "mobx-react-lite";
 import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
 import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
 import { DraggableComponent } from "../components/Draggable/DraggableComponent";
+import { postStore } from "../store/postStore";
 
 
 export function HomePage() {
-  const store = sectionStore;
 
   useEffect(() => {
     (async () => {
-      await store.getAllSectionsAsync("1");
+      await postStore.getPostById("0");
     })();
   }, []);
 
@@ -29,15 +29,15 @@ export function HomePage() {
             alignItems="center"
           >
             <Grid item>
-              {store.sections.map((section) => {
+              {sectionStore.sections.map((section) => {
                 return (
                     <DraggableComponent element={section} key={section.id}/>
                 );
               })}
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <FeaturedPosts/>
-            </Grid>
+            </Grid> */}
           </Grid>
           <CarouselComponent></CarouselComponent>
         </>

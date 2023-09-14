@@ -33,8 +33,8 @@ export function Course() {
               <NestedList></NestedList>
             </Grid>
             <Grid item xs ml={3}>
-              {store.activeSections &&
-                store.activeSections.map((section) => {
+              {sectionStore.sections &&
+                sectionStore.sections.map((section) => {
                   return (
                     <DraggableComponent element={section} key={section.id}/>
                   );

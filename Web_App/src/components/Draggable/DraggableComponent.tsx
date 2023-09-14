@@ -46,7 +46,7 @@ export function DraggableComponent(props: DraggableProps) {
     function dragEnd() {
         editingCourseStore.dragging = false;
         if (isSection(props.element)) {
-            editSection();
+            editSection(props.element);
             return;
         }
         if (!isLecture(props.element)) {

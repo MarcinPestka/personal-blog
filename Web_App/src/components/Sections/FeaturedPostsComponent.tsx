@@ -1,15 +1,15 @@
 import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { sectionStore } from "../../store/sectionStore";
-import { PostTile } from "../TileComponents/PostTileComponent";
+import { PostTile } from "../TileComponents/PostTiles/PostTileComponent";
 import { Observer } from "mobx-react-lite";
+import { postStore } from "../../store/postStore";
 
 export function FeaturedPosts() {
-  const store = sectionStore;
 
   useEffect(() => {
     (async () => {
-      await store.GetFeaturedPosts();
+      await postStore.GetFeaturedPosts();
     })();
   }, []);
 
@@ -24,7 +24,7 @@ export function FeaturedPosts() {
         justifyContent="center"
         alignItems="center"
       >
-        {store.posts.map((section) => {
+        {postStore.posts.map((section) => {
           return (
             <Grid item key={section.id}>
               <PostTile {...section}></PostTile>

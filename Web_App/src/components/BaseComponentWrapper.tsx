@@ -2,25 +2,16 @@ import { ISection } from "../models/section.model";
 import { BaseComponent } from "./BaseComponent";
 import { editingCourseStore } from "../store/editingCourseStore";
 import { Observer } from "mobx-react-lite";
-import { ApiAuthPut } from "../services/ApiService";
-import { courseStore } from "../store/courseStore";
 import { BaseEditComponent } from "./BaseEditComponent";
 import { UpperCorner } from "./SectionEditingComponents/EditingSubComponents/UpperCornerComponent";
 import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
-import { runInAction } from "mobx";
-import { EditingViewComponent } from "./SectionEditingComponents/EditingSubComponents/EditingViewComponent";
-import { OrderSections } from "../services/SectionService";
+import { sectionStore } from "../store/sectionStore";
+import { editSection } from "../services/SectionService";
 
 export function BaseComponentWrapper(props: ISection) {
-  async function handleClikc() {
-    await ApiAuthPut("Section/EditSection", editingCourseStore.editingSection).then((response) => {
-      let sections: ISection[] = response.data;
-      runInAction(() => {
-        courseStore.activeSections = OrderSections(sections);
-      });
-    });;
-    editingCourseStore.editingSection = {} as ISection;
-    await courseStore.getCourseById(courseStore.course.id);
+  async function handleClick() {
+    editSection(sectionStore.newSection);
+    sectionStore.newSection = {} as ISection;
   }
 
 
@@ -36,7 +27,7 @@ export function BaseComponentWrapper(props: ISection) {
             ) : (
             <></>
           )}
-            {editingCourseStore.editingSection?.id !== props.id ? (
+            {sectionStore.newSection?.id !== props.id ? (
               <>
 
                 <BaseComponent {...props} />
@@ -44,13 +35,13 @@ export function BaseComponentWrapper(props: ISection) {
             ) : (
               <>
                 {editingCourseStore.sectionPreview ? (
-                    <BaseComponent {...editingCourseStore.editingSection} />
+                    <BaseComponent {...sectionStore.newSection} />
                 ) : (
                   <>
                     <BaseEditComponent sectionType={props.sectionType} />
                     <button
                       onClick={async () => {
-                        handleClikc();
+                        handleClick();
                       }}
                     >
                       Save changes

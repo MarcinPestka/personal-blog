@@ -8,8 +8,8 @@ export function TitleNoImageEditComponent() {
     <>
     <Grid container alignItems="center">
       <Grid item mt={1}>
-          <TextField defaultValue={editingCourseStore.editingSection ? editingCourseStore.editingSection.title:""} id="header" label="Tytuł" variant="standard" placeholder="Tytuł" onChange={(e) => {editingCourseStore.editingSection.title = e.target.value}}/><br />
-          <TextField defaultValue={editingCourseStore.editingSection ? editingCourseStore.editingSection.subTitle:""} id="subHeader" label="Tytuł" variant="standard" placeholder="Podtytuł" onChange={(e) => {editingCourseStore.editingSection.subTitle = e.target.value}}/>
+          <TextField defaultValue={sectionStore.newSection ? sectionStore.newSection.title:""} id="header" label="Tytuł" variant="standard" placeholder="Tytuł" onChange={(e) => {sectionStore.newSection.title = e.target.value}}/><br />
+          <TextField defaultValue={sectionStore.newSection ? sectionStore.newSection.subTitle:""} id="subHeader" label="Tytuł" variant="standard" placeholder="Podtytuł" onChange={(e) => {sectionStore.newSection.subTitle = e.target.value}}/>
       </Grid>
     </Grid>
     </>

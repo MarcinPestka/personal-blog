@@ -2,15 +2,9 @@ import { Box, Grid, TextField } from "@mui/material";
 import { sectionStore } from "../../../store/sectionStore";
 import { useEffect } from "react";
 import { courseStore } from "../../../store/courseStore";
-import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function TitleEditComponent() {
   
-  useEffect(() => {
-      sectionStore.newSection.topicId = courseStore.activeTopicId;
-      sectionStore.newSection.postId = 1;
-  }, []);
-
   return (
     <>
       <Grid container alignItems="center">
@@ -24,8 +18,8 @@ export function TitleEditComponent() {
           />
         </Grid>
         <Grid item mt={1}>
-          <TextField id="header" label="Tytuł" variant="standard" placeholder="Tytuł" onChange={(e) => {editingCourseStore.editingSection.title = e.target.value}}/><br />
-          <TextField id="subHeader" label="Tytuł" variant="standard" placeholder="Podtytuł" onChange={(e) => {editingCourseStore.editingSection.subTitle = e.target.value}}/>
+          <TextField id="header" label="Tytuł" variant="standard" placeholder="Tytuł" onChange={(e) => {sectionStore.newSection.title = e.target.value}}/><br />
+          <TextField id="subHeader" label="Tytuł" variant="standard" placeholder="Podtytuł" onChange={(e) => {sectionStore.newSection.subTitle = e.target.value}}/>
           <Box textAlign="center">
             <button className="CTAbutton">Sprawdź kurs</button>
           </Box>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Web_Api.Data;
-using Web_Api.Model;
+using Web_Api.Model.Post;
 
 namespace Web_Api.Service.Blog
 {
@@ -29,7 +29,7 @@ namespace Web_Api.Service.Blog
             context.Posts.Add(post);
             await context.SaveChangesAsync();
 
-            return await context.Posts.FirstOrDefaultAsync();
+            return await context.Posts.Where(x=>x.Id == post.Id).FirstOrDefaultAsync();
         }
     }
 }
