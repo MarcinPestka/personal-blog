@@ -14,9 +14,8 @@ export class SectionsStore {
   }
 
   AddNewSection = async () => {
-    const params = useParams();
-    this.newSection.topicId = courseStore.activeTopicId;
-    this.newSection.postId = params.Id;
+    //this.newSection.topicId = courseStore.activeTopicId;
+    this.newSection.postId = 1;
     this.newSection.sectionType = editingCourseStore.newSectionType;
     this.newSection.title = editingCourseStore.editingSection.title;
     this.newSection.subTitle = editingCourseStore.editingSection.subTitle;

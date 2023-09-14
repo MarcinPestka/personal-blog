@@ -8,7 +8,6 @@ export function TitleEditComponent() {
   
   useEffect(() => {
       sectionStore.newSection.topicId = courseStore.activeTopicId;
-      sectionStore.newSection.postId = '1';
   }, []);
 
   return (

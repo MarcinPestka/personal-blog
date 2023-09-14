@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { IPost } from "../models/post.model";
 import { ApiGet } from "../services/ApiService";
 import { SectionsStore, sectionStore } from "./sectionStore";
+import { OrderSections } from "../services/SectionService";
 
 export class PostStore {
   posts: IPost[] = [];
@@ -16,7 +17,7 @@ export class PostStore {
     await ApiGet(`Post?Id=${Id}`).then((resp) => {
         runInAction(() => {
             this.post = resp.data;
-            sectionStore.sections = this.post.sections;
+            sectionStore.sections = OrderSections(this.post.sections);
         });
     });
   };
