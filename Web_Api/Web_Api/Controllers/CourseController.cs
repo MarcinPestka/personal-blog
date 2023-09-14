@@ -50,7 +50,7 @@ namespace Web_Api.Controllers
             return this.courseService.ActivateCourse(userId,topicId);
         }
 
-        [HttpPost]
+        [HttpPost("AddCourse")]
         public Task<Course> AddCourse(CourseDTO course)
         {
             var res = this.courseService.AddCourse(course);
