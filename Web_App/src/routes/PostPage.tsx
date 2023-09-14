@@ -5,19 +5,21 @@ import { ISection } from "../models/section.model";
 import { sectionStore } from "../store/sectionStore";
 import { useParams } from "react-router-dom";
 import { DraggableComponent } from "../components/Draggable/DraggableComponent";
+import { postStore } from "../store/postStore";
+import { Observer } from "mobx-react-lite";
 
 function PostPage() {
-  const [sections, setSections] = useState<ISection[]>([]);
-  const store = sectionStore;
   var params = useParams();
+
   useEffect(() => {
     (async () => {
-      await store.getAllSectionsAsync(params.id);
-      setSections(store.sections);
+      await postStore.getPostById(params.id);
     })();
   }, [params]);
 
   return (
+    <Observer>
+      {() => (
     <>
       <Grid
         container
@@ -27,12 +29,14 @@ function PostPage() {
         alignItems="center"
       >
         <Grid item marginLeft="100px" marginRight="100px">
-          {sections.map((section) => (
+          {sectionStore.sections.map((section) => (
             <DraggableComponent element={section} key={section.id}/>
           ))}
         </Grid>
       </Grid>
     </>
+      )}
+    </Observer>
   );
 }
 

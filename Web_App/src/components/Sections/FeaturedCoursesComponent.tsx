@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { sectionStore } from "../../store/sectionStore";
 import { PostTile } from "../TileComponents/PostTiles/PostTileComponent";
 import { Observer } from "mobx-react-lite";
+import { postStore } from "../../store/postStore";
 
 export function FeaturedCourses() {
-  const store = sectionStore;
 
   useEffect(() => {
     (async () => {
-      await store.GetFeaturedPosts();
+      await postStore.GetFeaturedPosts();
     })();
   }, []);
 
@@ -24,7 +24,7 @@ export function FeaturedCourses() {
         justifyContent="center"
         alignItems="center"
       >
-        {store.posts.map((section) => {
+        {postStore.posts.map((section) => {
           return (
             <Grid item>
               <PostTile {...section}></PostTile>
