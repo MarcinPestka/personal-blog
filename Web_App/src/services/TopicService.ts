@@ -16,8 +16,8 @@ export async function deleteTopic(topicId: number) {
   });
 }
 
-export async function editTopic(){
-  await ApiAuthPut("Topic/EditTopic",editingCourseStore.dragElement).then((response)=>{
+export async function editTopic(topic:ITopic){
+  await ApiAuthPut("Topic/EditTopic",topic).then((response)=>{
     courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = OrderTopics(response.data);
   });
 }

@@ -50,10 +50,10 @@ export function DraggableComponent(props: DraggableProps) {
             return;
         }
         if (!isLecture(props.element)) {
-            editTopic();
+            editTopic(props.element);
         }else{
             if (courseStore.activeLectureId !== props.element.id) {
-            editLecture();
+                editLecture(props.element);
             }
         }
     }

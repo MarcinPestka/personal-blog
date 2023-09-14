@@ -4,10 +4,11 @@ import { courseStore } from "../store/courseStore";
 import { editingCourseStore } from "../store/editingCourseStore";
 import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
 
-export async function addNewLecture(lecture:ILecture) {
-    await ApiAuthPost("Lecture/AddNewLecture",lecture).then((response) =>{
-      courseStore.course.lectures = OrderLectures(response.data);
-    });
+export async function addLecture(lecture:ILecture) {
+  await ApiAuthPost("Lecture/AddNewLecture", lecture).then((response) => {
+    console.log(OrderLectures(response.data));
+    courseStore.course.lectures = OrderLectures(response.data);
+  });
 }
 
 export async function deleteLecture(lectureId:number) {
@@ -16,8 +17,8 @@ export async function deleteLecture(lectureId:number) {
     });
   }
 
-  export async function editLecture(){
-    await ApiAuthPut("Lecture/EditLecture",editingCourseStore.dragElement).then((response)=>{
+  export async function editLecture(lecture:ILecture){
+    await ApiAuthPut("Lecture/EditLecture",lecture).then((response)=>{
       courseStore.course.lectures = OrderLectures(response.data);
     });
   }

@@ -1,7 +1,7 @@
 import { courseStore } from "../../../store/courseStore";
 import { Observer } from "mobx-react-lite";
-import { LectureElement } from "./LectureElement";
 import { DraggableComponent } from "../../Draggable/DraggableComponent";
+import NewLecture from "./NewLecture";
 
 export default function NestedList() {
   return (
@@ -16,6 +16,9 @@ export default function NestedList() {
                 </>
               ))}
           </>
+          {courseStore.course &&
+            <NewLecture order={courseStore.course.lectures.length+1}/>
+          }
         </div>
       )}
     </Observer>
