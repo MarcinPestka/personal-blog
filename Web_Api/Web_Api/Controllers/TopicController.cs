@@ -63,5 +63,12 @@ namespace Web_Api.Controllers
             return this.topicService.EditSection(topic);
         }
 
+        [HttpPost("AddLastTopic")]
+        [Authorize]
+        public Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
+        {
+            return this.topicService.AddLastActiveTopic(lastTopic);
+        }
+
     }
 }

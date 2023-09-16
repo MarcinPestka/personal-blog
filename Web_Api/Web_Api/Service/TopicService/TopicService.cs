@@ -92,5 +92,13 @@ namespace Web_Api.Service.TopicService
             await context.SaveChangesAsync();
             return await context.Topics.Where(x => x.LectureId == topic.LectureId).Include(x => x.Sections).ToArrayAsync();
         }
+
+        public async Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
+        {
+            context.LastTopic.Add(new LastTopic(lastTopic));
+            await context.SaveChangesAsync();
+
+            return await context.Topics.Where(x => x.Id == lastTopic.TopicId).FirstOrDefaultAsync();
+        }
     }
 }
