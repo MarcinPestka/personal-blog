@@ -1,7 +1,13 @@
 import { ISection } from "../models/section.model";
+import { courseStore } from "../store/courseStore";
 import { sectionStore } from "../store/sectionStore";
 import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
-import { editingCourseStore } from "../store/editingCourseStore";
+
+function updateCourseSection(sections:ISection[]) {
+  console.log(sectionStore.newSection.topicId);
+  if (sectionStore.newSection.topicId !== null) {
+    courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics.find(x => x.id === courseStore.activeTopicId)!.sections = OrderSections(sections);
+  }}
 
 export function GetAllSections() {
   return OrderSections(sectionStore.sections);
@@ -20,6 +26,7 @@ export function OrderSections(sections: ISection[]) {
 export async function editSection(section: ISection){
   await ApiAuthPut("Section/EditSection",section).then((response)=>{
     sectionStore.sections = OrderSections(response.data);
+    updateCourseSection(response.data);
   });
 }
 
@@ -27,12 +34,14 @@ export async function editSection(section: ISection){
 export async function AddNewSection(section:ISection) {
   await ApiAuthPost("Section/AddNewSection",section).then((response) =>{
     sectionStore.sections = OrderSections(response.data);
+    updateCourseSection(response.data);
   })
 }
 
 export async function deleteSectionById(id: number) {
   await ApiAuthDelete(`Section/DeleteSection?sectionId=${id}`, "").then((response) => {
     sectionStore.sections = OrderSections(response.data);
+    updateCourseSection(response.data);
   });
 }
 

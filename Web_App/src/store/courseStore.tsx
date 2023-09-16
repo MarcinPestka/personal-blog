@@ -129,14 +129,15 @@ export class CourseStore {
 
   setActiveLectureId = (id: number) => {
     this.activeLectureId = id;
-    this.setActiveTopicId(0);
+    this.setActiveTopicId(undefined);
   };
 
-  setActiveTopicId = (id: number) => {
+  setActiveTopicId = (id: number | undefined) => {
     if (id) {
       this.activeTopicId = id;
     } else {
       this.activeTopicId = this.course.lectures.find((i) => i.id === this.activeLectureId)?.topics[0]?.id ?? 0;
+      sectionStore.newSection.topicId = this.activeTopicId;
     }
     this.setActiveSections();
   };

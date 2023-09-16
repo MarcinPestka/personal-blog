@@ -17,6 +17,7 @@ function EditPost() {
       await postStore.getPostById(params.id);
       editingCourseStore.editPage = true;
       sectionStore.newSection.postId = Number(params.id);
+      sectionStore.newSection.topicId = null;
     })();
   }, [params]);
 

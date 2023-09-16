@@ -11,5 +11,5 @@ export interface ISection {
   order: number;
   sectionType: SectionTypeEnum | undefined;
   imageName?: string;
-  topicId?: number;
+  topicId?: number | null;
 }
