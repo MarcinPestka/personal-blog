@@ -29,7 +29,7 @@ namespace Web_Api.Controllers
 
         [HttpPost("CompleteTopic")]
         [Authorize]
-        public Task<CompletedTopic> CompleteTopic(CompletedTopicDTO completedTopic)
+        public Task<IEnumerable<int>> CompleteTopic(CompletedTopicDTO completedTopic)
         {
 
             return this.topicService.CompleteTopic(completedTopic);

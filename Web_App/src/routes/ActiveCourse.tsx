@@ -35,8 +35,8 @@ export function ActiveCourse() {
               <NestedList></NestedList>
             </Grid>
             <Grid item xs ml={10}>
-              {store.activeSections &&
-                store.activeSections.map((section) => {
+              {sectionStore.sections &&
+                sectionStore.sections.map((section) => {
                   return (
                     <BaseComponentWrapper
                       key={section.id}

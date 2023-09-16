@@ -12,7 +12,7 @@ import { sectionStore } from "./sectionStore";
 export class CourseStore {
   courses: ICourse[] = [];
   course!: ICourse;
-  completedTopicId: number[] = [];
+  completedTopicsId: number[] = [];
   activeCourse: boolean = false;
   activeCourseId: number = 0;
 
@@ -89,18 +89,13 @@ export class CourseStore {
   };
 
   GetCompletedTopics = async (activeCourseId: string | undefined) => {
-    await ApiGetAuth(
-      `Topic/GetCompletedTopicIds?courseId=${activeCourseId}`
-    ).then((resp) => {
-      let completedTopics: number[] = resp.data;
-      runInAction(() => {
-        this.completedTopicId = completedTopics;
-      });
+    await ApiGetAuth(`Topic/GetCompletedTopicIds?courseId=${activeCourseId}`).then((resp) => {
+        this.completedTopicsId = resp.data;
     });
   };
 
   HandleTopicCompletion = async (TopicId: number, ActiveCourseId: number) => {
-    if (!this.completedTopicId.includes(TopicId)) {
+    if (!this.completedTopicsId.includes(TopicId)) {
       this.CompleteTopic(TopicId, ActiveCourseId);
     } else {
       this.UnCompletedTopic(TopicId, ActiveCourseId);
@@ -108,19 +103,21 @@ export class CourseStore {
   };
 
   CompleteTopic = async (TopicId: number, ActiveCourseId: number) => {
-    this.completedTopicId.push(TopicId);
-    await ApiAuthPost("Course/CompleteTopic", { TopicId, ActiveCourseId }).then(
-      (resp) => {}
+    this.completedTopicsId.push(TopicId);
+    await ApiAuthPost("Topic/CompleteTopic", { TopicId, ActiveCourseId }).then(
+      (resp) => {
+        this.completedTopicsId = resp.data
+      }
     );
   };
 
   UnCompletedTopic = async (TopicId: number, ActiveCourseId: number) => {
-    var index = this.completedTopicId.indexOf(TopicId);
-    this.completedTopicId.splice(index, 1);
-    await ApiAuthDelete("Course/UnCompleteTopic", {
+    var index = this.completedTopicsId.indexOf(TopicId);
+    this.completedTopicsId.splice(index, 1);
+    await ApiAuthDelete("Topic/UnCompleteTopic", {
       TopicId,
       ActiveCourseId,
-    }).then((resp) => {});
+    });
   };
 
   setActiveSections = () => {

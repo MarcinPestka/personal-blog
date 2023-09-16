@@ -23,7 +23,6 @@ export default function NewLecture({order}: {order: number;}) {
     }
 
     async function handleAddClick() {
-      console.log(editingCourseStore.editingLecture);
       if (!editingCourseStore.editingLecture) {
         editingCourseStore.newLecture.order = order;
         addLecture(editingCourseStore.newLecture);
