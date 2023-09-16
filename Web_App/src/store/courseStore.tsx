@@ -40,9 +40,7 @@ export class CourseStore {
       runInAction(() => {
         this.course = course;
         this.course.lectures = OrderLectures(this.course.lectures);
-        this.course.lectures.forEach((x) => {
-          x.topics = OrderTopics(x.topics);
-        });
+        this.course.lectures.forEach((x) => {x.topics = OrderTopics(x.topics);});
 
         if (
           !editingCourseStore.editing &&

@@ -92,5 +92,22 @@ namespace Web_Api.Service.TopicService
             await context.SaveChangesAsync();
             return await context.Topics.Where(x => x.LectureId == topic.LectureId).Include(x => x.Sections).ToArrayAsync();
         }
+
+        public async Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
+        {
+            LastTopic lastTopicToDelete = await context.LastTopic.Where(x => x.ActiveCourseId == lastTopic.ActiveCourseId).FirstOrDefaultAsync();
+            context.LastTopic.Remove(lastTopicToDelete);
+
+            context.LastTopic.Add(new LastTopic(lastTopic));
+            await context.SaveChangesAsync();
+
+            return await context.Topics.Where(x => x.Id == lastTopic.TopicId).FirstOrDefaultAsync();
+        }
+
+        public async Task<Topic> GetLastActiveTopic(int activeCourseId)
+        {
+            int topicId = await context.LastTopic.Where(x => x.ActiveCourseId == activeCourseId).Select(x => x.TopicId).FirstOrDefaultAsync();
+            return await context.Topics.Where(x => x.Id == topicId).FirstOrDefaultAsync();
+        }
     }
 }

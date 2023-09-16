@@ -63,5 +63,20 @@ namespace Web_Api.Controllers
             return this.topicService.EditSection(topic);
         }
 
+        [HttpPost("AddLastTopic")]
+        [Authorize]
+        public Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
+        {
+            lastTopic.UserId = Int32.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return this.topicService.AddLastActiveTopic(lastTopic);
+        }
+
+        [HttpGet("GetLastTopic")]
+        [Authorize]
+        public Task<Topic> GetLastActiveTopic(int activeCourseId)
+        {
+            return this.topicService.GetLastActiveTopic(activeCourseId);
+        }
+
     }
 }

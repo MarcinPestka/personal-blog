@@ -11,5 +11,7 @@ namespace Web_Api.Service.TopicService
         Task<IEnumerable<Topic>> AddNewTopic(TopicDTO topic);
         Task<IEnumerable<Topic>> DeleteTopic(int topicId);
         Task<IEnumerable<Topic>> EditSection(TopicDTO topic);
+        Task<Topic> AddLastActiveTopic(LastTopicDTO topic);
+        Task<Topic> GetLastActiveTopic(int activeCourseId);
     }
 }

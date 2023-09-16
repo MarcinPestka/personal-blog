@@ -1,7 +1,6 @@
-import { ITopic } from "../models/course.model";
+import { ILastTopic, ITopic } from "../models/course.model";
 import { courseStore } from "../store/courseStore";
-import { editingCourseStore } from "../store/editingCourseStore";
-import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
+import { ApiAuthDelete, ApiAuthPost, ApiAuthPut, ApiGetAuth } from "./ApiService";
 
 export async function addTopic(topic: ITopic) {
   await ApiAuthPost("Topic/AddNewTopic", topic).then((response) => {
@@ -21,6 +20,22 @@ export async function editTopic(topic:ITopic){
     courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = OrderTopics(response.data);
   });
 }
+
+export async function getLastTopic(activeCourseId:number){
+  await ApiGetAuth(`Topic/GetLastTopic?activeCourseId=${activeCourseId}`).then((resp) => {
+    courseStore.activeLectureId = resp.data.lectureId;
+    courseStore.activeTopicId = resp.data.id;
+});
+}
+
+
+export async function addLastTopic(lastTopic: ILastTopic) {
+  await ApiAuthPost("Topic/AddLastTopic", lastTopic).then((response) => {
+    console.log(response.data);
+    //courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = response.data;
+  });
+}
+
 
 export function OrderTopics(topics: ITopic[]) {
   topics = topics.sort((n1, n2) => {

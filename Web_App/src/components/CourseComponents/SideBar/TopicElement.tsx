@@ -1,5 +1,5 @@
-import { ITopic } from "../../../models/course.model";
-import { deleteTopic } from "../../../services/TopicService";
+import { ILastTopic, ITopic } from "../../../models/course.model";
+import { addLastTopic, deleteTopic } from "../../../services/TopicService";
 import { courseStore } from "../../../store/courseStore";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,6 +16,11 @@ export function TopicElement(props:prop) {
     function handleTopicClick(id: number): void {
         courseStore.setActiveTopicId(id);
         sectionStore.newSection.topicId = id;
+        var lastTopic = {} as ILastTopic;
+        lastTopic.topicId = id;
+        lastTopic.lectureId = courseStore.activeLectureId;
+        lastTopic.activeCourseId = courseStore.activeCourseId;
+        addLastTopic(lastTopic);
     }
     
     async function handleTopicEdit(topic:ITopic) {
