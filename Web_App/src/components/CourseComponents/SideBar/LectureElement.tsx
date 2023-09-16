@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteLecture } from "../../../services/LectureService";
 import NewLecture from "./NewLecture";
+import TopicCompletionIndicator from "./TopicCompletionIndicator";
 
 interface prop {
     lecture:ILecture;
@@ -45,6 +46,7 @@ export function LectureElement(props:prop) {
         </>
         : 
         <>
+          <TopicCompletionIndicator topics={props.lecture.topics}/>
           <p className="lectureHeader" >{editingCourseStore.dragging !== true ? props.lecture.order:"."}. {props.lecture.title}</p>
           {editingCourseStore.editPage ?
             <>

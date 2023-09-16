@@ -4,6 +4,8 @@ $primary1: #90e0ef;
 $primary2: #00b4d8;
 $primary3: #0096c7;
 
+$completed: #60db71;
+$greyedOut: #d3d3d3;
 
 .wrapper {
   overflow: hidden;
@@ -106,8 +108,30 @@ $primary3: #0096c7;
 
 }
 
+.TopicsIndicatorContainer{
+  display: flex;
+  position: absolute;
+}
+
+.TopicsIndicator{
+  margin: 2px;
+  height: 5px;
+  width: 40px;
+  border-radius: 2px;
+  background-color: $greyedOut;
+  opacity: 0.5;
+  transition: 0.2s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+}
+
+.completed{
+  background-color: $completed;
+  opacity: 1;
+  transition: 0.2s cubic-bezier(0.83, 0.11, 0.46, 0.92) 0s;
+}
+
 .sideBarWrapper p {
   cursor: default;
+  margin-top: 15px;
 }
 
 .test{
