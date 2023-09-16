@@ -70,5 +70,12 @@ namespace Web_Api.Controllers
             return this.topicService.AddLastActiveTopic(lastTopic);
         }
 
+        [HttpGet("GetLastTopic")]
+        [Authorize]
+        public Task<Topic> GetLastActiveTopic(int activeCourseId)
+        {
+            return this.topicService.GetLastActiveTopic(activeCourseId);
+        }
+
     }
 }

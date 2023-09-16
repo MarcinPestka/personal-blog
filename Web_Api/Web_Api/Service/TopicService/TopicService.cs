@@ -100,5 +100,11 @@ namespace Web_Api.Service.TopicService
 
             return await context.Topics.Where(x => x.Id == lastTopic.TopicId).FirstOrDefaultAsync();
         }
+
+        public async Task<Topic> GetLastActiveTopic(int activeCourseId)
+        {
+            int topicId = await context.LastTopic.Where(x => x.ActiveCourseId == activeCourseId).Select(x => x.TopicId).FirstOrDefaultAsync();
+            return await context.Topics.Where(x => x.Id == topicId).FirstOrDefaultAsync();
+        }
     }
 }
