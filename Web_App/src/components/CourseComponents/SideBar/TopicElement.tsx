@@ -1,10 +1,11 @@
 import { ITopic } from "../../../models/course.model";
-import { deleteTopic, editTopic } from "../../../services/TopicService";
+import { deleteTopic } from "../../../services/TopicService";
 import { courseStore } from "../../../store/courseStore";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { sectionStore } from "../../../store/sectionStore";
+import CompletedCheckBox from "./CompletedTopicCheckBox";
 
 interface prop {
     topic:ITopic;
@@ -29,6 +30,9 @@ export function TopicElement(props:prop) {
   return (
     <>
     <div onClick={()=>handleTopicClick(props.topic.id)} className={courseStore.activeTopicId === props.topic.id ? "topicElement picked":"topicElement"} >
+        {courseStore.activeCourse === true ?
+        <CompletedCheckBox topicId={props.topic.id}/>:<></>
+        }
         <p>{(1)}.{(props.topic.order)} {props.topic.title}</p>
         {editingCourseStore.editPage ?
         <div className="IconContainer">

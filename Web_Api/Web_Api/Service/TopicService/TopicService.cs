@@ -15,12 +15,12 @@ namespace Web_Api.Service.TopicService
             this.context = context;
         }
 
-        public async Task<CompletedTopic> CompleteTopic(CompletedTopicDTO completedTopic)
+        public async Task<IEnumerable<int>> CompleteTopic(CompletedTopicDTO completedTopic)
         {
             context.CompletedTopic.Add(new CompletedTopic(completedTopic));
             await context.SaveChangesAsync();
 
-            return await context.CompletedTopic.Where(x => x.TopicId == completedTopic.TopicId).FirstOrDefaultAsync();
+            return await context.CompletedTopic.Where(x => x.ActiveCourseId == completedTopic.ActiveCourseId).Select(x=>x.TopicId).ToArrayAsync();
         }
 
         public async Task<IEnumerable<int>> GetCompletedTopicIds(int userId, int courseId)
