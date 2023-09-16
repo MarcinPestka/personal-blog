@@ -16,11 +16,13 @@ export function TopicElement(props:prop) {
     function handleTopicClick(id: number): void {
         courseStore.setActiveTopicId(id);
         sectionStore.newSection.topicId = id;
-        var lastTopic = {} as ILastTopic;
-        lastTopic.topicId = id;
-        lastTopic.lectureId = courseStore.activeLectureId;
-        lastTopic.activeCourseId = courseStore.activeCourseId;
-        addLastTopic(lastTopic);
+        if (courseStore.activeCourse) {
+            var lastTopic = {} as ILastTopic;
+            lastTopic.topicId = id;
+            lastTopic.lectureId = courseStore.activeLectureId;
+            lastTopic.activeCourseId = courseStore.activeCourseId;
+            addLastTopic(lastTopic);   
+        }
     }
     
     async function handleTopicEdit(topic:ITopic) {
