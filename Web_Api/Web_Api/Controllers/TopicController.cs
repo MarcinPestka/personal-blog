@@ -67,6 +67,7 @@ namespace Web_Api.Controllers
         [Authorize]
         public Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
         {
+            lastTopic.UserId = Int32.Parse(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             return this.topicService.AddLastActiveTopic(lastTopic);
         }
 

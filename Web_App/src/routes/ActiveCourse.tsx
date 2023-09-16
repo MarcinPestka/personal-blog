@@ -12,6 +12,7 @@ import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { ICourse } from "../models/course.model";
 import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
+import { getLastTopic } from "../services/TopicService";
 
 export function ActiveCourse() {
   const store = courseStore;
@@ -23,6 +24,7 @@ export function ActiveCourse() {
       await store.getCourseById(Number(params.activeId));
       await store.GetCompletedTopics(params.activeId);
       await courseStore.getActiveCourseId();
+      await getLastTopic(1);
     })();
   }, []);
 

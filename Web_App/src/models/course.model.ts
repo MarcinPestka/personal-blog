@@ -27,3 +27,11 @@ export interface ITopic {
   completed?: boolean;
   sections: ISection[];
 }
+
+export interface ILastTopic {
+  id:number;
+  activeCourseId:number;
+  userId:number;
+  topicId:number;
+  lectureId:number;
+}

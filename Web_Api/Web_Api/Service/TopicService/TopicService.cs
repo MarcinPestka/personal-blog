@@ -95,6 +95,9 @@ namespace Web_Api.Service.TopicService
 
         public async Task<Topic> AddLastActiveTopic(LastTopicDTO lastTopic)
         {
+            LastTopic lastTopicToDelete = await context.LastTopic.Where(x => x.ActiveCourseId == lastTopic.ActiveCourseId).FirstOrDefaultAsync();
+            context.LastTopic.Remove(lastTopicToDelete);
+
             context.LastTopic.Add(new LastTopic(lastTopic));
             await context.SaveChangesAsync();
 
