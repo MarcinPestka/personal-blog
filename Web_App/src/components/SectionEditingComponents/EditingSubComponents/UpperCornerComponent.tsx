@@ -36,6 +36,7 @@ export function UpperCorner(props: ISection) {
                 if (sectionStore.newSection.id === props.id) {
                   sectionStore.newSection = {} as ISection;
                 } else {
+                  console.log(props);
                   sectionStore.newSection = props;
                 }
               }}

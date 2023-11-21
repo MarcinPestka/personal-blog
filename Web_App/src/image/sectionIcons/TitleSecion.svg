@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Warstwa_1" data-name="Warstwa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 284.44 125.09">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Gradient_bez_nazwy_2-3);
+      }
+
+      .cls-2 {
+        fill: url(#Gradient_bez_nazwy_2-2);
+      }
+
+      .cls-3 {
+        fill: url(#Gradient_bez_nazwy_2);
+      }
+    </style>
+    <linearGradient id="Gradient_bez_nazwy_2" data-name="Gradient bez nazwy 2" x1="17.19" y1="40.3" x2="267.26" y2="40.3" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#355da8"/>
+      <stop offset="1" stop-color="#489dd7"/>
+    </linearGradient>
+    <linearGradient id="Gradient_bez_nazwy_2-2" data-name="Gradient bez nazwy 2" x1="17.19" y1="69.63" x2="235.96" y2="69.63" xlink:href="#Gradient_bez_nazwy_2"/>
+    <linearGradient id="Gradient_bez_nazwy_2-3" data-name="Gradient bez nazwy 2" x1="17.19" y1="91.87" x2="235.96" y2="91.87" xlink:href="#Gradient_bez_nazwy_2"/>
+  </defs>
+  <rect class="cls-3" x="17.19" y="25.31" width="250.07" height="29.98" rx="13.48" ry="13.48"/>
+  <rect class="cls-2" x="17.19" y="61.72" width="218.77" height="15.81" rx="7.11" ry="7.11"/>
+  <rect class="cls-1" x="17.19" y="83.96" width="218.77" height="15.81" rx="7.11" ry="7.11"/>
+</svg>

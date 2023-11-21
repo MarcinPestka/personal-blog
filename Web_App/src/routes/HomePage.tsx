@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import "../App.scss";
 import { Grid } from "@mui/material";
-import { sectionStore } from "../store/sectionStore";
 import { Observer } from "mobx-react-lite";
-import { FeaturedPosts } from "../components/Sections/FeaturedPostsComponent";
-import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
-import { DraggableComponent } from "../components/Draggable/DraggableComponent";
 import { postStore } from "../store/postStore";
+import img from "../image/htmlcss.jpg";
+import { DraggableComponent } from "../components/Draggable/DraggableComponent";
+import { CarouselComponent } from "../components/Sections/Carousel/CarouselComponent";
+import { sectionStore } from "../store/sectionStore";
 
 
 export function HomePage() {
@@ -34,12 +34,20 @@ export function HomePage() {
                     <DraggableComponent element={section} key={section.id}/>
                 );
               })}
-            </Grid>
+            </Grid> 
             {/* <Grid item>
               <FeaturedPosts/>
             </Grid> */}
           </Grid>
           <CarouselComponent></CarouselComponent>
+            {/* <div className="container">
+              <div className="wrap">
+                <img src={img} alt="" className="img"/>
+                <button>Zacznij</button>
+                <p>Programowanie JavaScript</p>
+                <p>Dla zielonych</p>
+              </div>
+            </div> */}
         </>
       )}
       
