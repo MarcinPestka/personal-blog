@@ -5,6 +5,7 @@ import { AddNewSection } from "../AddNewSectionComponent";
 import { ISection } from "../../../models/section.model";
 import { SectionAddStage } from "../../../services/SectionService";
 import { sectionStore } from "../../../store/sectionStore";
+import { runInAction } from "mobx";
 
 export function AddNewSectionInbetweenButton({section}: {section: number;}) {
   return (
@@ -22,9 +23,11 @@ export function AddNewSectionInbetweenButton({section}: {section: number;}) {
                 editingCourseStore.elementDragSection.order === section ? "over":""}`}
             
             onClick={() => {
-              sectionStore.newSection.order = section;
-              editingCourseStore.newSectionStage = SectionAddStage.sectionType;
-              editingCourseStore.editing = true;
+              runInAction(()=>{
+                sectionStore.newSection.order = section;
+                editingCourseStore.newSectionStage = SectionAddStage.sectionType;
+                editingCourseStore.editing = true;
+              })
             }}
           >
             {editingCourseStore.elementDrag === true

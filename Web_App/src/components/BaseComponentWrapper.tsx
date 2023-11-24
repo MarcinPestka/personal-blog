@@ -2,11 +2,11 @@ import { ISection } from "../models/section.model";
 import { BaseComponent } from "./BaseComponent";
 import { editingCourseStore } from "../store/editingCourseStore";
 import { Observer } from "mobx-react-lite";
-import { BaseEditComponent } from "./BaseEditComponent";
 import { UpperCorner } from "./SectionEditingComponents/EditingSubComponents/UpperCornerComponent";
 import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 import { sectionStore } from "../store/sectionStore";
 import { editSection } from "../services/SectionService";
+import { EditingViewComponent } from "./SectionEditingComponents/EditingSubComponents/EditingViewComponent";
 
 export function BaseComponentWrapper(props: ISection) {
   async function handleClick() {
@@ -29,25 +29,24 @@ export function BaseComponentWrapper(props: ISection) {
           )}
             {sectionStore.newSection?.id !== props.id ? (
               <>
-
                 <BaseComponent {...props} />
               </>
             ) : (
               <>
-                {editingCourseStore.sectionPreview ? (
-                    <BaseComponent {...sectionStore.newSection} />
-                ) : (
+                <EditingViewComponent/>
+                <BaseComponent {...sectionStore.newSection} />
+                {editingCourseStore.sectionPreview ? 
+                <></> :
                   <>
-                    <BaseEditComponent sectionType={props.sectionType} />
-                    <button
-                      onClick={async () => {
-                        handleClick();
-                      }}
-                    >
-                      Save changes
+                  <button
+                        onClick={async () => {
+                          handleClick();
+                        }}
+                      >
+                        Save changes
                     </button>
-                  </>
-                )}
+                    </>
+                }
               </>
             )}
           <div

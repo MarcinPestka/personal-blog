@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 export class SectionsStore {
   sections: ISection[] = [];
   newSection: ISection = {} as ISection;
+  test: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -15,9 +16,11 @@ export class SectionsStore {
 
   AddNewSection = async () => {
     await AddNewSection(this.newSection);
-    editingCourseStore.newSectionStage = undefined;
-    editingCourseStore.newSectionType = undefined;
-    editingCourseStore.editing = false;
+    runInAction(()=>{
+      editingCourseStore.newSectionStage = undefined;
+      editingCourseStore.newSectionType = undefined;
+    })
+
   }
 }
 

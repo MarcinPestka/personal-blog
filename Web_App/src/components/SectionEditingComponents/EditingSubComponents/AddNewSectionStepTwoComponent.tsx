@@ -7,6 +7,7 @@ import { sectionStore } from "../../../store/sectionStore";
 import codeSectionIcon from "../../../image/sectionIcons/CodeSection.svg";
 import titleSectionIcon from "../../../image/sectionIcons/TitleSecion.svg";
 import titleImageSectionIcon from "../../../image/sectionIcons/TitileImageSection.svg";
+import { runInAction } from "mobx";
 
 export function AddNewSectionStepTwo() {
   return (
@@ -15,9 +16,12 @@ export function AddNewSectionStepTwo() {
         <div
           className="addSectionButton stepTwo"
           onClick={() => {
-            editingCourseStore.newSectionType = SectionTypeEnum.Title;
-            sectionStore.newSection.sectionType = SectionTypeEnum.Title;
-            editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            runInAction(()=>{
+              editingCourseStore.newSectionType = SectionTypeEnum.Title;
+              sectionStore.newSection.sectionType = SectionTypeEnum.Title;
+              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            })
+
           }}
         >
           Title Section
@@ -26,9 +30,12 @@ export function AddNewSectionStepTwo() {
         <div
           className="addSectionButton stepTwo"
           onClick={() => {
-            editingCourseStore.newSectionType = SectionTypeEnum.TitleNoImage;
-            sectionStore.newSection.sectionType = SectionTypeEnum.TitleNoImage;
-            editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            runInAction(()=>{
+              editingCourseStore.newSectionType = SectionTypeEnum.TitleNoImage;
+              sectionStore.newSection.sectionType = SectionTypeEnum.TitleNoImage;
+              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            })
+
           }}
         >
           Title without image
@@ -37,9 +44,12 @@ export function AddNewSectionStepTwo() {
         <div
           className="addSectionButton stepTwo"
           onClick={() => {
-            editingCourseStore.newSectionType = SectionTypeEnum.CodeBlockSection;
-            sectionStore.newSection.sectionType = SectionTypeEnum.CodeBlockSection;
-            editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            runInAction(()=>{
+              editingCourseStore.newSectionType = SectionTypeEnum.CodeBlockSection;
+              sectionStore.newSection.sectionType = SectionTypeEnum.CodeBlockSection;
+              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+            })
+
           }}
         >
           Code Block Section

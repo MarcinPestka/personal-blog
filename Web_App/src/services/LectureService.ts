@@ -6,7 +6,6 @@ import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
 
 export async function addLecture(lecture:ILecture) {
   await ApiAuthPost("Lecture/AddNewLecture", lecture).then((response) => {
-    console.log(OrderLectures(response.data));
     courseStore.course.lectures = OrderLectures(response.data);
   });
 }
