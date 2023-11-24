@@ -1,14 +1,22 @@
 import { Observer } from "mobx-react-lite";
-import { deleteSectionById } from "../../../services/SectionService";
+import { SectionAddStage, deleteSectionById } from "../../../services/SectionService";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import { ISection } from "../../../models/section.model";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sectionStore } from "../../../store/sectionStore";
+import { EditingViewComponent } from "./EditingViewComponent";
 
 export function UpperCorner(props: ISection) {
-  async function handleClick() {
+  async function handleDeleteClick() {
     deleteSectionById(props.id);
+  }
+  async function handleEditClick() {
+    if (sectionStore.newSection.id === props.id) {
+      sectionStore.newSection = {} as ISection;
+    } else {
+      sectionStore.newSection = props;
+    }
   }
 
   return (
@@ -16,10 +24,11 @@ export function UpperCorner(props: ISection) {
       {() => (
         <>
           <div className={editingCourseStore.editPage ? "editSection":"editingSection invisible"}>
+          <EditingViewComponent />
               <span
                 className="deleteButton"
                 onClick={() => {
-                  handleClick();
+                  handleDeleteClick();
                 }}
               >
                 <DeleteIcon fontSize="small" />
@@ -33,12 +42,7 @@ export function UpperCorner(props: ISection) {
                   : "editButton"
               }
               onClick={() => {
-                if (sectionStore.newSection.id === props.id) {
-                  sectionStore.newSection = {} as ISection;
-                } else {
-                  console.log(props);
-                  sectionStore.newSection = props;
-                }
+                handleEditClick();
               }}
             >
               <EditIcon fontSize="small" />
