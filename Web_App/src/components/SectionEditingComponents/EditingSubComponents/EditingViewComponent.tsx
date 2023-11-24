@@ -2,6 +2,7 @@ import { Observer } from "mobx-react-lite";
 import { SectionAddStage } from "../../../services/SectionService";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import { AddNewSectionBackButton } from "./AddNewSectionBackButtonComponent";
+import { sectionStore } from "../../../store/sectionStore";
 
 export function EditingViewComponent() {
   return (

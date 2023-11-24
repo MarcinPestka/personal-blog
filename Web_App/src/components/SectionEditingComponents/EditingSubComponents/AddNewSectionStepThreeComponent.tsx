@@ -1,7 +1,5 @@
 import { Observer } from "mobx-react-lite";
-import { editingCourseStore } from "../../../store/editingCourseStore";
 import { sectionStore } from "../../../store/sectionStore";
-import { BaseEditComponent } from "../../BaseEditComponent";
 import { BaseComponent } from "../../BaseComponent";
 
 export function AddNewSectionStepThree() {
@@ -10,25 +8,7 @@ export function AddNewSectionStepThree() {
     <Observer>
       {() => (
         <>
-          <div className="sectionTypeDiv">
-            {editingCourseStore.sectionPreview ? (
-              <BaseComponent {...sectionStore.newSection} />
-            ) : (
-              <>
-                <BaseEditComponent
-                  sectionType={editingCourseStore.newSectionType}
-                />
-                <button
-                  onClick={() => {
-                    sectionStore.AddNewSection();
-                  }}
-                >
-                  {" "}
-                  Save{" "}
-                </button>
-              </>
-            )}
-          </div>
+          <BaseComponent {...sectionStore.newSection} />
         </>
       )}
     </Observer>

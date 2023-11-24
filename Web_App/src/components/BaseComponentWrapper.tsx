@@ -2,7 +2,6 @@ import { ISection } from "../models/section.model";
 import { BaseComponent } from "./BaseComponent";
 import { editingCourseStore } from "../store/editingCourseStore";
 import { Observer } from "mobx-react-lite";
-import { BaseEditComponent } from "./BaseEditComponent";
 import { UpperCorner } from "./SectionEditingComponents/EditingSubComponents/UpperCornerComponent";
 import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 import { sectionStore } from "../store/sectionStore";
@@ -34,24 +33,20 @@ export function BaseComponentWrapper(props: ISection) {
               </>
             ) : (
               <>
-                {editingCourseStore.sectionPreview ? (
+                <EditingViewComponent/>
+                <BaseComponent {...sectionStore.newSection} />
+                {editingCourseStore.sectionPreview ? 
+                <></> :
                   <>
-                    <EditingViewComponent/>
-                    <BaseComponent {...sectionStore.newSection} />
-                  </>
-                ) : (
-                  <>
-                    <EditingViewComponent/>
-                    <BaseEditComponent sectionType={props.sectionType} />
-                    <button
-                      onClick={async () => {
-                        handleClick();
-                      }}
-                    >
-                      Save changes
+                  <button
+                        onClick={async () => {
+                          handleClick();
+                        }}
+                      >
+                        Save changes
                     </button>
-                  </>
-                )}
+                    </>
+                }
               </>
             )}
           <div

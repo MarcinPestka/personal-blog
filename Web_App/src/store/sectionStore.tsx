@@ -17,7 +17,6 @@ export class SectionsStore {
     await AddNewSection(this.newSection);
     editingCourseStore.newSectionStage = undefined;
     editingCourseStore.newSectionType = undefined;
-    editingCourseStore.editing = false;
   }
 }
 
