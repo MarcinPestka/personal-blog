@@ -5,7 +5,6 @@ import { ISection } from "../../../models/section.model";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sectionStore } from "../../../store/sectionStore";
-import { EditingViewComponent } from "./EditingViewComponent";
 
 export function UpperCorner(props: ISection) {
   async function handleDeleteClick() {
@@ -24,7 +23,6 @@ export function UpperCorner(props: ISection) {
       {() => (
         <>
           <div className={editingCourseStore.editPage ? "editSection":"editingSection invisible"}>
-          <EditingViewComponent />
               <span
                 className="deleteButton"
                 onClick={() => {

@@ -7,6 +7,7 @@ import { UpperCorner } from "./SectionEditingComponents/EditingSubComponents/Upp
 import { AddNewSectionInbetweenButton } from "./SectionEditingComponents/EditingSubComponents/AddNewSectionInbetweenButtonComponent";
 import { sectionStore } from "../store/sectionStore";
 import { editSection } from "../services/SectionService";
+import { EditingViewComponent } from "./SectionEditingComponents/EditingSubComponents/EditingViewComponent";
 
 export function BaseComponentWrapper(props: ISection) {
   async function handleClick() {
@@ -29,15 +30,18 @@ export function BaseComponentWrapper(props: ISection) {
           )}
             {sectionStore.newSection?.id !== props.id ? (
               <>
-
                 <BaseComponent {...props} />
               </>
             ) : (
               <>
                 {editingCourseStore.sectionPreview ? (
+                  <>
+                    <EditingViewComponent/>
                     <BaseComponent {...sectionStore.newSection} />
+                  </>
                 ) : (
                   <>
+                    <EditingViewComponent/>
                     <BaseEditComponent sectionType={props.sectionType} />
                     <button
                       onClick={async () => {

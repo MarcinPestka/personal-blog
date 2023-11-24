@@ -12,7 +12,6 @@ export function EditingViewComponent() {
           <span className="test2">
             <AddNewSectionBackButton />
           </span>
-          {editingCourseStore.newSectionStage === SectionAddStage.sectionContents ? (
             <>
               <span className={editingCourseStore.sectionPreview ? "":"highlighted"} onClick={() => {editingCourseStore.sectionPreview = false}} style={{ marginLeft: "auto" }}>
                 Edit
@@ -22,9 +21,6 @@ export function EditingViewComponent() {
                 Preview
               </span>
             </>
-          ) : (
-            <></>
-          )}
         </div>
         </>
       )}
