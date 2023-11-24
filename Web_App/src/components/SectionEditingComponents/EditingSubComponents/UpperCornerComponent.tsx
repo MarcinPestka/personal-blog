@@ -5,6 +5,7 @@ import { ISection } from "../../../models/section.model";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sectionStore } from "../../../store/sectionStore";
+import { Tooltip } from "@mui/material";
 
 export function UpperCorner(props: ISection) {
   async function handleDeleteClick() {
@@ -24,15 +25,13 @@ export function UpperCorner(props: ISection) {
       {() => (
         <>
           <div className={editingCourseStore.editPage ? "editSection":"editingSection invisible"}>
-              <span
-                className="deleteButton"
-                onClick={() => {
-                  handleDeleteClick();
-                }}
-              >
+          <Tooltip title={<>Are you sure? <br /><span style={{cursor:"pointer"}} onClick={() => {handleDeleteClick();}}>Yes</span></>}>
+            <span className="deleteButton">
                 <DeleteIcon fontSize="small" />
                 usuń
-              </span>
+            </span>
+          </Tooltip>
+
             |
             <span
               className={
