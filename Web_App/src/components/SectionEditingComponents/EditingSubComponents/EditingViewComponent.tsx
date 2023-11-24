@@ -1,8 +1,7 @@
 import { Observer } from "mobx-react-lite";
-import { SectionAddStage } from "../../../services/SectionService";
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import { AddNewSectionBackButton } from "./AddNewSectionBackButtonComponent";
-import { sectionStore } from "../../../store/sectionStore";
+import { runInAction } from "mobx";
 
 export function EditingViewComponent() {
   return (
@@ -14,11 +13,11 @@ export function EditingViewComponent() {
             <AddNewSectionBackButton />
           </span>
             <>
-              <span className={editingCourseStore.sectionPreview ? "":"highlighted"} onClick={() => {editingCourseStore.sectionPreview = false}} style={{ marginLeft: "auto" }}>
+              <span className={editingCourseStore.sectionPreview ? "":"highlighted"} onClick={() => {runInAction(()=>{editingCourseStore.sectionPreview = false}) }} style={{ marginLeft: "auto" }}>
                 Edit
               </span>
               |
-              <span className={editingCourseStore.sectionPreview ? "highlighted":""}  onClick={() => {editingCourseStore.sectionPreview = true}} style={{ marginRight: "auto" }}>
+              <span className={editingCourseStore.sectionPreview ? "highlighted":""}  onClick={() => {runInAction(()=>{editingCourseStore.sectionPreview = true})}} style={{ marginRight: "auto" }}>
                 Preview
               </span>
             </>

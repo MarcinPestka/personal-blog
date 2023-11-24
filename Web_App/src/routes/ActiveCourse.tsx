@@ -1,7 +1,6 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
 import { GetAllSections } from "../services/SectionService";
-import { BaseComponent } from "../components/BaseComponent";
 import { useEffect, useState } from "react";
 import { IPost } from "../models/post.model";
 import { useParams } from "react-router-dom";
@@ -10,7 +9,6 @@ import NestedList from "../components/CourseComponents/SideBar/SideBar";
 import { ISection } from "../models/section.model";
 import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
-import { ICourse } from "../models/course.model";
 import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 import { getLastTopic } from "../services/TopicService";
 

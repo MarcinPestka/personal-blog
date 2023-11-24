@@ -1,17 +1,24 @@
 import { editingCourseStore } from "../../../store/editingCourseStore";
 import { SectionAddStage } from "../../../services/SectionService";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { runInAction } from "mobx";
 
 export function AddNewSectionBackButton() {
   function handleClick() {
     switch (editingCourseStore.newSectionStage) {
       case SectionAddStage.sectionType:
-        editingCourseStore.newSectionType = undefined;
-        editingCourseStore.newSectionStage = undefined;
+        runInAction(()=>{
+          editingCourseStore.newSectionType = undefined;
+          editingCourseStore.newSectionStage = undefined;
+        })
+
         break;
       case SectionAddStage.sectionContents:
-        editingCourseStore.newSectionType = undefined;
-        editingCourseStore.newSectionStage = undefined;
+        runInAction(()=>{        
+          editingCourseStore.newSectionType = undefined;
+          editingCourseStore.newSectionStage = undefined;
+        })
+
         break;
       default:
         break;

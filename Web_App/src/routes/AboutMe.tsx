@@ -1,7 +1,6 @@
 import "../App.scss";
 import { Grid } from "@mui/material";
 import { GetAllSections } from "../services/SectionService";
-import { BaseComponent } from "../components/BaseComponent";
 
 export function AboutMe() {
   var sections = GetAllSections();
