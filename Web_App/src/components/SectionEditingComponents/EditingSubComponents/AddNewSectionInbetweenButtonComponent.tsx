@@ -14,7 +14,6 @@ export function AddNewSectionInbetweenButton({section}: {section: number;}) {
           <div
             onDragOver={() => {
                 if (editingCourseStore.elementDragSection.order === section || editingCourseStore.elementDragSection.order === (section-1)) {
-                  console.log("nie powinno się zmieniać");
                 }else{
                   editingCourseStore.elementDragSection.order = section;
                 }

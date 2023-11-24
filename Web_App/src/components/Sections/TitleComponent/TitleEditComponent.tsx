@@ -18,8 +18,8 @@ export function TitleEditComponent() {
           />
         </Grid>
         <Grid item mt={1}>
-          <TextField id="header" label="Tytuł" variant="standard" placeholder="Tytuł" onChange={(e) => {sectionStore.newSection.title = e.target.value}}/><br />
-          <TextField id="subHeader" label="Tytuł" variant="standard" placeholder="Podtytuł" onChange={(e) => {sectionStore.newSection.subTitle = e.target.value}}/>
+          <TextField id="header" label="Tytuł" defaultValue={sectionStore.newSection ? sectionStore.newSection.title:""} variant="standard" placeholder="Tytuł" onChange={(e) => {sectionStore.newSection.title = e.target.value}}/><br />
+          <TextField id="subHeader" label="Tytuł" defaultValue={sectionStore.newSection ? sectionStore.newSection.subTitle:""} variant="standard" placeholder="Podtytuł" onChange={(e) => {sectionStore.newSection.subTitle = e.target.value}}/>
           <Box textAlign="center">
             <button className="CTAbutton">Sprawdź kurs</button>
           </Box>

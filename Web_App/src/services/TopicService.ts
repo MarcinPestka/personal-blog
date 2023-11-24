@@ -31,7 +31,6 @@ export async function getLastTopic(activeCourseId:number){
 
 export async function addLastTopic(lastTopic: ILastTopic) {
   await ApiAuthPost("Topic/AddLastTopic", lastTopic).then((response) => {
-    console.log(response.data);
     //courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics = response.data;
   });
 }

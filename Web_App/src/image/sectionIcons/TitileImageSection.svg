@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Warstwa_1" data-name="Warstwa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 284.44 125.09">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Gradient_bez_nazwy_2-3);
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: url(#Gradient_bez_nazwy_2-4);
+        stroke-miterlimit: 10;
+        stroke-width: 6px;
+      }
+
+      .cls-3 {
+        fill: url(#Gradient_bez_nazwy_2-2);
+      }
+
+      .cls-4 {
+        fill: url(#Gradient_bez_nazwy_2);
+      }
+    </style>
+    <linearGradient id="Gradient_bez_nazwy_2" data-name="Gradient bez nazwy 2" x1="80.55" y1="45.42" x2="273.12" y2="45.42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#355da8"/>
+      <stop offset="1" stop-color="#489dd7"/>
+    </linearGradient>
+    <linearGradient id="Gradient_bez_nazwy_2-2" data-name="Gradient bez nazwy 2" x1="80.55" y1="68" x2="249.02" y2="68" xlink:href="#Gradient_bez_nazwy_2"/>
+    <linearGradient id="Gradient_bez_nazwy_2-3" data-name="Gradient bez nazwy 2" x1="80.55" y1="85.12" x2="249.02" y2="85.12" xlink:href="#Gradient_bez_nazwy_2"/>
+    <linearGradient id="Gradient_bez_nazwy_2-4" data-name="Gradient bez nazwy 2" x1="8.32" y1="62.54" x2="64.35" y2="62.54" xlink:href="#Gradient_bez_nazwy_2"/>
+  </defs>
+  <g>
+    <rect class="cls-4" x="80.55" y="33.87" width="192.57" height="23.09" rx="11.54" ry="11.54"/>
+    <rect class="cls-3" x="80.55" y="61.91" width="168.46" height="12.18" rx="6.09" ry="6.09"/>
+    <rect class="cls-1" x="80.55" y="79.04" width="168.46" height="12.18" rx="6.09" ry="6.09"/>
+  </g>
+  <path class="cls-2" d="m43.42,74.86l-5.22-5.17c-2.52-2.5-3.78-3.74-5.22-4.2-1.27-.4-2.64-.39-3.9.04-1.43.49-2.67,1.76-5.13,4.31l-12.5,12.34m31.96-7.33l1.07-1.06c2.52-2.5,3.78-3.75,5.23-4.2,1.27-.4,2.64-.39,3.9.05,1.43.49,2.67,1.77,5.13,4.32l2.62,2.63m-17.94-1.74l12.54,12.57m0,0c-1.12.14-2.57.14-4.61.14h-30.02c-3.5,0-5.25,0-6.59-.68-1.18-.6-2.13-1.56-2.73-2.73-.28-.55-.45-1.18-.54-1.96m44.5,5.24c.8-.1,1.42-.26,1.98-.55,1.18-.6,2.13-1.56,2.73-2.73.68-1.34.68-3.09.68-6.59v-.96m-49.89,5.59c-.14-1.12-.14-2.57-.14-4.63v-30.02c0-3.5,0-5.25.68-6.59.6-1.18,1.56-2.13,2.73-2.73,1.34-.68,3.09-.68,6.59-.68h30.02c3.5,0,5.25,0,6.59.68,1.18.6,2.13,1.56,2.73,2.73.68,1.34.68,3.09.68,6.59v29.06m-9.38-23.43c0,3.45-2.8,6.25-6.25,6.25s-6.25-2.8-6.25-6.25,2.8-6.25,6.25-6.25,6.25,2.8,6.25,6.25Z"/>
+</svg>

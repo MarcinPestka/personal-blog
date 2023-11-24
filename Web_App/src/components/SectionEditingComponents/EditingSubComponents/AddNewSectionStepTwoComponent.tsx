@@ -4,6 +4,9 @@ import {
   SectionTypeEnum,
 } from "../../../services/SectionService";
 import { sectionStore } from "../../../store/sectionStore";
+import codeSectionIcon from "../../../image/sectionIcons/CodeSection.svg";
+import titleSectionIcon from "../../../image/sectionIcons/TitleSecion.svg";
+import titleImageSectionIcon from "../../../image/sectionIcons/TitileImageSection.svg";
 
 export function AddNewSectionStepTwo() {
   return (
@@ -18,6 +21,7 @@ export function AddNewSectionStepTwo() {
           }}
         >
           Title Section
+          <img src={titleSectionIcon} alt=""/>
         </div>
         <div
           className="addSectionButton stepTwo"
@@ -28,6 +32,7 @@ export function AddNewSectionStepTwo() {
           }}
         >
           Title without image
+          <img src={titleImageSectionIcon} alt=""/>
         </div>
         <div
           className="addSectionButton stepTwo"
@@ -38,6 +43,7 @@ export function AddNewSectionStepTwo() {
           }}
         >
           Code Block Section
+          <img src={codeSectionIcon} alt=""/>
         </div>
       </div>
     </>

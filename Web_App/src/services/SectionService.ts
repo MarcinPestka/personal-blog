@@ -4,8 +4,7 @@ import { sectionStore } from "../store/sectionStore";
 import { ApiAuthDelete, ApiAuthPost, ApiAuthPut } from "./ApiService";
 
 function updateCourseSection(sections:ISection[]) {
-  console.log(sectionStore.newSection.topicId);
-  if (sectionStore.newSection.topicId !== null) {
+  if (sectionStore.newSection.topicId) {
     courseStore.course.lectures.find(x => x.id === courseStore.activeLectureId)!.topics.find(x => x.id === courseStore.activeTopicId)!.sections = OrderSections(sections);
   }}
 
