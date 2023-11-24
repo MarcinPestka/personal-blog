@@ -19,6 +19,9 @@ export class UserStore {
       runInAction(() => {
         this.user = user;
       })
+    }).catch(()=>{
+      localStorage.removeItem('token');
+      this.loggedIn = false;
     });
   };
 
