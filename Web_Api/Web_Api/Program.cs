@@ -10,6 +10,7 @@ using Web_Api.Data;
 using Web_Api.Service.AuthService;
 using Web_Api.Service.Blog;
 using Web_Api.Service.CourseService;
+using Web_Api.Service.ExamService;
 using Web_Api.Service.LectureService;
 using Web_Api.Service.SectionService;
 using Web_Api.Service.TopicService;
@@ -27,6 +28,9 @@ builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
 builder.Services.AddScoped<ILectureService, LectureService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IAnswearService, AnswearService>();
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Web_Api.Enumerables;
 using Web_Api.Model;
-using Web_Api.Model.Exam;
 using Web_Api.Model.Post;
 
 namespace Web_Api.Data
@@ -19,7 +18,7 @@ namespace Web_Api.Data
         public DbSet<ActiveCourse> ActiveCourses { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Answear> Answears { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
