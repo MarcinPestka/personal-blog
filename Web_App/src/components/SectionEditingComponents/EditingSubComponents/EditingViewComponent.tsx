@@ -10,7 +10,6 @@ export function EditingViewComponent() {
         <>
         <div className="editViewDiv">
           <span className="test2">
-            <AddNewSectionBackButton />
           </span>
             <>
               <span className={editingCourseStore.sectionPreview ? "":"highlighted"} onClick={() => {runInAction(()=>{editingCourseStore.sectionPreview = false}) }} style={{ marginLeft: "auto" }}>

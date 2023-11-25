@@ -4,6 +4,7 @@ import { SectionAddStage } from "../../services/SectionService";
 import { AddNewSectionStepTwo } from "./EditingSubComponents/AddNewSectionStepTwoComponent";
 import { AddNewSectionStepThree } from "./EditingSubComponents/AddNewSectionStepThreeComponent";
 import { EditingViewComponent } from "./EditingSubComponents/EditingViewComponent";
+import { AddNewSectionBackButton } from "./EditingSubComponents/AddNewSectionBackButtonComponent";
 
 export function AddNewSection() {
   return (
@@ -11,6 +12,7 @@ export function AddNewSection() {
       {() => (
         <>
           <div className="addSectionWrapper">
+          <AddNewSectionBackButton />
             {editingCourseStore.newSectionStage ===
             SectionAddStage.sectionType ? (
               <>
