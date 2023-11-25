@@ -1,3 +1,4 @@
+import { IExam } from "./exam.model";
 import { ISection } from "./section.model";
 
 export interface ICourse {
@@ -17,7 +18,9 @@ export interface ILecture {
   order:number;
   CourseId: number;
   topics: ITopic[];
+  exam: IExam;
 }
+
 
 export interface ITopic {
   id: number;

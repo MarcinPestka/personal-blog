@@ -41,7 +41,7 @@ export class CourseStore {
         this.course = course;
         this.course.lectures = OrderLectures(this.course.lectures);
         this.course.lectures.forEach((x) => {x.topics = OrderTopics(x.topics);});
-
+        console.log(course);
         if (
           !editingCourseStore.editing &&
           course.lectures.length !== 0 &&

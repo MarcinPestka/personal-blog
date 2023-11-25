@@ -43,6 +43,8 @@ namespace Web_Api.Service.Blog
             return await context.Courses.Where(p => p.Id == Id)
                 .Include(p => p.Lectures)
                 .ThenInclude(p => p.Exam)
+                .ThenInclude(p => p.Questions)
+                .ThenInclude(p => p.Answears)
                 .Include(p => p.Lectures)
                 .ThenInclude(p => p.Topics)
                 .ThenInclude(p=> p.Sections)
