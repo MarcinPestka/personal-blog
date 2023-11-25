@@ -20,3 +20,13 @@ export interface IAnswear{
     answearText:string;
     description:string;
 }
+
+export interface CheckedAnswears {
+  examId:number;
+  answearPairs:ExamAnswear[];
+}
+
+export interface ExamAnswear{
+  questionId: number;
+  userAnswear:number;
+}

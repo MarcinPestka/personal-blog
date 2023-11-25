@@ -6,5 +6,6 @@ namespace Web_Api.Service.ExamService
     {
         Task<Exam> AddExam(ExamDTO exam);
         Task<Exam> GetExamById(int Id);
+        Task<double> CheckAnswears(CheckedAnswears checkedAnswears);
     }
 }

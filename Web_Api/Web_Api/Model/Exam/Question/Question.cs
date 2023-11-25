@@ -22,5 +22,6 @@ namespace Web_Api.Model
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
         public ICollection<Answear>? Answears { get; set; }
+        public int CorrectAnswearId { get; set; }
     }
 }

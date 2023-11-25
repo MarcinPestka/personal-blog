@@ -32,5 +32,14 @@ namespace Web_Api.Controllers
         {
             return this.examService.GetExamById(Id);
         }
+
+        [HttpPost("Check")]
+        [Authorize]
+        public Task<double> CheckAnswears(CheckedAnswears checkedAnswears)
+        {
+            return this.examService.CheckAnswears(checkedAnswears);
+        }
+
+
     }
 }

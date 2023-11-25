@@ -1,32 +1,27 @@
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
-import { IExam } from "../../../models/exam.model";
+import { ExamAnswear, IExam } from "../../../models/exam.model";
 import { useState } from "react";
+import { examStore } from "../../../store/examStore";
 
-interface ExamAnswear{
-  questionId: number;
-  answear:number;
-}
+
 
 
 export function ExamSection(props: IExam | undefined) {
   const [questionId, SetQuestionId] = useState(1);
   const [currnetAnswearId, SetCurrentAnswearId] = useState('');
-  const [examAnswears, SetExamAnswears] = useState<ExamAnswear[]>([]);
   
   const handleAnswearClick = ev => {
     const ans: ExamAnswear = {
       questionId: questionId,
-      answear: ev.target.value
+      userAnswear: ev.target.value
     }
 
-    if (!examAnswears.find(x=>x.questionId === ans.questionId)) {
-      examAnswears.push(ans)
+    if (!examStore.examAnswears.answearPairs.find(x=>x.questionId === ans.questionId)) {
+      examStore.examAnswears.answearPairs.push(ans)
     }else {
-      let index = examAnswears.findIndex(x=>x.questionId === ans.questionId);
-      examAnswears[index] = ans;
+      let index = examStore.examAnswears.answearPairs.findIndex(x=>x.questionId === ans.questionId);
+      examStore.examAnswears.answearPairs[index] = ans;
     }
-
-    SetExamAnswears(examAnswears);
   };
 
   function handleNavigation(questionId:number) {
@@ -56,11 +51,12 @@ export function ExamSection(props: IExam | undefined) {
             })}
             </div>
             <h1>{props!.questions.find(x=>x.id === questionId)!.questionText}</h1>
-            <RadioGroup value={examAnswears.find(x=>x.questionId === questionId)?.answear || ''} onChange={handleChange}>
+            <RadioGroup value={examStore.examAnswears.answearPairs.find(x=>x.questionId === questionId)?.userAnswear || ''} onChange={handleChange}>
             {props!.questions.find(x=>x.id === questionId)!.answears.map((ans)=>{
               return <FormControlLabel value={ans.id} control={<Radio />} label={ans.answearText} onChange={handleAnswearClick}/>;
             })}
               </RadioGroup>
+              <button onClick={()=>examStore.checkAnswears()}>test</button>
             </div>
         </Grid>
       </Grid>

@@ -29,5 +29,17 @@ namespace Web_Api.Service.ExamService
                 .ThenInclude(p => p.Answears)
                 .FirstOrDefaultAsync();
         }
+        public async Task<double> CheckAnswears(CheckedAnswears checkedAnswears)
+        {
+            Exam exam = await this.context.Exams.Where(x => x.Id == checkedAnswears.ExamId).Include(x=>x.Questions).FirstOrDefaultAsync();
+
+            double test = checkedAnswears.AnswearPairs.Count(x =>
+            {
+                var question = exam.Questions.FirstOrDefault(y => y.Id == x.QuestionId);
+                return question?.CorrectAnswearId == x.UserAnswear;
+            });
+
+            return Math.Round((test/(double)exam.Questions.Count())*100);
+        }
     }
 }
