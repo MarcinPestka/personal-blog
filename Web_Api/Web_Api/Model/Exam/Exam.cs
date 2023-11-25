@@ -14,6 +14,7 @@ namespace Web_Api.Model
             Title = examDTO.Title;
             Description = examDTO.Description;
             AuthorId = examDTO.AuthorId;
+            LectureId = examDTO.LectureId;
         }
 
         public int Id { get; set; }
@@ -23,5 +24,7 @@ namespace Web_Api.Model
         public string Description { get; set; }
         public int AuthorId { get; set; }
         public ICollection<Question>? Questions { get; set; }
+        public int? LectureId { get; set; }
+        public Lecture? Lecture { get; set; }
     }
 }
