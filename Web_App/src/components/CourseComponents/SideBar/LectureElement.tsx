@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { deleteLecture } from "../../../services/LectureService";
 import NewLecture from "./NewLecture";
 import TopicCompletionIndicator from "./TopicCompletionIndicator";
+import ExamSideBar from "../Exam/ExamSideBar";
 
 interface prop {
     lecture:ILecture;
@@ -73,6 +74,7 @@ export function LectureElement(props:prop) {
           </>
         ))
         }
+      <ExamSideBar />
       <AddNewTopicComponent order={props.lecture.topics.length+1}/>
       </div>
   </div>

@@ -11,6 +11,8 @@ import { Observer, useObserver } from "mobx-react-lite";
 import { courseStore } from "../store/courseStore";
 import { BaseComponentWrapper } from "../components/BaseComponentWrapper";
 import { getLastTopic } from "../services/TopicService";
+import { ExamSection } from "../components/Sections/Exam/ExamSectionComponent";
+import { examStore } from "../store/examStore";
 
 export function ActiveCourse() {
   const store = courseStore;
@@ -35,7 +37,7 @@ export function ActiveCourse() {
               <NestedList></NestedList>
             </Grid>
             <Grid item xs ml={10}>
-              {sectionStore.sections &&
+              {!examStore.isExam && sectionStore.sections &&
                 sectionStore.sections.map((section) => {
                   return (
                     <BaseComponentWrapper
@@ -44,6 +46,9 @@ export function ActiveCourse() {
                     />
                   );
                 })}
+                {examStore.isExam && examStore.exam &&
+                  <ExamSection {...examStore.exam}/>
+                }
             </Grid>
           </Grid>
         </>

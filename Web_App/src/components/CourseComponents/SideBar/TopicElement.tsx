@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { sectionStore } from "../../../store/sectionStore";
 import CompletedCheckBox from "./CompletedTopicCheckBox";
+import { examStore } from "../../../store/examStore";
 
 interface prop {
     topic:ITopic;
@@ -14,6 +15,7 @@ interface prop {
 export function TopicElement(props:prop) {
 
     function handleTopicClick(id: number): void {
+        examStore.EndExam();
         courseStore.setActiveTopicId(id);
         sectionStore.newSection.topicId = id;
         if (courseStore.activeCourse) {
