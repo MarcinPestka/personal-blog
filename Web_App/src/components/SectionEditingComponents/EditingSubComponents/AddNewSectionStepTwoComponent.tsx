@@ -8,67 +8,60 @@ import codeSectionIcon from "../../../image/sectionIcons/CodeSection.svg";
 import titleSectionIcon from "../../../image/sectionIcons/TitleSecion.svg";
 import titleImageSectionIcon from "../../../image/sectionIcons/TitileImageSection.svg";
 import { runInAction } from "mobx";
-import { TitleNoImageComponent } from "../../Sections/TitleNoImageComponent/TitleNoImageComponent";
 
 export function AddNewSectionStepTwo() {
-  return (
+  function handleClick(sectionType:SectionTypeEnum) {
+    runInAction(()=>{
+      editingCourseStore.newSectionType = sectionType;
+      sectionStore.newSection.sectionType = sectionType;
+      editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
+    })
+  }
+
+    return (
     <>
-      <div className="addSectionInnerWrapper">
-        <div
+      <div className="addSectionInnerWrapper">        
+      <div
           className="addSectionButton stepTwo"
-          onClick={() => {
-            runInAction(()=>{
-              editingCourseStore.newSectionType = SectionTypeEnum.Title;
-              sectionStore.newSection.sectionType = SectionTypeEnum.Title;
-              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
-            })
-
-          }}
-        >
+          onClick={() => {handleClick(SectionTypeEnum.Title)}}>
+          <img src={titleSectionIcon} alt=""/> <br />
           Title Section
-          <img src={titleSectionIcon} alt=""/>
         </div>
         <div
           className="addSectionButton stepTwo"
-          onClick={() => {
-            runInAction(()=>{
-              editingCourseStore.newSectionType = SectionTypeEnum.TitleNoImage;
-              sectionStore.newSection.sectionType = SectionTypeEnum.TitleNoImage;
-              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
-            })
-
-          }}
-        >
+          onClick={() => {handleClick(SectionTypeEnum.TitleNoImage)}}>
+          <img src={titleImageSectionIcon} alt=""/> <br />
           Title without image
-          <img src={titleImageSectionIcon} alt=""/>
         </div>
         <div
           className="addSectionButton stepTwo"
-          onClick={() => {
-            runInAction(()=>{
-              editingCourseStore.newSectionType = SectionTypeEnum.CodeBlockSection;
-              sectionStore.newSection.sectionType = SectionTypeEnum.CodeBlockSection;
-              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
-            })
-
-          }}
-        >
+          onClick={() => {handleClick(SectionTypeEnum.CodeBlockSection)}}>
+          <img src={codeSectionIcon} alt=""/> <br />
           Code Block Section
-          <img src={codeSectionIcon} alt=""/>
         </div>
         <div
           className="addSectionButton stepTwo"
-          onClick={() => {
-            runInAction(()=>{
-              editingCourseStore.newSectionType = SectionTypeEnum.TextSection;
-              sectionStore.newSection.sectionType = SectionTypeEnum.TextSection;
-              editingCourseStore.newSectionStage = SectionAddStage.sectionContents;
-            })
-
-          }}
-        >
+          onClick={() => {handleClick(SectionTypeEnum.TextSection)}}>
+          <img src={titleSectionIcon} alt=""/> <br />
           Text section
-          <img src={titleSectionIcon} alt=""/>
+        </div> 
+        <div
+          className="addSectionButton stepTwo"
+          onClick={() => {handleClick(SectionTypeEnum.Title)}}>
+          <img src={titleSectionIcon} alt=""/> <br />
+          Title Section
+        </div>
+        <div
+          className="addSectionButton stepTwo"
+          onClick={() => {handleClick(SectionTypeEnum.Title)}}>
+          <img src={titleSectionIcon} alt=""/><br />
+          Title Section 
+        </div>
+        <div
+          className="addSectionButton stepTwo"
+          onClick={() => {handleClick(SectionTypeEnum.Title)}}>
+          <img src={titleSectionIcon} alt=""/><br />
+          Title Section 
         </div>
       </div>
     </>

@@ -11,16 +11,12 @@ export function AddNewSectionBackButton() {
           editingCourseStore.newSectionType = undefined;
           editingCourseStore.newSectionStage = undefined;
         })
-
         break;
       case SectionAddStage.sectionContents:
         runInAction(()=>{        
           editingCourseStore.newSectionType = undefined;
-          editingCourseStore.newSectionStage = undefined;
+          editingCourseStore.newSectionStage = SectionAddStage.sectionType;
         })
-
-        break;
-      default:
         break;
     }
   }

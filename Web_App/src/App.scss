@@ -363,8 +363,34 @@ body {
 }
 
 .addSectionInnerWrapper{
-  display: inline-flex;
-  justify-content: center;
+  // display: inline-flex;
+  // justify-content: center;
+  overflow: auto;
+  margin: 20px;
+  white-space: nowrap;
+}
+
+/* width */
+.addSectionInnerWrapper::-webkit-scrollbar {
+  width: 3px;
+  height: 10px;
+  border-radius: 20px;
+}
+
+/* Track */
+.addSectionInnerWrapper::-webkit-scrollbar-track {
+  background: $greyedOut;
+}
+
+/* Handle */
+.addSectionInnerWrapper::-webkit-scrollbar-thumb {
+  background: $primary3;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+.addSectionInnerWrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .addSectionBackButton{
@@ -375,16 +401,19 @@ body {
 }
 
 .addSectionButton{
-  text-align: center;
   border-radius: 4px;
   border-width: 2px;
-  border-color: $primary3;
-  color: $primary3;
   font-weight: 450;
   border-style: solid;
   cursor:pointer;
-  margin-right: auto;
-  margin-left: auto;
+  
+  border-color: $primary3;
+  color: $primary3;
+  
+  display: inline-block;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
 }
 
 .stepOne{
@@ -397,8 +426,8 @@ body {
 .stepTwo{
   padding: 10px;
   margin-right: 20px;
+  margin-bottom: 20px;
   width: 20%;
-  aspect-ratio: 1/1;
 }
 
 .addSectionButton:hover{
