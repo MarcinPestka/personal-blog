@@ -22,5 +22,13 @@ namespace Web_Api.Service.ExamService
             return await context.Answears.Where(x => x.Id == _answear.Id).FirstOrDefaultAsync();
         }
 
+        public async Task EditAnswear(AnswearDTO answear)
+        {
+            Answear _answear = await context.Answears.Where(x => x.Id == answear.Id).FirstOrDefaultAsync();
+
+            _answear.AnswearText = answear.AnswearText;
+
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -21,5 +21,12 @@ namespace Web_Api.Controllers
         {
             return this.answearService.AddAnswear(answaer);
         }
+
+        [HttpPut]
+        [Authorize]
+        public Task EditAnswear(AnswearDTO answaer)
+        {
+            return this.answearService.EditAnswear(answaer);
+        }
     }
 }

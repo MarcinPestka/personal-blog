@@ -1,18 +1,19 @@
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import { ExamAnswear, IExam } from "../../../models/exam.model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { examStore } from "../../../store/examStore";
 import { AddNewAnswear, AddNewQuestion } from "../../../services/ExamService";
-import { TextEditor } from "../../TextEditor/TextEditor";
+import { TextEditor, TextEditorType } from "../../TextEditor/TextEditor";
 import { Observer } from "mobx-react-lite";
-
-
-
 
 export function ExamSection() {
   const [questionId, SetQuestionId] = useState(1);
   const [currnetAnswearId, SetCurrentAnswearId] = useState('');
   
+  useEffect(()=>{
+    examStore.currentQuestionId = examStore.exam?.questions[0].id;
+  },[])
+
   const handleAnswearClick = ev => {
     const ans: ExamAnswear = {
       questionId: questionId,
@@ -65,12 +66,23 @@ export function ExamSection() {
               onClick={()=> addNewQuestion()}
             >+</div>
             </div>
-            <TextEditor text={examStore.exam?.questions.find(x=>x.id === questionId)?.questionText}/>
-            <RadioGroup value={examStore.examAnswears.answearPairs.find(x=>x.questionId === questionId)?.userAnswear || ''} onChange={handleChange}>
+            <TextEditor text={examStore.exam?.questions.find(x=>x.id === questionId)?.questionText} id={0} type={TextEditorType.question}/>
+            <div>
+            <form action="">
+            
             {examStore.exam?.questions.find(x=>x.id === questionId)?.answears?.map((ans)=>{
-              return <FormControlLabel value={ans.id} control={<Radio />} label={ans.answearText} onChange={handleAnswearClick}/>;
+              return (
+              <>
+              <div style={{display:"flex",paddingTop:'10px'}}>
+              <input type="radio" id="age1" name="age" value="30"/>
+              <TextEditor text={ans.answearText} id={ans.id} type={TextEditorType.answear}></TextEditor>
+              </div>
+              </>
+              
+              );
             })}
-              </RadioGroup>
+              </form>
+            </div>
               <button onClick={()=>AddNewAnswear()}>Add new answear</button>
             </div>
         </Grid>

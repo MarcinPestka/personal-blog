@@ -37,3 +37,8 @@ export async function EditQuestion(newQuestionText: string) {
     await ApiAuthPut("Question", question).then(()=>{});
     examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)!.questionText = newQuestionText;
 }
+
+export async function EditAnswear(newAnswearText: string, id: number) {
+    await ApiAuthPut("Answear", {answearText:newAnswearText,id:id}).then(()=>{});
+    examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)!.answears!.find(x=>x.id === id)!.answearText = newAnswearText;
+}

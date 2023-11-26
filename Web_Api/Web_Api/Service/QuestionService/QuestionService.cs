@@ -28,7 +28,6 @@ namespace Web_Api.Service.ExamService
 
             _question.QuestionText = question.QuestionText;
 
-            //context.Entry(_question).CurrentValues.SetValues(_question);
             await context.SaveChangesAsync();
         }
     }

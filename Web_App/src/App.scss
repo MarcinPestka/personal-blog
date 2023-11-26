@@ -13,7 +13,6 @@ $greyedOut: #d3d3d3;
 
 .editable *{
   margin:0px;
-  font-size: 30px;
   font-weight: 500;
   letter-spacing: 5px;
   padding: 0px;
@@ -21,10 +20,19 @@ $greyedOut: #d3d3d3;
   font-family: inherit;
 }
 
+.small * {
+  font-size: 20px;
+}
+
+
+.large * {
+  font-size: 30px;
+}
+
 .editable input{
   border: none;
   border-bottom: $greyedOut 1px solid;
-  width: 400%;
+  width: 800%;
   background-color: transparent;
 }
 
@@ -238,6 +246,7 @@ $greyedOut: #d3d3d3;
 }
 
 .icon{
+  cursor: pointer;
   opacity: 0.2;
 }
 .icon:hover{
