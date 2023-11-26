@@ -22,12 +22,18 @@ export async function AddNewQuestion() {
     });
 }
 
+export async function AddNewAnswear() {
+    await ApiAuthPost("Answear", {questionId:examStore.currentQuestionId, answearText: "Answear" }).then((resp)=>{
+        examStore.exam!.questions.find(x=>x.id===examStore.currentQuestionId)!.answears!.push(resp.data);
+    });
+}
 
 export async function EditQuestion(newQuestionText: string) {
     const question: IQuestionDTO = {
         id:examStore.currentQuestionId,
         questionText: newQuestionText
-      }
+    }
+
     await ApiAuthPut("Question", question).then(()=>{});
     examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)!.questionText = newQuestionText;
 }

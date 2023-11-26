@@ -2,7 +2,7 @@ import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import { ExamAnswear, IExam } from "../../../models/exam.model";
 import { useState } from "react";
 import { examStore } from "../../../store/examStore";
-import { AddNewQuestion } from "../../../services/ExamService";
+import { AddNewAnswear, AddNewQuestion } from "../../../services/ExamService";
 import { TextEditor } from "../../TextEditor/TextEditor";
 import { Observer } from "mobx-react-lite";
 
@@ -71,7 +71,7 @@ export function ExamSection() {
               return <FormControlLabel value={ans.id} control={<Radio />} label={ans.answearText} onChange={handleAnswearClick}/>;
             })}
               </RadioGroup>
-              <button onClick={()=>examStore.checkAnswears()}>test</button>
+              <button onClick={()=>AddNewAnswear()}>Add new answear</button>
             </div>
         </Grid>
       </Grid>
