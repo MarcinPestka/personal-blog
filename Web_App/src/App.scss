@@ -19,6 +19,10 @@ $greyedOut: #d3d3d3;
 }
 
 .dot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   width: 12px;
   height: 12px;
   margin-left: 10px;

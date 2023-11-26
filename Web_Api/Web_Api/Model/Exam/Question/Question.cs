@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Api.Model
 {
@@ -17,8 +18,8 @@ namespace Web_Api.Model
         }
 
         public int Id { get; set; }
-        public string QuestionText { get; set; }
-        public string Description { get; set; }
+        public string? QuestionText { get; set; }
+        public string? Description { get; set; }
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
         public ICollection<Answear>? Answears { get; set; }

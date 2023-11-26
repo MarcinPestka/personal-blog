@@ -7,17 +7,17 @@ namespace Web_Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class QuestionConroller : ControllerBase
+    public class QuestionController : ControllerBase
     {
         private readonly IQuestionService questionService;
-        public QuestionConroller(IQuestionService questionService)
+        public QuestionController(IQuestionService questionService)
         {
             this.questionService = questionService;
         }
 
         [HttpPost]
         [Authorize]
-        public Task<Question> AddNewQuestion(QuestionDTO question)
+        public Task<IEnumerable<Question>> AddNewQuestion(QuestionDTO question)
         {
             return this.questionService.AddQuestion(question);
         }

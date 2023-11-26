@@ -8,11 +8,18 @@ export interface IExam{
   questions: IQuestion[];
 }
 
+
+export interface IQuestionDTO{
+  examId: number;
+  questionText:string;
+}
+
 export interface IQuestion{
     id: number;
+    examId: number;
     questionText:string;
-    description:string;
-    answears: IAnswear[];
+    description?:string;
+    answears?: IAnswear[];
 }
 
 export interface IAnswear{

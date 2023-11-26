@@ -12,14 +12,14 @@ namespace Web_Api.Service.ExamService
             this.context = context;
         }
 
-        public async Task<Question> AddQuestion(QuestionDTO question)
+        public async Task<IEnumerable<Question>> AddQuestion(QuestionDTO question)
         {
             Question _question = new Question(question);
             context.Questions.Add(_question);
 
             await context.SaveChangesAsync();
 
-            return await context.Questions.Where(x => x.Id == _question.Id).FirstOrDefaultAsync();
+            return await context.Questions.Where(x => x.ExamId == question.ExamId).ToListAsync();
         }
     }
 }

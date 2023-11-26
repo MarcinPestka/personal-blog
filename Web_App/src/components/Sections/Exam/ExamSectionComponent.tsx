@@ -2,6 +2,7 @@ import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import { ExamAnswear, IExam } from "../../../models/exam.model";
 import { useState } from "react";
 import { examStore } from "../../../store/examStore";
+import { AddNewQuestion } from "../../../services/ExamService";
 
 
 
@@ -32,6 +33,10 @@ export function ExamSection(props: IExam | undefined) {
     SetCurrentAnswearId((event.target as HTMLInputElement).value);
   };
 
+  const addNewQuestion = async () => {
+    await AddNewQuestion();
+  };
+
   return (
     <>
       <Grid container>
@@ -49,10 +54,15 @@ export function ExamSection(props: IExam | undefined) {
                 ></div>
               );
             })}
+            <div
+              className={"dot selected"}
+              style={{color:'white', cursor:'pointer'}}
+              onClick={()=> addNewQuestion()}
+            >+</div>
             </div>
-            <h1>{props!.questions.find(x=>x.id === questionId)!.questionText}</h1>
+            <h1>{props?.questions.find(x=>x.id === questionId)?.questionText}</h1>
             <RadioGroup value={examStore.examAnswears.answearPairs.find(x=>x.questionId === questionId)?.userAnswear || ''} onChange={handleChange}>
-            {props!.questions.find(x=>x.id === questionId)!.answears.map((ans)=>{
+            {props?.questions.find(x=>x.id === questionId)?.answears?.map((ans)=>{
               return <FormControlLabel value={ans.id} control={<Radio />} label={ans.answearText} onChange={handleAnswearClick}/>;
             })}
               </RadioGroup>
