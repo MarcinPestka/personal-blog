@@ -21,5 +21,12 @@ namespace Web_Api.Controllers
         {
             return this.questionService.AddQuestion(question);
         }
+        [HttpPut]
+        [Authorize]
+        public Task EditQuestion(QuestionDTO question)
+        {
+            return this.questionService.EditQuestion(question);
+        }
+
     }
 }

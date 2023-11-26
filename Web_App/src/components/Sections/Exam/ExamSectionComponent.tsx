@@ -3,11 +3,13 @@ import { ExamAnswear, IExam } from "../../../models/exam.model";
 import { useState } from "react";
 import { examStore } from "../../../store/examStore";
 import { AddNewQuestion } from "../../../services/ExamService";
+import { TextEditor } from "../../TextEditor/TextEditor";
+import { Observer } from "mobx-react-lite";
 
 
 
 
-export function ExamSection(props: IExam | undefined) {
+export function ExamSection() {
   const [questionId, SetQuestionId] = useState(1);
   const [currnetAnswearId, SetCurrentAnswearId] = useState('');
   
@@ -26,6 +28,7 @@ export function ExamSection(props: IExam | undefined) {
   };
 
   function handleNavigation(questionId:number) {
+    examStore.currentQuestionId = questionId;
     SetQuestionId(questionId);
   }
 
@@ -38,12 +41,14 @@ export function ExamSection(props: IExam | undefined) {
   };
 
   return (
+    <Observer>
+      {() => (
     <>
       <Grid container>
         <Grid item xs={10}>
           <div className="lineBreakDisplay">
           <div className="indicators">
-            {props!.questions.map((item, index) => {
+            {examStore.exam!.questions.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -60,9 +65,9 @@ export function ExamSection(props: IExam | undefined) {
               onClick={()=> addNewQuestion()}
             >+</div>
             </div>
-            <h1>{props?.questions.find(x=>x.id === questionId)?.questionText}</h1>
+            <TextEditor text={examStore.exam?.questions.find(x=>x.id === questionId)?.questionText}/>
             <RadioGroup value={examStore.examAnswears.answearPairs.find(x=>x.questionId === questionId)?.userAnswear || ''} onChange={handleChange}>
-            {props?.questions.find(x=>x.id === questionId)?.answears?.map((ans)=>{
+            {examStore.exam?.questions.find(x=>x.id === questionId)?.answears?.map((ans)=>{
               return <FormControlLabel value={ans.id} control={<Radio />} label={ans.answearText} onChange={handleAnswearClick}/>;
             })}
               </RadioGroup>
@@ -71,5 +76,7 @@ export function ExamSection(props: IExam | undefined) {
         </Grid>
       </Grid>
     </>
+      )}
+    </Observer>
   );
 }

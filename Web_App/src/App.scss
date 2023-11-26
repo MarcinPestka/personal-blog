@@ -7,6 +7,32 @@ $primary3: #0096c7;
 $completed: #60db71;
 $greyedOut: #d3d3d3;
 
+.editable{
+  display: flex;
+}
+
+.editable *{
+  margin:0px;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  padding: 0px;
+  width: -webkit-fill-available;
+  font-family: inherit;
+}
+
+.editable input{
+  border: none;
+  border-bottom: $greyedOut 1px solid;
+  width: 400%;
+  background-color: transparent;
+}
+
+.editable input:focus{
+  outline: none;
+  border-bottom: $greyedOut 2px solid;
+}
+
 .wrapper {
   overflow: hidden;
 }
@@ -203,6 +229,7 @@ $greyedOut: #d3d3d3;
 }
 
 .IconContainer{
+  width: auto;
   min-width: fit-content;
   margin-left:auto;
 }

@@ -46,7 +46,7 @@ export function EditCourse() {
                 </>
               )}
               {examStore.isExam && examStore.exam &&
-                <ExamSection {...examStore.exam}/>
+                <ExamSection/>
               }
             </Grid>
           </Grid>

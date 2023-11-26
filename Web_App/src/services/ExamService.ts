@@ -2,7 +2,7 @@ import { ICourse, ILecture } from "../models/course.model";
 import { CheckedAnswears, IExam, IQuestion, IQuestionDTO } from "../models/exam.model";
 import { courseStore } from "../store/courseStore";
 import { examStore } from "../store/examStore";
-import { ApiAuthPost } from "./ApiService";
+import { ApiAuthPost, ApiAuthPut } from "./ApiService";
 
 export async function CheckAnswearsApi(CheckedAnswears:CheckedAnswears) {
     await ApiAuthPost("Exam/check", CheckedAnswears).then((resp)=>{
@@ -18,8 +18,16 @@ export async function AddNewQuestion() {
       }
 
     await ApiAuthPost("Question", question).then((resp)=>{
-        //console.log(resp.data);
         examStore.exam!.questions = resp.data;
     });
 }
 
+
+export async function EditQuestion(newQuestionText: string) {
+    const question: IQuestionDTO = {
+        id:examStore.currentQuestionId,
+        questionText: newQuestionText
+      }
+    await ApiAuthPut("Question", question).then(()=>{});
+    examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)!.questionText = newQuestionText;
+}

@@ -47,7 +47,7 @@ export function ActiveCourse() {
                   );
                 })}
                 {examStore.isExam && examStore.exam &&
-                  <ExamSection {...examStore.exam}/>
+                  <ExamSection/>
                 }
             </Grid>
           </Grid>

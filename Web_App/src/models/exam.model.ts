@@ -10,7 +10,8 @@ export interface IExam{
 
 
 export interface IQuestionDTO{
-  examId: number;
+  id?: number;
+  examId?: number;
   questionText:string;
 }
 

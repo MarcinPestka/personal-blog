@@ -7,6 +7,8 @@ export class ExamStore {
   exam: IExam | undefined;
   isExam:boolean = false;
   examAnswears:CheckedAnswears = {examId:7,answearPairs:[]} as CheckedAnswears;
+  
+  currentQuestionId:number | undefined;
 
 
   constructor() {

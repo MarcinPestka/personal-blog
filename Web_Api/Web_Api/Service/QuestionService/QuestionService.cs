@@ -21,5 +21,15 @@ namespace Web_Api.Service.ExamService
 
             return await context.Questions.Where(x => x.ExamId == question.ExamId).ToListAsync();
         }
+
+        public async Task EditQuestion(QuestionDTO question)
+        {
+            Question _question = await context.Questions.Where(x => x.Id == question.Id).FirstOrDefaultAsync();
+
+            _question.QuestionText = question.QuestionText;
+
+            //context.Entry(_question).CurrentValues.SetValues(_question);
+            await context.SaveChangesAsync();
+        }
     }
 }
