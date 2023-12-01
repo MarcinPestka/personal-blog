@@ -17,7 +17,7 @@ namespace Web_Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public Task<IEnumerable<Question>> AddNewQuestion(QuestionDTO question)
+        public Task<Question> AddNewQuestion(QuestionDTO question)
         {
             return this.questionService.AddQuestion(question);
         }
@@ -26,6 +26,12 @@ namespace Web_Api.Controllers
         public Task EditQuestion(QuestionDTO question)
         {
             return this.questionService.EditQuestion(question);
+        }
+        [HttpDelete]
+        [Authorize]
+        public Task DeleteQuestion(int id)
+        {
+            return this.questionService.DeleteQuestion(id);
         }
 
     }

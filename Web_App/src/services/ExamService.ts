@@ -18,14 +18,21 @@ export async function AddNewQuestion() {
       }
 
     await ApiAuthPost("Question", question).then((resp)=>{
-        examStore.exam!.questions = resp.data;
+        examStore.exam!.questions.push(resp.data);
+    });
+}
+
+
+export async function DeleteQuestion(id:number) {
+    await ApiAuthDelete(`Question?id=${id}`, '').then((resp)=>{
+        examStore.currentQuestionId = examStore.exam!.questions[examStore.exam!.questions.findIndex(x=>x.id === id)-1].id;
+        examStore.exam!.questions = examStore.exam!.questions.filter(x=>x.id !== id);
     });
 }
 
 
 export async function DeleteAnswear(id:number) {
     await ApiAuthDelete(`Answear?id=${id}`, '').then((resp)=>{
-        console.log("test");
         examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)!.answears = examStore.exam!.questions.find(x=>x.id === examStore.currentQuestionId)?.answears?.filter(x=>x.id !== id);
     });
 }

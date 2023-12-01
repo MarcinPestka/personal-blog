@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
 import { EditAnswear, EditQuestion } from "../../services/ExamService";
+import { editingCourseStore } from "../../store/editingCourseStore";
 
 export enum TextEditorType {
   question,
@@ -52,7 +53,8 @@ export function TextEditor(props: ITextEditorProps) {
       {() => (
         <>
         <div className={`editable ${props.type ? 'small' : 'large'}`}>
-            {edit ? 
+            {editingCourseStore.editPage &&
+              edit ? 
                 <>
                 <input defaultValue={props.text} onChange={(e)=>SetTextState(e.target.value)} type="text" id="fname" name="fname" onBlur={()=>handleBlur()} autoFocus spellCheck="false"/>
                 <div className="IconContainer" onClick={()=>handleEdit()}><DoneIcon className="addIcon icon"/></div> 
@@ -61,6 +63,7 @@ export function TextEditor(props: ITextEditorProps) {
                 <><p onClick={()=>{SetEdit(true);SetAnswearId(props.id)}}>{props.text}</p>
                 </>
             }
+           
         </div>
         </>
       )}

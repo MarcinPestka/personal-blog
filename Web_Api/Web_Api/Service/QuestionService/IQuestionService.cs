@@ -4,7 +4,8 @@ namespace Web_Api.Service.ExamService
 {
     public interface IQuestionService
     {
-        Task<IEnumerable<Question>> AddQuestion(QuestionDTO exam);
+        Task<Question> AddQuestion(QuestionDTO exam);
         Task EditQuestion(QuestionDTO exam);
+        Task DeleteQuestion(int id);
     }
 }

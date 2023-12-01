@@ -12,14 +12,14 @@ namespace Web_Api.Service.ExamService
             this.context = context;
         }
 
-        public async Task<IEnumerable<Question>> AddQuestion(QuestionDTO question)
+        public async Task<Question> AddQuestion(QuestionDTO question)
         {
             Question _question = new Question(question);
             context.Questions.Add(_question);
 
             await context.SaveChangesAsync();
 
-            return await context.Questions.Where(x => x.ExamId == question.ExamId).ToListAsync();
+            return await context.Questions.Where(x => x.Id == _question.Id).FirstOrDefaultAsync();
         }
 
         public async Task EditQuestion(QuestionDTO question)
@@ -27,6 +27,14 @@ namespace Web_Api.Service.ExamService
             Question _question = await context.Questions.Where(x => x.Id == question.Id).FirstOrDefaultAsync();
 
             _question.QuestionText = question.QuestionText;
+
+            await context.SaveChangesAsync();
+        }
+         
+        public async Task DeleteQuestion(int id)
+        {
+            Question question = await context.Questions.Where(x => x.Id == id).FirstOrDefaultAsync();
+            context.Questions.Remove(question);
 
             await context.SaveChangesAsync();
         }

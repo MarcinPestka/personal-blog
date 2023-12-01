@@ -5,6 +5,7 @@ import { examStore } from "../../../store/examStore";
 import { AddNewAnswear, AddNewQuestion } from "../../../services/ExamService";
 import { TextEditor, TextEditorType } from "../../TextEditor/TextEditor";
 import { Observer } from "mobx-react-lite";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 enum navActionEnum {
     Next,
@@ -21,7 +22,7 @@ export function ExamNavigation() {
   const [completedIds, SetCompletedIds] = useState<number[]>([]);
 
   useEffect(()=>{
-    examStore.currentQuestionId = examStore.exam?.questions[0].id;
+    examStore.currentQuestionId = examStore.exam!.questions[0].id;
   },[])
 
 
@@ -82,11 +83,13 @@ export function ExamNavigation() {
                 ></div>
               );
             })}
+            {editingCourseStore.editPage &&
             <div
-              className={"dot selected"}
-              style={{color:'white', cursor:'pointer'}}
-              onClick={()=> addNewQuestion()}
+            className={"dot selected"}
+            style={{color:'white', cursor:'pointer'}}
+            onClick={()=> addNewQuestion()}
             >+</div>
+            }
             </div>
             <button className="primaryButton"  style={examStore.exam!.questions.findIndex(x=>x.id === examStore.currentQuestionId) === examStore.exam!.questions.length-1 ? {visibility:'hidden'}:{}} onClick={()=>handleNavigationButtonsClick(navActionEnum.Next)}>Next</button>
             </div>

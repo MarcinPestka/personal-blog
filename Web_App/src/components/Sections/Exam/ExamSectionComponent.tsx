@@ -2,16 +2,18 @@ import { Grid } from "@mui/material";
 import { ExamAnswear } from "../../../models/exam.model";
 import { useEffect, useState } from "react";
 import { examStore } from "../../../store/examStore";
-import { AddNewAnswear, DeleteAnswear } from "../../../services/ExamService";
+import { AddNewAnswear, DeleteAnswear, DeleteQuestion } from "../../../services/ExamService";
 import { TextEditor, TextEditorType } from "../../TextEditor/TextEditor";
 import { Observer } from "mobx-react-lite";
 import { ExamNavigation } from "./ExamNavigationComponent";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { courseStore } from "../../../store/courseStore";
+import { editingCourseStore } from "../../../store/editingCourseStore";
 
 export function ExamSection() {
   
   useEffect(()=>{
-    examStore.currentQuestionId = examStore.exam?.questions[0].id;
+    examStore.currentQuestionId = examStore.exam!.questions[0].id;
   },[])
 
   const handleAnswearClick = ev => {
@@ -47,7 +49,12 @@ export function ExamSection() {
         <Grid item xs={10}>
           <div className="lineBreakDisplay">
           <ExamNavigation/>
-            <TextEditor text={examStore.exam?.questions.find(x=>x.id === examStore.currentQuestionId)?.questionText} id={0} type={TextEditorType.question}/>
+            <div style={{display:'flex'}}>
+              <TextEditor text={examStore.exam?.questions.find(x=>x.id === examStore.currentQuestionId)?.questionText} id={0} type={TextEditorType.question}/>
+              {editingCourseStore.editPage &&
+                <DeleteIcon className="deleteIcon icon" onClick={() => {DeleteQuestion(examStore.currentQuestionId!)}}></DeleteIcon>
+              }
+            </div>
             <div>
             <form action="">
             
@@ -57,7 +64,9 @@ export function ExamSection() {
               <div style={{display:"flex",paddingTop:'10px'}}>
               <input type="radio" id="age1" name="age" value={ans.id} checked={ans.id == examStore.examAnswears.answearPairs.find(x=>x.questionId === examStore.currentQuestionId)?.answearId} onChange={(e)=>{console.log(e.target.value);handleAnswearClick(e)}}/>
               <TextEditor text={ans.answearText} id={ans.id} type={TextEditorType.answear}></TextEditor>
+              {editingCourseStore.editPage &&
               <DeleteIcon className="deleteIcon icon" onClick={() => {DeleteAnswear(ans.id)}}></DeleteIcon>
+              }
               </div>
               </>
               
@@ -66,7 +75,9 @@ export function ExamSection() {
               </form>
               <p className="smallFont margin-s grey underline" style={{cursor:'pointer',visibility:examStore.examAnswears.answearPairs.find(x=> x.questionId === examStore.currentQuestionId) === undefined || examStore.examAnswears.answearPairs.find(x=> x.questionId === examStore.currentQuestionId)!.answearId === null ? 'hidden':'visible'}} onClick={()=>test()}>Wyczyść odpowiedź</p>
             </div>
+              {editingCourseStore.editPage &&
               <button className="primaryButton" onClick={()=>AddNewAnswear()}>Add new answear</button>
+              }
             </div>
         </Grid>
       </Grid>

@@ -8,7 +8,7 @@ export class ExamStore {
   isExam:boolean = false;
   examAnswears:CheckedAnswears = {examId:7,answearPairs:[]} as CheckedAnswears;
   
-  currentQuestionId:number | undefined;
+  currentQuestionId:number = 0;
 
 
   constructor() {
