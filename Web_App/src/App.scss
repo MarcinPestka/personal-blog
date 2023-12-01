@@ -6,6 +6,7 @@ $primary3: #0096c7;
 
 $completed: #60db71;
 $greyedOut: #d3d3d3;
+$warning: #f2ff66;
 
 .editable{
   display: flex;
@@ -24,9 +25,34 @@ $greyedOut: #d3d3d3;
   font-size: 20px;
 }
 
-
 .large * {
   font-size: 30px;
+}
+
+.smallFont {
+  font-size: 15px;
+}
+
+.margin-s{
+  margin: 10px;
+}
+
+.grey{
+  color:$greyedOut;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.primaryButton{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  color: #fff;
+  background-color: $primary1;
+  padding: 5px 20px;
+  border: solid $primary1 2px;
+  border-radius: 7px;
 }
 
 .editable input{
@@ -49,7 +75,7 @@ $greyedOut: #d3d3d3;
   display: flex;
   align-items: center;
   position: relative;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .dot{
@@ -69,6 +95,19 @@ $greyedOut: #d3d3d3;
 .selected{
   background-color: $primary3;
 }
+
+.green {
+  background-color: $completed;
+}
+
+.yellow {
+  background-color: $warning;
+}
+
+.red {
+  background-color: red;
+}
+
 
 .carousel {
   display: flex;

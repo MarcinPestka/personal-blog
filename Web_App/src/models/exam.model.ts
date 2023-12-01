@@ -36,5 +36,5 @@ export interface CheckedAnswears {
 
 export interface ExamAnswear{
   questionId: number;
-  userAnswear:number;
+  answearId:number|null;
 }
