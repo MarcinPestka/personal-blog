@@ -17,7 +17,7 @@ namespace Web_Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public Task<Answear> AddNewQuestion(AnswearDTO answaer)
+        public Task<Answear> AddNewAnswear(AnswearDTO answaer)
         {
             return this.answearService.AddAnswear(answaer);
         }
@@ -27,6 +27,13 @@ namespace Web_Api.Controllers
         public Task EditAnswear(AnswearDTO answaer)
         {
             return this.answearService.EditAnswear(answaer);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public Task DeleteAnswear(int id)
+        {
+            return this.answearService.DeleteAnswear(id);
         }
     }
 }

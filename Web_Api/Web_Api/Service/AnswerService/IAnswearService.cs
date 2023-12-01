@@ -6,5 +6,6 @@ namespace Web_Api.Service.ExamService
     {
         Task<Answear> AddAnswear(AnswearDTO answear);
         Task EditAnswear(AnswearDTO answear);
+        Task DeleteAnswear(int id);
     }
 }

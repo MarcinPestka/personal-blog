@@ -30,5 +30,13 @@ namespace Web_Api.Service.ExamService
 
             await context.SaveChangesAsync();
         }
+
+        public async Task DeleteAnswear(int id)
+        {
+            Answear answear = await context.Answears.Where(x => x.Id == id).FirstOrDefaultAsync();
+            context.Answears.Remove(answear);
+
+            await context.SaveChangesAsync();
+        }
     }
 }

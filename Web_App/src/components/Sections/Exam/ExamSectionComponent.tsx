@@ -2,10 +2,11 @@ import { Grid } from "@mui/material";
 import { ExamAnswear } from "../../../models/exam.model";
 import { useEffect, useState } from "react";
 import { examStore } from "../../../store/examStore";
-import { AddNewAnswear } from "../../../services/ExamService";
+import { AddNewAnswear, DeleteAnswear } from "../../../services/ExamService";
 import { TextEditor, TextEditorType } from "../../TextEditor/TextEditor";
 import { Observer } from "mobx-react-lite";
 import { ExamNavigation } from "./ExamNavigationComponent";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function ExamSection() {
   
@@ -56,6 +57,7 @@ export function ExamSection() {
               <div style={{display:"flex",paddingTop:'10px'}}>
               <input type="radio" id="age1" name="age" value={ans.id} checked={ans.id == examStore.examAnswears.answearPairs.find(x=>x.questionId === examStore.currentQuestionId)?.answearId} onChange={(e)=>{console.log(e.target.value);handleAnswearClick(e)}}/>
               <TextEditor text={ans.answearText} id={ans.id} type={TextEditorType.answear}></TextEditor>
+              <DeleteIcon className="deleteIcon icon" onClick={() => {DeleteAnswear(ans.id)}}></DeleteIcon>
               </div>
               </>
               
